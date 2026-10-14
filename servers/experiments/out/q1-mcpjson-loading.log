@@ -1,0 +1,29 @@
+########## Q1-A：.mcp.json 在场（未批准）##########
+cwd(bash) = /e/aicoding/mini-claude-code
+cwd(win)  = E:\aicoding\mini-claude-code
+--- .mcp.json 内容 ---
+{
+  "mcpServers": {
+    "local-tools": {
+      "type": "stdio",
+      "command": "D:\\Anaconda3\\envs\\aicoding\\python.exe",
+      "args": ["E:\\aicoding\\mini-claude-code\\servers\\local_tools_server.py"]
+    }
+  }
+}
+--- claude mcp list ---
+Checking MCP server health…
+
+local-tools: D:\Anaconda3\envs\aicoding\python.exe E:\aicoding\mini-claude-code\servers\local_tools_server.py - ⏸ Pending approval (run `claude` to approve)
+--- claude -p ---
+FOUND
+
+########## Q1-B：.mcp.json 移走（同 cwd，单变量）##########
+cwd(bash) = /e/aicoding/mini-claude-code
+cwd(win)  = E:\aicoding\mini-claude-code
+--- .mcp.json 是否在场 ---
+ls: cannot access '.mcp.json': No such file or directory
+--- claude mcp list ---
+No MCP servers configured. Use `claude mcp add` to add a server.
+--- claude -p ---
+NOT_LOADED

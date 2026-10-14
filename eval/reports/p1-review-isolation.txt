@@ -1,0 +1,58 @@
+# t15 验收②：同实例并发隔离（自有反例 + 反向复现）
+
+临时 RUNS_ROOT=C:\Users\<用户名>\AppData\Local\Temp\t15-iso-ie8g82er\runs
+临时 VENV_ROOT=C:\Users\<用户名>\AppData\Local\Temp\t15-iso-ie8g82er\venvs
+实例=astanin-python-tabulate__5373ebf；并发 2；轮数=3
+
+## A 当前公式：同实例两个 run 并发 3 轮
+
+### 轮 1: PASS（并发 2，同实例）
+- venv A = C:\Users\<用户名>\AppData\Local\Temp\t15-iso-ie8g82er\venvs\astanin__python-tabulate-8f320866-02e97eee
+- venv B = C:\Users\<用户名>\AppData\Local\Temp\t15-iso-ie8g82er\venvs\astanin__python-tabulate-8f320866-78186623
+- venv 互异 = True；.pth 名互异 = True
+- A 挂载：{"own_pth": "_eval_editable_abb7df679cef4198.pth", "own_found": true, "other_editable_pth": [], "targets": ["c:\\users\\<用户名>\\appdata\\local\\temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r1-a\\astanin-python-tabulate__5373ebf\\repo", "c:\\users\\<用户名>\\appdata\\local\\temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r1-a\\astanin-python-tabulate__5373ebf\\repo"], "points_to_own_ws": true, "only_own_editable": true}
+- B 挂载：{"own_pth": "_eval_editable_5af6dd651a6ac84b.pth", "own_found": true, "other_editable_pth": [], "targets": ["c:\\users\\<用户名>\\appdata\\local\\temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r1-b\\astanin-python-tabulate__5373ebf\\repo", "c:\\users\\<用户名>\\appdata\\local\\temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r1-b\\astanin-python-tabulate__5373ebf\\repo"], "points_to_own_ws": true, "only_own_editable": true}
+- 并发结束后再核 import：A={"ok": true, "resolved": "C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r1-A\\astanin-python-tabulate__5373ebf\\repo\\tabulate\\__init__.py"}
+                        B={"ok": true, "resolved": "C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r1-B\\astanin-python-tabulate__5373ebf\\repo\\tabulate\\__init__.py"}
+
+### 轮 2: PASS（并发 2，同实例）
+- venv A = C:\Users\<用户名>\AppData\Local\Temp\t15-iso-ie8g82er\venvs\astanin__python-tabulate-8f320866-a682fa74
+- venv B = C:\Users\<用户名>\AppData\Local\Temp\t15-iso-ie8g82er\venvs\astanin__python-tabulate-8f320866-0556366e
+- venv 互异 = True；.pth 名互异 = True
+- A 挂载：{"own_pth": "_eval_editable_415423a09d596655.pth", "own_found": true, "other_editable_pth": [], "targets": ["c:\\users\\<用户名>\\appdata\\local\\temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r2-a\\astanin-python-tabulate__5373ebf\\repo", "c:\\users\\<用户名>\\appdata\\local\\temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r2-a\\astanin-python-tabulate__5373ebf\\repo"], "points_to_own_ws": true, "only_own_editable": true}
+- B 挂载：{"own_pth": "_eval_editable_13b0319ce05c9068.pth", "own_found": true, "other_editable_pth": [], "targets": ["c:\\users\\<用户名>\\appdata\\local\\temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r2-b\\astanin-python-tabulate__5373ebf\\repo", "c:\\users\\<用户名>\\appdata\\local\\temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r2-b\\astanin-python-tabulate__5373ebf\\repo"], "points_to_own_ws": true, "only_own_editable": true}
+- 并发结束后再核 import：A={"ok": true, "resolved": "C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r2-A\\astanin-python-tabulate__5373ebf\\repo\\tabulate\\__init__.py"}
+                        B={"ok": true, "resolved": "C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r2-B\\astanin-python-tabulate__5373ebf\\repo\\tabulate\\__init__.py"}
+
+### 轮 3: PASS（并发 2，同实例）
+- venv A = C:\Users\<用户名>\AppData\Local\Temp\t15-iso-ie8g82er\venvs\astanin__python-tabulate-8f320866-d98b23f3
+- venv B = C:\Users\<用户名>\AppData\Local\Temp\t15-iso-ie8g82er\venvs\astanin__python-tabulate-8f320866-feeaaea1
+- venv 互异 = True；.pth 名互异 = True
+- A 挂载：{"own_pth": "_eval_editable_26f407c59392971f.pth", "own_found": true, "other_editable_pth": [], "targets": ["c:\\users\\<用户名>\\appdata\\local\\temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r3-a\\astanin-python-tabulate__5373ebf\\repo", "c:\\users\\<用户名>\\appdata\\local\\temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r3-a\\astanin-python-tabulate__5373ebf\\repo"], "points_to_own_ws": true, "only_own_editable": true}
+- B 挂载：{"own_pth": "_eval_editable_701c948890b23e33.pth", "own_found": true, "other_editable_pth": [], "targets": ["c:\\users\\<用户名>\\appdata\\local\\temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r3-b\\astanin-python-tabulate__5373ebf\\repo", "c:\\users\\<用户名>\\appdata\\local\\temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r3-b\\astanin-python-tabulate__5373ebf\\repo"], "points_to_own_ws": true, "only_own_editable": true}
+- 并发结束后再核 import：A={"ok": true, "resolved": "C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r3-A\\astanin-python-tabulate__5373ebf\\repo\\tabulate\\__init__.py"}
+                        B={"ok": true, "resolved": "C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r3-B\\astanin-python-tabulate__5373ebf\\repo\\tabulate\\__init__.py"}
+
+## B 反向复现：把 (实例, run) 隔离公式还原成修复前
+- 已还原为修复前公式：venv_dir=<repo>-<base[:8]>；editable_pth_name=_eval_editable_<sha256(instance_id)[:16]>.pth
+- venv A/B：C:\Users\<用户名>\AppData\Local\Temp\t15-iso-ie8g82er\venvs\astanin__python-tabulate-8f320866 | C:\Users\<用户名>\AppData\Local\Temp\t15-iso-ie8g82er\venvs\astanin__python-tabulate-8f320866 ⇒ 同一 venv = True
+- .pth A/B：C:\Users\<用户名>\AppData\Local\Temp\t15-iso-ie8g82er\venvs\astanin__python-tabulate-8f320866\Lib\site-packages\_eval_editable_dfd8c51fb82c34cf.pth | C:\Users\<用户名>\AppData\Local\Temp\t15-iso-ie8g82er\venvs\astanin__python-tabulate-8f320866\Lib\site-packages\_eval_editable_dfd8c51fb82c34cf.pth ⇒ 同一 .pth = True
+- A 的 import（B 之前）：{"ok": true, "resolved": "C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-pre-A\\astanin-python-tabulate__5373ebf\\repo\\tabulate\\__init__.py"}
+- A 的 import（B 之后）：{"ok": false, "error": "隔离失败：tabulate 的导入路径不在本实例工作区内（解析到 C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-pre-B\\astanin-python-tabulate__5373ebf\\repo\\tabulate\\__init__.py，期望在 C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-pre-A\\astanin
+- B 准备结果：成功
+- 静默误判（A 被解析到 B 的工作区）：False
+- 缺陷复现 = True
+- B 自己的 import 归属：{"ok": true, "resolved": "C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-pre-B\\astanin-python-tabulate__5373ebf\\repo\\tabulate\\__init__.py"}
+
+## C 还原后复核（纯函数）
+- 还原后 venv_dir 为原函数 = True；editable_pth_name 为原函数 = True
+- 两个 run_id 映射到互异 venv = True；互异 .pth = True
+
+## 小结
+- restored_distinct_venv: True
+- restored_distinct_pth: True
+- restored_venv_dir_is_original: True
+- restored_pth_name_is_original: True
+- all_rounds_pass: True
+- zero_infra: True
+- reverse_defect_reproduced: True

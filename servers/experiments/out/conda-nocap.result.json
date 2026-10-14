@@ -1,0 +1,19 @@
+{
+  "command": [
+    "D:/Anaconda3/Scripts/conda.exe",
+    "run",
+    "-n",
+    "aicoding",
+    "python",
+    "E:/aicoding/mini-claude-code/servers/local_tools_server.py"
+  ],
+  "responses": {
+    "initialize": null
+  },
+  "raw_stdout_lines": [],
+  "notes": [
+    "initialize 未成功 —— 后续请求全部跳过。这正是反向对照期望的形态。"
+  ],
+  "exit_code": 0,
+  "non_json_stdout_lines": []
+}

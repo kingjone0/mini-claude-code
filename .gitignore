@@ -1,0 +1,55 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+
+# Claude Code 的 local 作用域设置（本机私有覆盖）。
+# 之前只有机器级的 ~/.config/git/ignore 挡着 —— 那不在仓库里，换台机器 clone
+# 就会变成「未跟踪且未忽略」，`git add -A` 会把它带进提交。写进仓库才可移植。
+.claude/settings.local.json
+
+# 运行日志（验证输出统一进 VERIFY.md，不散落）
+*.log
+
+# 例外：实验落盘的原始证据要留痕 —— 它们是 VERIFY-mcp.md 引用的东西。
+# 没有这些文件，别人只能看到我转抄的结论，看不到原始字节。
+!servers/experiments/out/*.log
+
+# ⚠️ 但上面那条 `!` 会把 out/ 下**所有** .log 重新放回跟踪范围，所以下面这条不能省。
+# server 自己的运行日志有两种落点：本体默认写 local-tools-server.log；
+# 探针每次运行会把 MCP_SERVER_LOG 指到 <前缀>.<mode>.server.log。
+# 两者都是**每次运行都写**的运行时状态（和 usage.jsonl 同类），不是冻结快照 —— 不进仓库。
+# 规则必须写在上面那条 `!` 之后才生效：.gitignore 是「最后匹配的那条说了算」。
+# 里程碑时要留证的话，照 usage.jsonl 的老办法：cp 成带名字的快照再提交。
+servers/experiments/out/*server.log
+
+# 运行时状态（每次运行追加），不进仓库。
+# 里程碑时冻结成 out/usage-<里程碑>.jsonl 再提交。
+# 为什么单独点名而不是写 *.jsonl：out/ 下还有 mcp-good.json 这类**冻结的**对照配置，
+# 那些是该进仓库的证据，不能被一条宽规则误伤。
+# 另外它是本仓库里唯一「运行时会写入、且可能夹带凭据」的文件 —— 移出跟踪，整类风险消失。
+servers/experiments/out/usage.jsonl
+
+# policy_dispatch.jsonl 是运行时追加状态；里程碑只提交带名字的冻结快照。
+# 写在上方 ! 例外之后，确保最后匹配规则生效。
+servers/experiments/out/policy_dispatch.jsonl
+
+# .mcp.json 是「项目作用域」配置，里面的 command 必然是**某台机器上的绝对路径**。
+# 机器相关的路径不该固化进 git 历史 —— 所以本体不进仓库，只提交 .mcp.json.example 模板。
+.mcp.json
+
+# coding_agent.py 的每次运行产物（JSON 事件序列 + 可读日志）——运行时状态，不进仓库。
+# 和 usage.jsonl 同类：里程碑时要留证，就 cp 成 verify-agent-<名字>.json 的快照再提交。
+#
+# ⚠️ 规则必须写在上面那条 `!servers/experiments/out/*.log` **之后** ——
+#    .gitignore 是「最后匹配的那条说了算」，写在前面会被那条 `!` 覆盖掉。
+#
+# ⚠️ 这里踩过一次：本条规则第一次编辑失败（edit 工具要求先 read），当时想"稍后补"，
+#    结果 git add -A 把 12 个运行时文件一起提交了。**编辑失败要当场重试，不能"稍后"。**
+servers/experiments/out/agent-*.json
+servers/experiments/out/agent-*.log
+
+# HANDOVER.md 是内部交接文档（含私有内容），只留本地、不进任何仓库。
+# 公开版走 release 分支单独构建；本条目防止 `git add -A` 误把它带上。
+HANDOVER.md
+

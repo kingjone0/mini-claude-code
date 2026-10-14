@@ -1,0 +1,104 @@
+................................................................... [  8%]
+........................................................... [ 16%]
+............................................................................................................. [ 30%]
+....................................................................................................................................................... [ 50%]
+.................................... [ 54%]
+............................................................ [ 62%]
+................................................................................ [ 73%]
+........................................................................ [ 82%]
+............................................ [ 88%]
+..........................................................................................                                                               [100%]
+================================== FAILURES ===================================
+________ SlidingWindowTests.test_islice_version (expected=[(0, 1, 2)]) ________
+
+self = <tests.test_recipes.SlidingWindowTests testMethod=test_islice_version>
+
+    def test_islice_version(self):
+        for iterable, n, expected in [
+            ([], 1, []),
+            ([0], 1, [(0,)]),
+            ([0, 1], 1, [(0,), (1,)]),
+            ([0, 1, 2], 2, [(0, 1), (1, 2)]),
+            ([0, 1, 2], 3, [(0, 1, 2)]),
+            ([0, 1, 2], 4, []),
+            ([0, 1, 2, 3], 4, [(0, 1, 2, 3)]),
+            ([0, 1, 2, 3, 4], 4, [(0, 1, 2, 3), (1, 2, 3, 4)]),
+        ]:
+            with self.subTest(expected=expected):
+                actual = list(mi.sliding_window(iterable, n))
+>               self.assertEqual(actual, expected)
+E               AssertionError: Lists differ: [] != [(0, 1, 2)]
+E               
+E               Second list contains 1 additional elements.
+E               First extra element 0:
+E               (0, 1, 2)
+E               
+E               - []
+E               + [(0, 1, 2)]
+
+tests\test_recipes.py:924: AssertionError
+______ SlidingWindowTests.test_islice_version (expected=[(0, 1, 2, 3)]) _______
+
+self = <tests.test_recipes.SlidingWindowTests testMethod=test_islice_version>
+
+    def test_islice_version(self):
+        for iterable, n, expected in [
+            ([], 1, []),
+            ([0], 1, [(0,)]),
+            ([0, 1], 1, [(0,), (1,)]),
+            ([0, 1, 2], 2, [(0, 1), (1, 2)]),
+            ([0, 1, 2], 3, [(0, 1, 2)]),
+            ([0, 1, 2], 4, []),
+            ([0, 1, 2, 3], 4, [(0, 1, 2, 3)]),
+            ([0, 1, 2, 3, 4], 4, [(0, 1, 2, 3), (1, 2, 3, 4)]),
+        ]:
+            with self.subTest(expected=expected):
+                actual = list(mi.sliding_window(iterable, n))
+>               self.assertEqual(actual, expected)
+E               AssertionError: Lists differ: [] != [(0, 1, 2, 3)]
+E               
+E               Second list contains 1 additional elements.
+E               First extra element 0:
+E               (0, 1, 2, 3)
+E               
+E               - []
+E               + [(0, 1, 2, 3)]
+
+tests\test_recipes.py:924: AssertionError
+_ SlidingWindowTests.test_islice_version (expected=[(0, 1, 2, 3), (1, 2, 3, 4)]) _
+
+self = <tests.test_recipes.SlidingWindowTests testMethod=test_islice_version>
+
+    def test_islice_version(self):
+        for iterable, n, expected in [
+            ([], 1, []),
+            ([0], 1, [(0,)]),
+            ([0, 1], 1, [(0,), (1,)]),
+            ([0, 1, 2], 2, [(0, 1), (1, 2)]),
+            ([0, 1, 2], 3, [(0, 1, 2)]),
+            ([0, 1, 2], 4, []),
+            ([0, 1, 2, 3], 4, [(0, 1, 2, 3)]),
+            ([0, 1, 2, 3, 4], 4, [(0, 1, 2, 3), (1, 2, 3, 4)]),
+        ]:
+            with self.subTest(expected=expected):
+                actual = list(mi.sliding_window(iterable, n))
+>               self.assertEqual(actual, expected)
+E               AssertionError: Lists differ: [(1, 2, 3, 4)] != [(0, 1, 2, 3), (1, 2, 3, 4)]
+E               
+E               First differing element 0:
+E               (1, 2, 3, 4)
+E               (0, 1, 2, 3)
+E               
+E               Second list contains 1 additional elements.
+E               First extra element 1:
+E               (1, 2, 3, 4)
+E               
+E               - [(1, 2, 3, 4)]
+E               + [(0, 1, 2, 3), (1, 2, 3, 4)]
+
+tests\test_recipes.py:924: AssertionError
+=========================== short test summary info ===========================
+SUBFAILED(expected=[(0, 1, 2)]) tests/test_recipes.py::SlidingWindowTests::test_islice_version
+SUBFAILED(expected=[(0, 1, 2, 3)]) tests/test_recipes.py::SlidingWindowTests::test_islice_version
+SUBFAILED(expected=[(0, 1, 2, 3), (1, 2, 3, 4)]) tests/test_recipes.py::SlidingWindowTests::test_islice_version
+3 failed, 768 passed, 21199 subtests passed in 28.34s

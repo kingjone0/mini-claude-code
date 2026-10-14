@@ -1,0 +1,44 @@
+# mini-claude-code（mini Coding Agent + SWE-bench 式评测）
+# 项目：E:\aicoding\mini-claude-code
+#
+# ── 环境要求 ──────────────────────────────────────────────
+# Python >= 3.10（SDK 硬要求；本项目用 3.12）
+# 使用 conda 环境 aicoding
+#
+# ── 安装命令 ──────────────────────────────────────────────
+# 装依赖用 conda run + python -m pip，不要用裸 pip（裸 pip 可能落进 base 环境）：
+#
+#   D:\Anaconda3\Scripts\conda.exe run -n aicoding python -m pip install -r requirements.txt
+#
+# ⚠️ 但【跑本项目脚本】一律直调 D:\Anaconda3\envs\aicoding\python.exe，不要用 conda run：
+# 默认模式会缓冲输出，且子进程 stdin 是 EOF ⇒ MCP server 会立刻退出
+# （口径与 README.md / AGENT.md / eval/README.md 一致）。
+#
+# ── 版本固定说明 ──────────────────────────────────────────
+# 固定在 0.2.152（PyPI 当前最新）。固定版本是为了可复现——
+# 第三阶段跑 SWE-bench baseline 对比时，环境漂移会让数据失去可比性。
+#
+# ── 自动解析的运行时依赖 ──────────────────────────────────
+#   anyio>=4.0.0
+#   sniffio>=1.0.0
+#   mcp   ← 约束不是这里写的，是 claude-agent-sdk 声明的：mcp>=1.23.0,<3.0.0
+#
+#   2026-09-16 更正：本行原来写的是 "mcp>=1.23.0,<2.0.0"，是记错的。
+#   实际声明（importlib.metadata.requires('claude-agent-sdk') 读出来）是 <3.0.0，
+#   所以本机解析到 mcp 2.2.0 是**正常的**，不是装错了版本。
+#   这一点很关键：mcp 2.x 把 FastMCP 改名成了 MCPServer，
+#   照着老教程写 from mcp.server.fastmcp import FastMCP 会直接报错。
+#   下面显式钉住 mcp 的版本 —— 它现在是**直接依赖**（servers/ 里的代码自己 import 它），
+#   不再只是传递依赖；第三阶段跑 SWE-bench 对比时，环境漂移会让数据失去可比性。
+#
+# ── 不要装这个 ────────────────────────────────────────────
+#   claude-code-sdk  ← 废弃旧名，停在 0.0.25，导入路径是 claude_code_sdk，已弃用
+#   正确包名是 claude-agent-sdk，导入路径是 claude_agent_sdk
+
+# ── 直接依赖 ──────────────────────────────────────────────
+claude-agent-sdk==0.2.152
+mcp==2.2.0
+
+# pytest：靶场（fixtures/mini_repo）与 coding_agent.py 的 run_tests 工具都依赖它。
+# 第三阶段接 SWE-bench 时同样需要 —— SWE-bench 的仓库测试就是 pytest 写的。
+pytest==9.1.1

@@ -1,0 +1,22 @@
+{
+  "metrics": {
+    "tool_calls_total": 0,
+    "tool_calls_per_tool": {},
+    "run_tests_exit_codes": [],
+    "run_tests_count": 0,
+    "apply_patch_count": 0,
+    "search_count": 0,
+    "read_count": 0,
+    "label": "v2-badendpoint",
+    "allow_write": true,
+    "agent_error": "ResultError: Claude Code returned an error result: There's an issue with the selected model (deepseek-flash[1m]). It may not exist or you may not have access to it. (exit code: 1)",
+    "elapsed_s": 2.1,
+    "baseline_exit_code": 1,
+    "final_exit_code": 1,
+    "changed_files": [],
+    "test_files_touched": [],
+    "edits_outside_scope": [],
+    "success": false
+  },
+  "events": []
+}

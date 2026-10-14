@@ -1,0 +1,40 @@
+{
+  "skip_predicate": {
+    "skipped": [
+      "A",
+      "C"
+    ],
+    "pending": [
+      "B"
+    ]
+  },
+  "rewrite": {
+    "before": {
+      "instance_id": "demo-instance",
+      "arm": "B",
+      "stage": "failed_infra",
+      "verdict_class": "timeout",
+      "resolved": false,
+      "wall_s": 900.02
+    },
+    "after": {
+      "instance_id": "demo-instance",
+      "arm": "B",
+      "stage": "judged",
+      "verdict_class": "agent_result",
+      "resolved": true,
+      "wall_s": 220.0,
+      "note": "resume 重跑后的新终态"
+    }
+  },
+  "budget": {
+    "real_spawns": 4,
+    "len_prior": 3,
+    "started_arms_formula": 38
+  },
+  "source_refs": [
+    "eval/harness/scheduler_p1.py:131-136",
+    "eval/harness/scheduler_p1.py:333",
+    "eval/harness/scheduler_p1.py:312"
+  ]
+}

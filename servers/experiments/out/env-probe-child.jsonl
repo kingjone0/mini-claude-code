@@ -1,0 +1,4 @@
+{"case": "C0 父进程未设 + 未显式传", "pid": 47988, "AGENT_REPO_ROOT": null, "AGENT_REPO_MAP_DEFAULT": null, "ANTHROPIC_MODEL": "deepseek-flash[1m]"}
+{"case": "C1 父进程设了 + 未显式传", "pid": 22908, "AGENT_REPO_ROOT": null, "AGENT_REPO_MAP_DEFAULT": "symbols", "ANTHROPIC_MODEL": "deepseek-flash[1m]"}
+{"case": "C2 父进程设了 + 显式传", "pid": 66436, "AGENT_REPO_ROOT": null, "AGENT_REPO_MAP_DEFAULT": "symbols", "ANTHROPIC_MODEL": "deepseek-flash[1m]"}
+{"case": "C3 父进程未设 + 显式传", "pid": 68224, "AGENT_REPO_ROOT": null, "AGENT_REPO_MAP_DEFAULT": "summary", "ANTHROPIC_MODEL": "deepseek-flash[1m]"}

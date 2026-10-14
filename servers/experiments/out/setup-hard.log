@@ -1,0 +1,54 @@
+靶场：more-itertools-hard  →  E:\aicoding\targets\more-itertools-hard
+固定提交：81c21a8db1c922260cd673841257fb9b112c1318
+缺陷 3 处，期望失败 32 个
+
+  已存在，跳过 clone：E:\aicoding\targets\more-itertools-hard
+  checkout 81c21a8db1c9
+  已写 README.md（1187 字符）
+  [_complex_sumprod 的 r2 实部/虚部顺序对调（dft 与 idft 共用）] 已注入 more_itertools/more.py
+  [_sliding_window_islice 每个 tee 分支多消费 1 个元素] 已注入 more_itertools/recipes.py
+  [_islice_helper 负 start 分支的 len_iter 少减 1] 已注入 more_itertools/more.py
+  已提交（HEAD 现在持有'坏'的状态）
+
+--- 校验初始状态 ---
+  HEAD: d3c6ad0bdcad54c367ccfeec2be7471e263df975
+  工作区: 干净
+  pytest: 失败 32  通过 766
+    SUBFAILED(slice_args=(-4, 3, 1)) tests/test_more.py::IsliceExtendedTests::test_all
+    SUBFAILED(slice_args=(-4, 3, 2)) tests/test_more.py::IsliceExtendedTests::test_all
+    SUBFAILED(slice_args=(-4, 3, 3)) tests/test_more.py::IsliceExtendedTests::test_all
+    SUBFAILED(slice_args=(-4, 3, 4)) tests/test_more.py::IsliceExtendedTests::test_all
+    SUBFAILED(slice_args=(-4, 4, 1)) tests/test_more.py::IsliceExtendedTests::test_all
+    SUBFAILED(slice_args=(-4, 5, 1)) tests/test_more.py::IsliceExtendedTests::test_all
+    SUBFAILED(slice_args=(-4, 5, 2)) tests/test_more.py::IsliceExtendedTests::test_all
+    SUBFAILED(slice_args=(-4, 6, 1)) tests/test_more.py::IsliceExtendedTests::test_all
+    SUBFAILED(slice_args=(-4, 6, 3)) tests/test_more.py::IsliceExtendedTests::test_all
+    SUBFAILED(slice_args=(-3, 4, 1)) tests/test_more.py::IsliceExtendedTests::test_all
+    SUBFAILED(slice_args=(-3, 4, 2)) tests/test_more.py::IsliceExtendedTests::test_all
+    SUBFAILED(slice_args=(-3, 4, 3)) tests/test_more.py::IsliceExtendedTests::test_all
+    SUBFAILED(slice_args=(-3, 4, 4)) tests/test_more.py::IsliceExtendedTests::test_all
+    SUBFAILED(slice_args=(-3, 5, 1)) tests/test_more.py::IsliceExtendedTests::test_all
+    SUBFAILED(slice_args=(-3, 6, 1)) tests/test_more.py::IsliceExtendedTests::test_all
+    SUBFAILED(slice_args=(-3, 6, 2)) tests/test_more.py::IsliceExtendedTests::test_all
+    SUBFAILED(slice_args=(-2, 5, 1)) tests/test_more.py::IsliceExtendedTests::test_all
+    SUBFAILED(slice_args=(-2, 5, 2)) tests/test_more.py::IsliceExtendedTests::test_all
+    SUBFAILED(slice_args=(-2, 5, 3)) tests/test_more.py::IsliceExtendedTests::test_all
+    SUBFAILED(slice_args=(-2, 5, 4)) tests/test_more.py::IsliceExtendedTests::test_all
+    SUBFAILED(slice_args=(-2, 6, 1)) tests/test_more.py::IsliceExtendedTests::test_all
+    SUBFAILED(slice_args=(-1, 6, 1)) tests/test_more.py::IsliceExtendedTests::test_all
+    SUBFAILED(slice_args=(-1, 6, 2)) tests/test_more.py::IsliceExtendedTests::test_all
+    SUBFAILED(slice_args=(-1, 6, 3)) tests/test_more.py::IsliceExtendedTests::test_all
+    SUBFAILED(slice_args=(-1, 6, 4)) tests/test_more.py::IsliceExtendedTests::test_all
+    SUBFAILED[07] (testCase=TestCase(initialSize=3, slice=(-2, 2, 1), expectedAliveStates=[[1, 1, 1], [0, 0, 1], [0, 0, 0]])
+    SUBFAILED[09] (testCase=TestCase(initialSize=5, slice=(-4, 4, 2), expectedAliveStates=[[1, 1, 1, 1, 1], [0, 0, 1, 1, 1],
+    FAILED tests/test_more.py::DiscreteFourierTransformTests::test_basic - Assert...
+    FAILED tests/test_more.py::DiscreteFourierTransformTests::test_roundtrip - as...
+    SUBFAILED(expected=[(0, 1, 2)]) tests/test_recipes.py::SlidingWindowTests::test_islice_version
+    SUBFAILED(expected=[(0, 1, 2, 3)]) tests/test_recipes.py::SlidingWindowTests::test_islice_version
+    SUBFAILED(expected=[(0, 1, 2, 3), (1, 2, 3, 4)]) tests/test_recipes.py::SlidingWindowTests::test_islice_version
+
+  ✓ 靶场就绪：恰好 32 个失败（3 处缺陷，逐处预期 2 + 3 + 27 = 32）
+    缺陷已提交进 HEAD —— reset_fixture() 还原得掉、也保得住
+
+  用 agent 跑：
+    python coding_agent.py --fixture more-itertools-hard --label <标签>

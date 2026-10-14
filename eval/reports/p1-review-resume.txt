@@ -1,0 +1,25 @@
+# t15 反向核查：`--resume` 对 timeout/infra 槽的语义（离线）
+
+临时批次目录：C:\Users\<用户名>\AppData\Local\Temp\t15-resume-zlrthsek\batch
+
+## ① 跳过判定（复刻 scheduler_p1.py:333 的表达式）
+- 状态文件里 3 行：A=judged/agent_result、B=failed_infra/timeout、C=judged/agent_result
+- skipped（跳过，不重跑）= ['A', 'C']
+- pending（会重新提交）= ['B']
+- 复刻源码字符串：`if prev and prev.get("stage") == "judged":` （scheduler_p1.py:333）
+- ⇒ timeout 槽被判定为 pending：是
+
+## ② 重跑同一 (实例, 臂) 后终态被改写
+- 重跑前 B 的终态：{"instance_id": "demo-instance", "arm": "B", "stage": "failed_infra", "verdict_class": "timeout", "resolved": false, "wall_s": 900.02}
+- 重跑后 B 的终态：{"instance_id": "demo-instance", "arm": "B", "stage": "judged", "verdict_class": "agent_result", "resolved": true, "wall_s": 220.0, "note": "resume 重跑后的新终态"}
+- 文件行数 = 4（同一 (实例,臂) 现在有两行，读回取**最后一行**）
+
+## ③ 预算计数（scheduler_p1.py:131-136 的 started_arms 公式）
+- 实际 spawn 次数 = 4（含 resume 重跑 B 的一次）
+- `len(read_triple_state())` = 3（按 (instance, arm) 去重）⇒ started_arms = 35 + 3 = 38
+- ⇒ 重跑**不增加** started_arms：REV2 的 75 槽上限会被少记，实际启动数比账面多 1。
+
+## 源码位置
+- eval/harness/scheduler_p1.py:131-136
+- eval/harness/scheduler_p1.py:333
+- eval/harness/scheduler_p1.py:312

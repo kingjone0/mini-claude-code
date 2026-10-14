@@ -1,0 +1,63 @@
+# t15 验收①：判定不可被自述绕过（临时目录 + 真判定链）
+
+临时 RUNS_ROOT=C:\Users\<用户名>\AppData\Local\Temp\t15-judge-thky1ap8\runs
+临时 VENV_ROOT=C:\Users\<用户名>\AppData\Local\Temp\t15-judge-thky1ap8\venvs
+实例 astanin-python-tabulate__5373ebf: F2P=['test/test_output.py::test_floatfmt_decimal']  P2P=60 条
+实例 more-itertools-more-itertools__1b7f033: F2P=['tests/test_more.py::TestConcurrentTee::test_concurrent_consumers']  P2P=60 条
+
+## case-empty-selfreport  (instance=astanin-python-tabulate__5373ebf)
+- 自述诱饵（判定链不该读）：['C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-judge-thky1ap8\\runs\\p1-review-t15-case-empty-selfreport\\astanin-python-tabulate__5373ebf\\artifacts\\console_A.log', 'C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-judge-thky1ap8\\runs\\p1-review-t15-case-empty-selfreport\\astanin-python-tabulate__5373ebf\\artifacts\\agent_selfreport.json']
+- verdict_class = agent_result   resolved = False
+- judged = {"resolved": false, "f2p_total": 1, "f2p_not_passed": ["test/test_output.py::test_floatfmt_decimal"], "f2p_missing": [], "p2p_total": 60, "p2p_not_passed": [], "p2p_missing": []}
+- 候选补丁 sha256 = e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855；判决用（剥测试侧后）sha256 = e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+- pytest exit = 1 timed_out = False
+- pytest cmd 前 6 段 = ['C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-judge-thky1ap8\\venvs\\astanin__python-tabulate-8f320866-12e29dbb\\Scripts\\python.exe', '-m', 'pytest', '-p', 'no:cacheprovider', '-q']
+- notes = ['测试侧剥离后候选补丁为空 => empty_patch', 'P0 同源独立 pytest 判定完成（测试侧改动已剥离）']
+
+## case-bogus-edit-selfreport  (instance=astanin-python-tabulate__5373ebf)
+- 往 tabulate/__init__.py 追加一行注释（改动文件=C:\Users\<用户名>\AppData\Local\Temp\t15-judge-thky1ap8\runs\p1-review-t15-case-bogus-edit-selfreport\astanin-python-tabulate__5373ebf\repo\tabulate\__init__.py）
+- 自述诱饵（判定链不该读）：['C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-judge-thky1ap8\\runs\\p1-review-t15-case-bogus-edit-selfreport\\astanin-python-tabulate__5373ebf\\artifacts\\console_A.log', 'C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-judge-thky1ap8\\runs\\p1-review-t15-case-bogus-edit-selfreport\\astanin-python-tabulate__5373ebf\\artifacts\\agent_selfreport.json']
+- verdict_class = agent_result   resolved = False
+- judged = {"resolved": false, "f2p_total": 1, "f2p_not_passed": ["test/test_output.py::test_floatfmt_decimal"], "f2p_missing": [], "p2p_total": 60, "p2p_not_passed": [], "p2p_missing": []}
+- 候选补丁 sha256 = 4b7c583f60b3a2126899521efdacb9b85142ddb4d01f3706dcfdeb93aaea09e2；判决用（剥测试侧后）sha256 = 994abab003f34fffd8e051f0dda2e17c40855561151649bdd14826eb829584aa
+- pytest exit = 1 timed_out = False
+- pytest cmd 前 6 段 = ['C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-judge-thky1ap8\\venvs\\astanin__python-tabulate-8f320866-0361c6de\\Scripts\\python.exe', '-m', 'pytest', '-p', 'no:cacheprovider', '-q']
+- notes = ['P0 同源独立 pytest 判定完成（测试侧改动已剥离）']
+
+## case-wrong-frozen-selfreport  (instance=more-itertools-more-itertools__1b7f033)
+- wrong_patch_plan => wrong_patch_method=unrelated_file_comment => 正着施加错补丁正文; apply exit=0
+- 自述诱饵（判定链不该读）：['C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-judge-thky1ap8\\runs\\p1-review-t15-case-wrong-frozen-selfreport\\more-itertools-more-itertools__1b7f033\\artifacts\\console_A.log', 'C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-judge-thky1ap8\\runs\\p1-review-t15-case-wrong-frozen-selfreport\\more-itertools-more-itertools__1b7f033\\artifacts\\agent_selfreport.json']
+- verdict_class = agent_result   resolved = False
+- judged = {"resolved": false, "f2p_total": 1, "f2p_not_passed": ["tests/test_more.py::TestConcurrentTee::test_concurrent_consumers"], "f2p_missing": [], "p2p_total": 60, "p2p_not_passed": [], "p2p_missing": []}
+- 候选补丁 sha256 = 8254a1f5806c744d6534bbdc1f5c3f54a1d8a91581c1d55ebadb80c3072d59fc；判决用（剥测试侧后）sha256 = ac5998b7974beffff35ba9e885f9990a522244487fbc45f99aba1489ad843fa9
+- pytest exit = 1 timed_out = False
+- pytest cmd 前 6 段 = ['C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-judge-thky1ap8\\venvs\\more-itertools__more-itertools-4cbe6f9d-c34786f4\\Scripts\\python.exe', '-m', 'pytest', '-p', 'no:cacheprovider', '-q']
+- notes = ['P0 同源独立 pytest 判定完成（测试侧改动已剥离）']
+
+## case-gold-control  (instance=astanin-python-tabulate__5373ebf)
+- 自述诱饵（判定链不该读）：['C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-judge-thky1ap8\\runs\\p1-review-t15-case-gold-control\\astanin-python-tabulate__5373ebf\\artifacts\\console_A.log', 'C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-judge-thky1ap8\\runs\\p1-review-t15-case-gold-control\\astanin-python-tabulate__5373ebf\\artifacts\\agent_selfreport.json']
+- verdict_class = agent_result   resolved = True
+- judged = {"resolved": true, "f2p_total": 1, "f2p_not_passed": [], "f2p_missing": [], "p2p_total": 60, "p2p_not_passed": [], "p2p_missing": []}
+- 候选补丁 sha256 = 98250589e5e0dc608fbf83ada7d6103197f0148806583a4b3a8057d634c19751；判决用（剥测试侧后）sha256 = 98250589e5e0dc608fbf83ada7d6103197f0148806583a4b3a8057d634c19751
+- pytest exit = 0 timed_out = False
+- pytest cmd 前 6 段 = ['C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-judge-thky1ap8\\venvs\\astanin__python-tabulate-8f320866-d6ce4ffb\\Scripts\\python.exe', '-m', 'pytest', '-p', 'no:cacheprovider', '-q']
+- notes = ['P0 同源独立 pytest 判定完成（测试侧改动已剥离）']
+
+## 口径断言：超时先于退出码、infra/timeout 不计入分母
+- classify_run 四例（timed_out=True&rc=1 / rc=1&有失败 / rc=2 / 正常）=> ['timeout', 'agent_result', 'infra_error', 'agent_result']
+  期望 ['timeout', 'agent_result', 'infra_error', 'agent_result'] => True
+- summarize(3 agent_result 其中 1 resolved + 1 timeout + 1 infra) = {"total": 5, "counts": {"agent_result": 3, "empty_patch": 0, "patch_conflict": 0, "infra_error": 1, "timeout": 1, "harness_bug": 0}, "resolved": 1, "denominator": 3, "resolved_rate": 0.3333333333333333, "infra_retryable": 2}
+  期望 denominator=3, resolved=1, infra_retryable=2 => True
+
+## 额外观察：冻结 wrong_patch 的两种施加语义（tabulate 系）
+- astanin-python-tabulate__5373ebf: wrong_patch_method=reverse_of_gold；wrong_patch 与 gold 逐字节相同 = True
+- 正着施加该正文 = 施加 gold => resolved=True（本脚本第一次跑就实测到了）；唯一正确施加方式是 `wrong_patch_plan()` 给出的「先叠 gold 再 git apply -R」。
+- 这一条是**构造侧**已归档的遗留（见 run_instance.py:204-225 与 gold_check 的 caveat），不是判定侧缺陷；但它说明「wrong_patch 正文」本身不能当「错补丁」用。
+
+## 小结
+- selfreport_ignored_empty: PASS
+- selfreport_ignored_bogus_edit: PASS
+- selfreport_ignored_wrong_frozen: PASS
+- gold_control_resolves: PASS
+- timeout_before_exit_code: PASS
+- infra_timeout_not_in_denominator: PASS

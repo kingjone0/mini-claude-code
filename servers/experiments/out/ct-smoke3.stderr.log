@@ -1,0 +1,32 @@
+[code-tools] 启动：transport=stdio，REPO_ROOT=E:\aicoding\mini-claude-code\fixtures\mini_repo
+[code-tools] cwd=E:\aicoding\mini-claude-code
+[code-tools] python=D:\Anaconda3\envs\aicoding\python.exe
+[code-tools] 日志文件：E:\aicoding\mini-claude-code\servers\experiments\out\code-tools-server.log
+[code-tools] handler 调用：list_files(subdir='.', pattern='*.py')
+[code-tools] handler 调用：search_code(regex='def median', glob='*.py', subdir='.')
+[code-tools] handler 调用：read_file(path='calc.py', start=1, end=12)
+[code-tools] handler 调用：read_file(path='../../../Windows/win.ini', start=0, end=0)
+[code-tools] read_file 拒绝：路径越出仓库根：'../../../Windows/win.ini' → E:\aicoding\Windows\win.ini（只允许 E:\aicoding\mini-claude-code\fixtures\mini_repo 之内）
+[code-tools] handler 调用：apply_patch(path='../outside.txt', old=1 字符, new=1 字符)
+[code-tools] apply_patch 拒绝：路径越出仓库根：'../outside.txt' → E:\aicoding\mini-claude-code\fixtures\outside.txt（只允许 E:\aicoding\mini-claude-code\fixtures\mini_repo 之内）
+[code-tools] handler 调用：read_file(path='C:/Windows/win.ini', start=0, end=0)
+[code-tools] read_file 拒绝：路径越出仓库根：'C:/Windows/win.ini' → C:\Windows\win.ini（只允许 E:\aicoding\mini-claude-code\fixtures\mini_repo 之内）
+[code-tools] handler 调用：run_tests(test_path='../../x.py', keyword='', detail='brief')
+[code-tools] run_tests 拒绝（test_path）：路径越出仓库根：'../../x.py' → E:\aicoding\mini-claude-code\x.py（只允许 E:\aicoding\mini-claude-code\fixtures\mini_repo 之内）
+[code-tools] handler 调用：run_tests(test_path='', keyword='; rm -rf /', detail='brief')
+[code-tools] run_tests 拒绝（keyword）：'; rm -rf /'
+[code-tools] handler 调用：apply_patch(path='calc.py', old=4 字符, new=5 字符)
+[code-tools] handler 调用：run_tests(test_path='', keyword='', detail='brief')
+[code-tools] run_tests 执行：cwd=E:\aicoding\mini-claude-code\fixtures\mini_repo cmd=--tb=line -p no:cacheprovider
+[code-tools] run_tests 完成：退出码=1
+[code-tools] handler 调用：repo_map(subdir='.', pattern='*.py', detail='summary')
+[code-tools] handler 成功：repo_map(summary) → 163 字符
+[code-tools] handler 调用：repo_map(subdir='.', pattern='*.py', detail='symbols')
+[code-tools] handler 成功：repo_map(symbols) → 653 字符（完整）
+[code-tools] handler 调用：run_tests(test_path='', keyword='', detail='bogus')
+[code-tools] handler 调用：run_tests(test_path='', keyword='', detail='brief')
+[code-tools] run_tests 执行：cwd=E:\aicoding\mini-claude-code\fixtures\mini_repo cmd=--tb=line -p no:cacheprovider
+[code-tools] run_tests 完成：退出码=1
+[code-tools] handler 调用：run_tests(test_path='', keyword='', detail='full')
+[code-tools] run_tests 执行：cwd=E:\aicoding\mini-claude-code\fixtures\mini_repo cmd=--tb=short -p no:cacheprovider
+[code-tools] run_tests 完成：退出码=1

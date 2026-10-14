@@ -1,0 +1,159 @@
+{
+  "env": {
+    "AGENT_REPO_MAP_DEFAULT": null,
+    "AGENT_REPO_MAP_DESC": "v2",
+    "AGENT_SERVER_INSTRUCTIONS": "v2"
+  },
+  "instructions": "代码仓库工具集。所有路径都相对于仓库根 E:\\aicoding\\mini-claude-code\\fixtures\\mini_repo，越出该目录的访问一律被拒绝。\n\n面对一个不熟悉的仓库，推荐的工作顺序：\n1. repo_map —— 先看全局（默认每个文件一行，通常只有几百字符）。不知道目标在哪个文件时，这一步比逐个 read_file 便宜得多。\n2. search_code —— 精确定位到行。\n3. read_file —— 看清上下文。\n4. apply_patch —— 修改。\n5. run_tests —— 验证。",
+  "serverInfo": {
+    "name": "code-tools",
+    "version": "1.0.0"
+  },
+  "tools": {
+    "apply_patch": {
+      "description": "把文件里的 old 精确替换成 new。\n\n    ⚠️ old 必须在文件中**唯一出现**，否则拒绝 —— 歧义匹配会改错地方，\n       而\"改错地方\"比\"没改\"更难排查。需要时请给出更长的上下文片段。\n    ",
+      "inputSchema": {
+        "properties": {
+          "new": {
+            "title": "New",
+            "type": "string"
+          },
+          "old": {
+            "title": "Old",
+            "type": "string"
+          },
+          "path": {
+            "title": "Path",
+            "type": "string"
+          }
+        },
+        "required": [
+          "path",
+          "old",
+          "new"
+        ],
+        "title": "apply_patchArguments",
+        "type": "object"
+      }
+    },
+    "list_files": {
+      "description": "列出仓库内某目录下的条目（相对仓库根的路径）。\n\n    subdir: 相对仓库根的目录，默认 \".\"（仓库根）\n    pattern: 通配符，默认 \"*\"；例如 \"*.py\"、\"test_*.py\"\n    ",
+      "inputSchema": {
+        "properties": {
+          "pattern": {
+            "default": "*",
+            "title": "Pattern",
+            "type": "string"
+          },
+          "subdir": {
+            "default": ".",
+            "title": "Subdir",
+            "type": "string"
+          }
+        },
+        "title": "list_filesArguments",
+        "type": "object"
+      }
+    },
+    "read_file": {
+      "description": "读仓库内的文本文件，输出带行号（便于回填给 apply_patch）。\n\n    path:  相对仓库根的路径\n    start: 起始行（1 起算；0 表示从头）\n    end:   结束行（含；0 表示到末尾）\n    ",
+      "inputSchema": {
+        "properties": {
+          "end": {
+            "default": 0,
+            "title": "End",
+            "type": "integer"
+          },
+          "path": {
+            "title": "Path",
+            "type": "string"
+          },
+          "start": {
+            "default": 0,
+            "title": "Start",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "title": "read_fileArguments",
+        "type": "object"
+      }
+    },
+    "repo_map": {
+      "description": "仓库结构总览：文件清单 + 行数 + 符号数。用来在一个不熟悉的仓库里先看全局。\n\n**什么时候调用我**：刚接手一个仓库、或者不知道某个函数/类在哪个文件里时，先调用我一次。默认输出（summary）每个文件一行，通常只有几百字符 —— 比 list_files 信息量更大（带行数和符号数），比 search_code 更全局（不用先猜关键词），比逐个 read_file 便宜几个数量级。\n\ndetail —— 省略时取环境变量 `AGENT_REPO_MAP_DEFAULT` 的值（未设置等价于 \"summary\"）。空串表示\"没传\"。\n    \"summary\" —— 每个文件一行。便宜，用来\"先看全局、再决定读哪里\"。\n    \"symbols\" —— 每个文件里的类 / 函数 / 常量 + 行号。\n        ⚠️ 大仓库上会很长：more-itertools 靶场全量 46,776 字符，超过 read_file 的 20000 上限、会被截断。要展开符号就配 subdir 缩小范围，例如 subdir=\"more_itertools\" 只要 ~11k 字符。",
+      "inputSchema": {
+        "properties": {
+          "detail": {
+            "default": "",
+            "title": "Detail",
+            "type": "string"
+          },
+          "pattern": {
+            "default": "*.py",
+            "title": "Pattern",
+            "type": "string"
+          },
+          "subdir": {
+            "default": ".",
+            "title": "Subdir",
+            "type": "string"
+          }
+        },
+        "title": "repo_mapArguments",
+        "type": "object"
+      }
+    },
+    "run_tests": {
+      "description": "在仓库根运行 pytest，返回真实退出码与输出。\n\n    test_path: 可选的测试文件/目录（相对仓库根，必须在仓库内）\n    keyword:   可选的 pytest -k 表达式（只允许字母数字与 _ - . 空格）\n    detail:    \"brief\"（默认，每个失败只给一行）或 \"full\"（完整堆栈）\n\n    ⚠️ 本工具**不接收命令字符串** —— 命令由服务端拼装，agent 只给受校验的参数。\n       这是「权限与沙箱」层的核心设计：不给入口，比过滤参数可靠。\n    ",
+      "inputSchema": {
+        "properties": {
+          "detail": {
+            "default": "brief",
+            "title": "Detail",
+            "type": "string"
+          },
+          "keyword": {
+            "default": "",
+            "title": "Keyword",
+            "type": "string"
+          },
+          "test_path": {
+            "default": "",
+            "title": "Test Path",
+            "type": "string"
+          }
+        },
+        "title": "run_testsArguments",
+        "type": "object"
+      }
+    },
+    "search_code": {
+      "description": "按正则搜索仓库内文件内容，返回 `相对路径:行号: 内容`。\n\n    regex: Python 正则\n    glob:  只搜匹配该通配符的文件，默认 \"*.py\"\n    subdir: 搜索起点，默认仓库根\n    ",
+      "inputSchema": {
+        "properties": {
+          "glob": {
+            "default": "*.py",
+            "title": "Glob",
+            "type": "string"
+          },
+          "regex": {
+            "title": "Regex",
+            "type": "string"
+          },
+          "subdir": {
+            "default": ".",
+            "title": "Subdir",
+            "type": "string"
+          }
+        },
+        "required": [
+          "regex"
+        ],
+        "title": "search_codeArguments",
+        "type": "object"
+      }
+    }
+  }
+}

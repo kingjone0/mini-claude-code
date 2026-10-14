@@ -1,0 +1,20 @@
+[
+  {
+    "name": "more._complex_sumprod: r2 复数实部/虚部顺序对调",
+    "file": "more_itertools/more.py",
+    "old": "    r2 = chain(map(real, v2), map(imag, v2))",
+    "new": "    r2 = chain(map(imag, v2), map(real, v2))"
+  },
+  {
+    "name": "recipes._sliding_window_islice: islice(i, i) -> islice(i, i + 1)",
+    "file": "more_itertools/recipes.py",
+    "old": "        next(islice(iterator, i, i), None)",
+    "new": "        next(islice(iterator, i, i + 1), None)"
+  },
+  {
+    "name": "more._islice_helper(负 start): len_iter 少减 1",
+    "file": "more_itertools/more.py",
+    "old": "            cache = deque(wrapper, maxlen=-start)\n            len_iter = next(counter) - 1",
+    "new": "            cache = deque(wrapper, maxlen=-start)\n            len_iter = next(counter)"
+  }
+]

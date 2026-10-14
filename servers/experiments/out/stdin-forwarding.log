@@ -1,0 +1,18 @@
+### stdin 转发：三档（子进程 readline 一行）###
+
+### 档 1：直连 python.exe（对照基线）###
+child: 准备读 stdin
+child: readline 返回 'PING\n'
+GOT-LINE: PING
+
+### 档 2：conda run --no-capture-output ###
+child: 准备读 stdin
+child: readline 返回 'PING\n'
+GOT-LINE: PING
+
+### 档 3：conda run（默认）###
+child: 准备读 stdin
+child: readline 返回 ''
+
+GOT-LINE: 
+

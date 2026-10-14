@@ -1,0 +1,25 @@
+### 计时探针：三档启动方式（子进程 t=0 打一行、睡 6 秒、t=6 再打一行，两次都 flush）###
+
+[direct] 运行中 t=3s：stdout 已收到 16 字节
+[direct] 进程退出后：stdout 共收到 32 字节
+[direct]   OUT @ t= 0.03s  b'LINE-ONE-AT-T0\r\n'
+[direct]   ERR @ t= 6.03s  b'child: \xe4\xb8\xa4\xe8\xa1\x8c\xe9\x83\xbd\xe6\x89\x93\xe5\xae\x8c\xe4\xba\x86\r\n'
+[direct]   OUT @ t= 6.03s  b'LINE-TWO-AT-T6\r\n'
+[direct] 判定：输出运行中就可见
+
+[conda-nocapflag] 运行中 t=3s：stdout 已收到 16 字节
+[conda-nocapflag] 进程退出后：stdout 共收到 32 字节
+[conda-nocapflag]   OUT @ t= 1.97s  b'LINE-ONE-AT-T0\r\n'
+[conda-nocapflag]   OUT @ t= 7.98s  b'LINE-TWO-AT-T6\r\n'
+[conda-nocapflag]   ERR @ t= 7.98s  b'child: \xe4\xb8\xa4\xe8\xa1\x8c\xe9\x83\xbd\xe6\x89\x93\xe5\xae\x8c\xe4\xba\x86\r\n'
+[conda-nocapflag] 判定：输出运行中就可见
+
+[conda-default] 运行中 t=3s：stdout 已收到 0 字节
+[conda-default] 进程退出后：stdout 共收到 34 字节
+[conda-default]   ERR @ t= 7.94s  b'child: \xe4\xb8\xa4\xe8\xa1\x8c\xe9\x83\xbd\xe6\x89\x93\xe5\xae\x8c\xe4\xba\x86\r\n'
+[conda-default]   ERR @ t= 7.94s  b'\r\n'
+[conda-default]   OUT @ t= 7.94s  b'LINE-ONE-AT-T0\r\n'
+[conda-default]   OUT @ t= 7.94s  b'LINE-TWO-AT-T6\r\n'
+[conda-default]   OUT @ t= 7.94s  b'\r\n'
+[conda-default] 判定：输出被『缓冲到退出』—— 运行中拿不到，退出时一次性到达
+

@@ -1,0 +1,46 @@
+................................................................... [  8%]
+........................................................... [ 16%]
+............................................................................................................. [ 30%]
+....................................................................................................................................................... [ 50%]
+.................................... [ 54%]
+............................................................ [ 62%]
+................................................................................ [ 73%]
+..................FF.................................................... [ 82%]
+............................................ [ 88%]
+..........................................................................................                                                               [100%]
+================================== FAILURES ===================================
+__________________ DiscreteFourierTransformTests.test_basic ___________________
+
+self = <tests.test_more.DiscreteFourierTransformTests testMethod=test_basic>
+
+    def test_basic(self):
+        # Example calculation from:
+        # https://en.wikipedia.org/wiki/Discrete_Fourier_transform#Example
+        xarr = [1, 2 - 1j, -1j, -1 + 2j]
+        Xarr = [2, -2 - 2j, -2j, 4 + 4j]
+>       self.assertTrue(all(map(cmath.isclose, mi.dft(xarr), Xarr)))
+E       AssertionError: False is not true
+
+tests\test_more.py:6725: AssertionError
+________________ DiscreteFourierTransformTests.test_roundtrip _________________
+
+self = <tests.test_more.DiscreteFourierTransformTests testMethod=test_roundtrip>
+
+    def test_roundtrip(self):
+        for _ in range(1_000):
+            N = randrange(35)
+            xarr = [complex(random(), random()) for i in range(N)]
+            Xarr = list(mi.dft(xarr))
+>           assert all(map(cmath.isclose, mi.idft(Xarr), xarr))
+E           assert False
+E            +  where False = all(<map object at 0x000001ED5354A800>)
+E            +    where <map object at 0x000001ED5354A800> = map(<built-in function isclose>, <generator object idft at 0x000001ED52E02F00>, [(0.16377684475236043+0.9059055629095121j), (0.7735879800290875+0.8786303371012171j), (0.37759477697221155+0.006595040...7019+0.10203672129957864j), (0.043887451982234094+0.6671381677849223j), (0.12624969922059648+0.9066079782041607j), ...])
+E            +      where <built-in function isclose> = cmath.isclose
+E            +      and   <generator object idft at 0x000001ED52E02F00> = <function idft at 0x000001ED51C9AE80>([(-8.878018061390716+8.878018061390716j), (-0.0160492527143176+1.1825810845218512j), (-0.8809609421161169-1.2796436144...3166287+1.7876530149082235j), (0.30017211237395447+2.500728483394534j), (-0.7508480923589261-1.1854188270770272j), ...])
+E            +        where <function idft at 0x000001ED51C9AE80> = mi.idft
+
+tests\test_more.py:6733: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_more.py::DiscreteFourierTransformTests::test_basic - Assert...
+FAILED tests/test_more.py::DiscreteFourierTransformTests::test_roundtrip - as...
+2 failed, 766 passed, 21202 subtests passed in 28.16s

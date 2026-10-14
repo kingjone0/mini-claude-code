@@ -1,0 +1,53 @@
+[skip] subagent-ab-hard-A-1 已有产物（要重跑先删 agent-subagent-ab-hard-A-1.json）
+[skip] subagent-ab-hard-B-1 已有产物（要重跑先删 agent-subagent-ab-hard-B-1.json）
+[run ] subagent-ab-hard-C-1  --fixture more-itertools-hard --label subagent-ab-hard-C-1 --subagent --subagent-force
+[done] subagent-ab-hard-C-1  exit=0
+[skip] subagent-ab-hard-A-2 已有产物（要重跑先删 agent-subagent-ab-hard-A-2.json）
+[run ] subagent-ab-hard-B-2  --fixture more-itertools-hard --label subagent-ab-hard-B-2 --subagent
+[done] subagent-ab-hard-B-2  exit=0
+[run ] subagent-ab-hard-C-2  --fixture more-itertools-hard --label subagent-ab-hard-C-2 --subagent --subagent-force
+[done] subagent-ab-hard-C-2  exit=0
+[run ] subagent-ab-hard-A-3  --fixture more-itertools-hard --label subagent-ab-hard-A-3
+[done] subagent-ab-hard-A-3  exit=0
+[run ] subagent-ab-hard-B-3  --fixture more-itertools-hard --label subagent-ab-hard-B-3 --subagent
+[done] subagent-ab-hard-B-3  exit=0
+[run ] subagent-ab-hard-C-3  --fixture more-itertools-hard --label subagent-ab-hard-C-3 --subagent --subagent-force
+[done] subagent-ab-hard-C-3  exit=0
+[run ] subagent-ab-hard-A-4  --fixture more-itertools-hard --label subagent-ab-hard-A-4
+[done] subagent-ab-hard-A-4  exit=0
+[run ] subagent-ab-hard-B-4  --fixture more-itertools-hard --label subagent-ab-hard-B-4 --subagent
+[done] subagent-ab-hard-B-4  exit=0
+[run ] subagent-ab-hard-C-4  --fixture more-itertools-hard --label subagent-ab-hard-C-4 --subagent --subagent-force
+[done] subagent-ab-hard-C-4  exit=0
+
+④ 层 A/B/C 跑批清单
+靶场 more-itertools-hard　每臂 n=4　三臂交错
+完成 12/12 次
+
+── 臂 A（n=4）
+   成功率 4/4
+   input_tokens             中位数 31214.5     极差 [27317, 35586]
+   output_tokens            中位数 13331.0     极差 [11409, 18808]
+   cost_usd                 中位数 0.7212620000000001  极差 [0.6207009999999998, 0.888194]
+   elapsed_s                中位数 130.65      极差 [101.7, 158.1]
+   tool_calls_total         中位数 28.5        极差 [23, 37]
+── 臂 B（n=4）
+   成功率 4/4
+   input_tokens             中位数 25572.0     极差 [24629, 26537]
+   output_tokens            中位数 14800.0     极差 [12729, 15928]
+   cost_usd                 中位数 0.6598710000000001  极差 [0.6054700000000001, 0.705355]
+   elapsed_s                中位数 126.89999999999999  极差 [112.4, 132.0]
+   tool_calls_total         中位数 27.5        极差 [22, 28]
+   subagent_spawn_calls     中位数 0.0         极差 [0, 0]
+   采用 0/4　spawn 总次数 0
+── 臂 C（n=4）
+   成功率 4/4
+   input_tokens             中位数 52312.5     极差 [44114, 66250]
+   output_tokens            中位数 29010.5     极差 [18089, 42179]
+   cost_usd                 中位数 1.3869125   极差 [0.8039760000000001, 1.911457]
+   elapsed_s                中位数 214.2       极差 [186.0, 234.9]
+   tool_calls_total         中位数 19.0        极差 [10, 45]
+   subagent_spawn_calls     中位数 1.0         极差 [1, 1]
+   采用 4/4　spawn 总次数 4
+
+落盘：subagent-ab-hard-runs.jsonl / subagent-ab-hard-manifest.txt

@@ -1,0 +1,162 @@
+{
+  "instance_id": "astanin-python-tabulate__5373ebf",
+  "rounds": [
+    {
+      "round": 1,
+      "errors": [],
+      "venv_distinct": true,
+      "pth_distinct": true,
+      "mount_a": {
+        "own_pth": "_eval_editable_abb7df679cef4198.pth",
+        "own_found": true,
+        "other_editable_pth": [],
+        "targets": [
+          "c:\\users\\<用户名>\\appdata\\local\\temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r1-a\\astanin-python-tabulate__5373ebf\\repo",
+          "c:\\users\\<用户名>\\appdata\\local\\temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r1-a\\astanin-python-tabulate__5373ebf\\repo"
+        ],
+        "points_to_own_ws": true,
+        "only_own_editable": true
+      },
+      "mount_b": {
+        "own_pth": "_eval_editable_5af6dd651a6ac84b.pth",
+        "own_found": true,
+        "other_editable_pth": [],
+        "targets": [
+          "c:\\users\\<用户名>\\appdata\\local\\temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r1-b\\astanin-python-tabulate__5373ebf\\repo",
+          "c:\\users\\<用户名>\\appdata\\local\\temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r1-b\\astanin-python-tabulate__5373ebf\\repo"
+        ],
+        "points_to_own_ws": true,
+        "only_own_editable": true
+      },
+      "import_after_concurrency": {
+        "a": {
+          "ok": true,
+          "resolved": "C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r1-A\\astanin-python-tabulate__5373ebf\\repo\\tabulate\\__init__.py"
+        },
+        "b": {
+          "ok": true,
+          "resolved": "C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r1-B\\astanin-python-tabulate__5373ebf\\repo\\tabulate\\__init__.py"
+        }
+      },
+      "verdict": "PASS"
+    },
+    {
+      "round": 2,
+      "errors": [],
+      "venv_distinct": true,
+      "pth_distinct": true,
+      "mount_a": {
+        "own_pth": "_eval_editable_415423a09d596655.pth",
+        "own_found": true,
+        "other_editable_pth": [],
+        "targets": [
+          "c:\\users\\<用户名>\\appdata\\local\\temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r2-a\\astanin-python-tabulate__5373ebf\\repo",
+          "c:\\users\\<用户名>\\appdata\\local\\temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r2-a\\astanin-python-tabulate__5373ebf\\repo"
+        ],
+        "points_to_own_ws": true,
+        "only_own_editable": true
+      },
+      "mount_b": {
+        "own_pth": "_eval_editable_13b0319ce05c9068.pth",
+        "own_found": true,
+        "other_editable_pth": [],
+        "targets": [
+          "c:\\users\\<用户名>\\appdata\\local\\temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r2-b\\astanin-python-tabulate__5373ebf\\repo",
+          "c:\\users\\<用户名>\\appdata\\local\\temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r2-b\\astanin-python-tabulate__5373ebf\\repo"
+        ],
+        "points_to_own_ws": true,
+        "only_own_editable": true
+      },
+      "import_after_concurrency": {
+        "a": {
+          "ok": true,
+          "resolved": "C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r2-A\\astanin-python-tabulate__5373ebf\\repo\\tabulate\\__init__.py"
+        },
+        "b": {
+          "ok": true,
+          "resolved": "C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r2-B\\astanin-python-tabulate__5373ebf\\repo\\tabulate\\__init__.py"
+        }
+      },
+      "verdict": "PASS"
+    },
+    {
+      "round": 3,
+      "errors": [],
+      "venv_distinct": true,
+      "pth_distinct": true,
+      "mount_a": {
+        "own_pth": "_eval_editable_26f407c59392971f.pth",
+        "own_found": true,
+        "other_editable_pth": [],
+        "targets": [
+          "c:\\users\\<用户名>\\appdata\\local\\temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r3-a\\astanin-python-tabulate__5373ebf\\repo",
+          "c:\\users\\<用户名>\\appdata\\local\\temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r3-a\\astanin-python-tabulate__5373ebf\\repo"
+        ],
+        "points_to_own_ws": true,
+        "only_own_editable": true
+      },
+      "mount_b": {
+        "own_pth": "_eval_editable_701c948890b23e33.pth",
+        "own_found": true,
+        "other_editable_pth": [],
+        "targets": [
+          "c:\\users\\<用户名>\\appdata\\local\\temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r3-b\\astanin-python-tabulate__5373ebf\\repo",
+          "c:\\users\\<用户名>\\appdata\\local\\temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r3-b\\astanin-python-tabulate__5373ebf\\repo"
+        ],
+        "points_to_own_ws": true,
+        "only_own_editable": true
+      },
+      "import_after_concurrency": {
+        "a": {
+          "ok": true,
+          "resolved": "C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r3-A\\astanin-python-tabulate__5373ebf\\repo\\tabulate\\__init__.py"
+        },
+        "b": {
+          "ok": true,
+          "resolved": "C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-iso-r3-B\\astanin-python-tabulate__5373ebf\\repo\\tabulate\\__init__.py"
+        }
+      },
+      "verdict": "PASS"
+    }
+  ],
+  "reverse": {
+    "venv_a": "C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-iso-ie8g82er\\venvs\\astanin__python-tabulate-8f320866",
+    "pth_a": "C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-iso-ie8g82er\\venvs\\astanin__python-tabulate-8f320866\\Lib\\site-packages\\_eval_editable_dfd8c51fb82c34cf.pth",
+    "venv_b": "C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-iso-ie8g82er\\venvs\\astanin__python-tabulate-8f320866",
+    "pth_b": "C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-iso-ie8g82er\\venvs\\astanin__python-tabulate-8f320866\\Lib\\site-packages\\_eval_editable_dfd8c51fb82c34cf.pth",
+    "b_prepare_error": null,
+    "same_venv": true,
+    "same_pth": true,
+    "a_import_before_b": {
+      "ok": true,
+      "resolved": "C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-pre-A\\astanin-python-tabulate__5373ebf\\repo\\tabulate\\__init__.py"
+    },
+    "a_import_after_b": {
+      "ok": false,
+      "error": "隔离失败：tabulate 的导入路径不在本实例工作区内（解析到 C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-pre-B\\astanin-python-tabulate__5373ebf\\repo\\tabulate\\__init__.py，期望在 C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-pre-A\\astanin-python-tabulate__5373ebf\\repo 内）；stderr="
+    },
+    "mount_a_after_b": {
+      "own_pth": "_eval_editable_dfd8c51fb82c34cf.pth",
+      "own_found": true,
+      "other_editable_pth": [],
+      "targets": [
+        "c:\\users\\<用户名>\\appdata\\local\\temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-pre-b\\astanin-python-tabulate__5373ebf\\repo",
+        "c:\\users\\<用户名>\\appdata\\local\\temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-pre-b\\astanin-python-tabulate__5373ebf\\repo"
+      ],
+      "points_to_own_ws": false,
+      "only_own_editable": true
+    },
+    "silent_crosstalk": false,
+    "loud_infra": "隔离失败：tabulate 的导入路径不在本实例工作区内（解析到 C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-pre-B\\astanin-python-tabulate__5373ebf\\repo\\tabulate\\__init__.py，期望在 C:\\Users\\<用户名>\\AppData\\Local\\Temp\\t15-iso-ie8g82er\\runs\\p1-review-t15-pre-A\\astanin-python-tabulate__5373ebf\\repo 内）；stderr=",
+    "defect_reproduced": true
+  },
+  "checks": {
+    "restored_distinct_venv": true,
+    "restored_distinct_pth": true,
+    "restored_venv_dir_is_original": true,
+    "restored_pth_name_is_original": true,
+    "all_rounds_pass": true,
+    "zero_infra": true,
+    "reverse_defect_reproduced": true
+  }
+}

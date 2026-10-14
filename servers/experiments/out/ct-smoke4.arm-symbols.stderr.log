@@ -1,0 +1,9 @@
+[code-tools] 启动：transport=stdio，REPO_ROOT=E:\aicoding\mini-claude-code\fixtures\mini_repo
+[code-tools] repo_map 默认详细度：AGENT_REPO_MAP_DEFAULT='symbols' -> 生效 'symbols'
+[code-tools] cwd=E:\aicoding\mini-claude-code
+[code-tools] python=D:\Anaconda3\envs\aicoding\python.exe
+[code-tools] 日志文件：E:\aicoding\mini-claude-code\servers\experiments\out\code-tools-server.log
+[code-tools] handler 调用：repo_map(subdir='.', pattern='*.py', detail='symbols') [用默认='symbols'，生效='symbols']
+[code-tools] handler 成功：repo_map(symbols) → 653 字符（完整）
+[code-tools] handler 调用：repo_map(subdir='.', pattern='*.py', detail='summary') [未用默认='symbols'，生效='summary']
+[code-tools] handler 成功：repo_map(summary) → 163 字符

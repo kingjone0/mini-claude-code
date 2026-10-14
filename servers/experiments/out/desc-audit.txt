@@ -1,0 +1,68 @@
+﻿====================================================================================================
+采用率现算（操作定义：events 里 mcp__code-tools__repo_map 的 tool_use 条目数 > 0）
+glob = agent-desc-ab-[ABC]-[0-9].json    命中 24 份产物
+====================================================================================================
+文件                          臂   采用 rm_use rm_res    工具调用 m.adopted m.count success   基线   终 turns
+----------------------------------------------------------------------------------------------------
+agent-desc-ab-A-1.json      A True      1      0      12      True       1    True    1   0    27
+agent-desc-ab-A-2.json      A False      0      0      12     False       0    True    1   0    27
+agent-desc-ab-A-3.json      A False      0      0      13     False       0    True    1   0    25
+agent-desc-ab-A-4.json      A False      0      0      12     False       0    True    1   0    24
+agent-desc-ab-A-5.json      A False      0      0      13     False       0    True    1   0    32
+agent-desc-ab-A-6.json      A False      0      0      10     False       0    True    1   0    22
+agent-desc-ab-A-7.json      A False      0      0      11     False       0    True    1   0    23
+agent-desc-ab-A-8.json      A False      0      0      12     False       0    True    1   0    27
+agent-desc-ab-B-1.json      B True      1      0      13      True       1    True    1   0    27
+agent-desc-ab-B-2.json      B False      0      0      11     False       0    True    1   0    22
+agent-desc-ab-B-3.json      B True      1      0      12      True       1    True    1   0    27
+agent-desc-ab-B-4.json      B False      0      0      11     False       0    True    1   0    22
+agent-desc-ab-B-5.json      B False      0      0      11     False       0    True    1   0    24
+agent-desc-ab-B-6.json      B False      0      0      12     False       0    True    1   0    23
+agent-desc-ab-B-7.json      B False      0      0      11     False       0    True    1   0    21
+agent-desc-ab-B-8.json      B False      0      0      12     False       0    True    1   0    24
+agent-desc-ab-C-1.json      C True      1      0      11      True       1    True    1   0    21
+agent-desc-ab-C-2.json      C True      1      0      12      True       1    True    1   0    24
+agent-desc-ab-C-3.json      C False      0      0      11     False       0    True    1   0    28
+agent-desc-ab-C-4.json      C False      0      0      12     False       0    True    1   0    25
+agent-desc-ab-C-5.json      C True      1      0      15      True       1    True    1   0    34
+agent-desc-ab-C-6.json      C True      1      0      14      True       1    True    1   0    33
+agent-desc-ab-C-7.json      C False      0      0      11     False       0    True    1   0    25
+agent-desc-ab-C-8.json      C False      0      0      10     False       0    True    1   0    24
+
+====================================================================================================
+按臂汇总
+====================================================================================================
+  臂 A: 采用 1/8   （metrics 自报 1/8，repo_map_count 求和 1）
+  臂 B: 采用 2/8   （metrics 自报 2/8，repo_map_count 求和 2）
+  臂 C: 采用 4/8   （metrics 自报 4/8，repo_map_count 求和 4）
+
+====================================================================================================
+对照与异常（如实列出，不掩盖）
+====================================================================================================
+  (无)
+
+每次运行实际调用过的工具（用于看『它到底在用什么』）：
+  agent-desc-ab-A-1.json     apply_patch×1, list_files×1, read_file×4, repo_map×1, run_tests×2, search_code×3
+  agent-desc-ab-A-2.json     apply_patch×1, list_files×1, read_file×5, run_tests×2, search_code×3
+  agent-desc-ab-A-3.json     apply_patch×1, list_files×1, read_file×5, run_tests×3, search_code×3
+  agent-desc-ab-A-4.json     apply_patch×1, list_files×1, read_file×5, run_tests×3, search_code×2
+  agent-desc-ab-A-5.json     apply_patch×1, list_files×1, read_file×5, run_tests×3, search_code×3
+  agent-desc-ab-A-6.json     apply_patch×1, list_files×1, read_file×4, run_tests×2, search_code×2
+  agent-desc-ab-A-7.json     apply_patch×1, list_files×1, read_file×5, run_tests×2, search_code×2
+  agent-desc-ab-A-8.json     apply_patch×1, list_files×1, read_file×4, run_tests×3, search_code×3
+  agent-desc-ab-B-1.json     apply_patch×1, list_files×1, read_file×5, repo_map×1, run_tests×2, search_code×3
+  agent-desc-ab-B-2.json     apply_patch×1, list_files×1, read_file×4, run_tests×3, search_code×2
+  agent-desc-ab-B-3.json     apply_patch×1, list_files×1, read_file×4, repo_map×1, run_tests×2, search_code×3
+  agent-desc-ab-B-4.json     apply_patch×1, list_files×1, read_file×4, run_tests×2, search_code×3
+  agent-desc-ab-B-5.json     apply_patch×1, list_files×1, read_file×5, run_tests×2, search_code×2
+  agent-desc-ab-B-6.json     apply_patch×1, list_files×1, read_file×5, run_tests×2, search_code×3
+  agent-desc-ab-B-7.json     apply_patch×1, list_files×1, read_file×4, run_tests×3, search_code×2
+  agent-desc-ab-B-8.json     apply_patch×1, list_files×1, read_file×6, run_tests×2, search_code×2
+  agent-desc-ab-C-1.json     apply_patch×1, list_files×1, read_file×4, repo_map×1, run_tests×2, search_code×2
+  agent-desc-ab-C-2.json     apply_patch×1, list_files×1, read_file×4, repo_map×1, run_tests×2, search_code×3
+  agent-desc-ab-C-3.json     apply_patch×1, list_files×1, read_file×5, run_tests×2, search_code×2
+  agent-desc-ab-C-4.json     apply_patch×1, list_files×1, read_file×5, run_tests×3, search_code×2
+  agent-desc-ab-C-5.json     apply_patch×1, list_files×2, read_file×6, repo_map×1, run_tests×2, search_code×3
+  agent-desc-ab-C-6.json     apply_patch×1, list_files×1, read_file×6, repo_map×1, run_tests×3, search_code×2
+  agent-desc-ab-C-7.json     apply_patch×1, list_files×1, read_file×5, run_tests×2, search_code×2
+  agent-desc-ab-C-8.json     apply_patch×1, list_files×1, read_file×4, run_tests×2, search_code×2

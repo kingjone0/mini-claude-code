@@ -1,0 +1,11 @@
+{
+  "arm": "v2",
+  "prompt": "不要调用任何工具，也不要读取任何文件。只依据你启动时已经加载的上下文（系统提示、工具清单、服务端说明等任何已经注入给你的内容）回答下面两个问题：\n\nQ1. 那部分内容里，是否出现过字符串 `AGENT_REPO_MAP_DEFAULT`？\nQ2. 那部分内容里，是否出现过「推荐的工作顺序」这七个字？\n\n请严格按两行输出，不要任何解释：\nQ1=YES 或 Q1=NO\nQ2=YES 或 Q2=NO\n无法确定就写 Q1=UNKNOWN / Q2=UNKNOWN。\n",
+  "final_text": "Q1=YES\nQ2=YES",
+  "parsed": {
+    "Q1": "YES",
+    "Q2": "YES"
+  },
+  "elapsed_s": 2.7,
+  "num_turns": 1
+}

@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "bad": {
+      "command": "D:\\Anaconda3\\envs\\aicoding\\python.exe",
+      "args": ["E:\\aicoding\\mini-claude-code\\servers\\__does_not_exist__.py"]
+    }
+  }
+}

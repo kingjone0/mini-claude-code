@@ -1,0 +1,150 @@
+====================================================================================================
+# C 臂 scout 中位数追因（t15 reviewer）
+====================================================================================================
+
+### p1-20261013T122356-astanin-python-tabulate__5373ebf-C  verdict=agent_result resolved=True started_at_epoch=1791894460 (2026-10-13T20:27:40)
+  scout 记录：label 全量 7 条，run 窗口内 1 条
+    WINDOW ts=2026-10-13T20:28:09+08:00 task_id=a8700398bca6778ee k=1 group=test/test_output.py iu=21362 cr=81024 cost=0.250472 turns=4 elapsed=25.1 scope=scout 会话（独立 query()；含 dr
+    (窗口外) ts=2026-10-13T14:42:39+08:00 task_id=a0b9e9c1a1577e46a k=1 group=test/test_output.py
+    (窗口外) ts=2026-10-13T15:30:22+08:00 task_id=ae962f5ca96b446aa k=1 group=test/test_output.py
+    (窗口外) ts=2026-10-13T15:46:46+08:00 task_id=ac4aa280168083845 k=1 group=test/test_output.py
+    (窗口外) ts=2026-10-13T18:40:43+08:00 task_id=a70835ac33ac8d312 k=1 group=test/test_output.py
+    (窗口外) ts=2026-10-13T18:49:46+08:00 task_id=a44c11175d6fcc356 k=1 group=test/test_output.py
+    (窗口外) ts=2026-10-13T19:17:12+08:00 task_id=aca4f3d734aa99387 k=1 group=test/test_output.py
+  窗口内汇总: iu=21362 cr=81024 cost=0.250472
+  parent usage 行 ts=2026-10-13T20:33:55+08:00 input_uncached=59696 cache_read=3290880 cost=3.32302 turns=72
+    policy_scout_input_uncached=21362
+    policy_scout_cache_read=81024
+    policy_scout_cache_creation=0
+    policy_scout_cost_usd=0.250472
+    policy_scout_sessions=1
+    policy_scout_elapsed_s=25.1
+    policy_k_groups=1
+    policy_groups_final=k1=undiagnosed
+    policy_groups_completed=0
+    policy_groups_truncated=0
+    policy_groups_undiagnosed=1
+    policy_index_chars=141
+    policy_worktrees_after_dispatch=1
+
+### p1-20261013T122356-astanin-python-tabulate__87a9a4e-C  verdict=agent_result resolved=False started_at_epoch=1791894837 (2026-10-13T20:33:57)
+  scout 记录：label 全量 1 条，run 窗口内 1 条
+    WINDOW ts=2026-10-13T20:35:47+08:00 task_id=ad2e537bf56311005 k=1 group=test/test_regression.py iu=29324 cr=302464 cost=0.7431519999999999 turns=2 elapsed=105.5 scope=scout 会话（独立 query()；含 dr
+  窗口内汇总: iu=29324 cr=302464 cost=0.743152
+  parent usage 行 ts=2026-10-13T20:36:05+08:00 input_uncached=8581 cache_read=34944 cost=0.12565199999999999 turns=10
+    policy_scout_input_uncached=29324
+    policy_scout_cache_read=302464
+    policy_scout_cache_creation=0
+    policy_scout_cost_usd=0.743152
+    policy_scout_sessions=1
+    policy_scout_elapsed_s=105.5
+    policy_k_groups=1
+    policy_groups_final=k1=completed
+    policy_groups_completed=1
+    policy_groups_truncated=0
+    policy_groups_undiagnosed=0
+    policy_index_chars=407
+    policy_worktrees_after_dispatch=1
+
+### p1-20261013T122356-astanin-python-tabulate__9dedd45-C  verdict=agent_result resolved=True started_at_epoch=1791894967 (2026-10-13T20:36:07)
+  scout 记录：label 全量 1 条，run 窗口内 1 条
+    WINDOW ts=2026-10-13T20:36:55+08:00 task_id=a6e0f1a1a7679792d k=1 group=test/test_output.py iu=18550 cr=44544 cost=0.208872 turns=2 elapsed=45.0 scope=scout 会话（独立 query()；含 dr
+  窗口内汇总: iu=18550 cr=44544 cost=0.208872
+  parent usage 行 ts=2026-10-13T20:37:40+08:00 input_uncached=16085 cache_read=188288 cost=0.32334399999999996 turns=21
+    policy_scout_input_uncached=18550
+    policy_scout_cache_read=44544
+    policy_scout_cache_creation=0
+    policy_scout_cost_usd=0.208872
+    policy_scout_sessions=1
+    policy_scout_elapsed_s=45.0
+    policy_k_groups=1
+    policy_groups_final=k1=undiagnosed
+    policy_groups_completed=0
+    policy_groups_truncated=0
+    policy_groups_undiagnosed=1
+    policy_index_chars=141
+    policy_worktrees_after_dispatch=1
+
+### p1-20261013T122356-more-itertools-more-itertools__1b7f033-C  verdict=timeout resolved=False started_at_epoch=1791895062 (2026-10-13T20:37:42)
+  scout 记录：label 全量 1 条，run 窗口内 1 条
+    WINDOW ts=2026-10-13T20:39:32+08:00 task_id=a7a34020aac7958c7 k=1 group=tests/test_more.py iu=19612 cr=131200 cost=0.30383499999999997 turns=2 elapsed=69.7 scope=scout 会话（独立 query()；含 dr
+  窗口内汇总: iu=19612 cr=131200 cost=0.303835
+  parent usage 行：run 窗口内无（超时行）
+
+### p1-20261013T122356-more-itertools-more-itertools__ccf96ac-C  verdict=agent_result resolved=False started_at_epoch=1791895783 (2026-10-13T20:49:43)
+  scout 记录：label 全量 1 条，run 窗口内 1 条
+    WINDOW ts=2026-10-13T20:51:06+08:00 task_id=a7e42705d5a7fbdbf k=1 group=tests/test_recipes.py iu=23826 cr=72576 cost=0.24009299999999997 turns=2 elapsed=49.0 scope=scout 会话（独立 query()；含 dr
+  窗口内汇总: iu=23826 cr=72576 cost=0.240093
+  parent usage 行 ts=2026-10-13T20:55:40+08:00 input_uncached=25005 cache_read=899072 cost=1.343736 turns=49
+    policy_scout_input_uncached=23826
+    policy_scout_cache_read=72576
+    policy_scout_cache_creation=0
+    policy_scout_cost_usd=0.240093
+    policy_scout_sessions=1
+    policy_scout_elapsed_s=49.0
+    policy_k_groups=1
+    policy_groups_final=k1=undiagnosed
+    policy_groups_completed=0
+    policy_groups_truncated=0
+    policy_groups_undiagnosed=1
+    policy_index_chars=143
+    policy_worktrees_after_dispatch=1
+
+### p1-20261013T122356-more-itertools-more-itertools__f8ccab2-C  verdict=agent_result resolved=True started_at_epoch=1791896141 (2026-10-13T20:55:41)
+  scout 记录：label 全量 1 条，run 窗口内 1 条
+    WINDOW ts=2026-10-13T20:57:45+08:00 task_id=a42d2747e83749437 k=1 group=tests/test_recipes.py iu=23003 cr=149632 cost=0.414556 turns=2 elapsed=90.6 scope=scout 会话（独立 query()；含 dr
+  窗口内汇总: iu=23003 cr=149632 cost=0.414556
+  parent usage 行 ts=2026-10-13T21:09:51+08:00 input_uncached=113077 cache_read=12958848 cost=9.487459 turns=155
+    policy_scout_input_uncached=23003
+    policy_scout_cache_read=149632
+    policy_scout_cache_creation=0
+    policy_scout_cost_usd=0.414556
+    policy_scout_sessions=1
+    policy_scout_elapsed_s=90.6
+    policy_k_groups=1
+    policy_groups_final=k1=undiagnosed
+    policy_groups_completed=0
+    policy_groups_truncated=0
+    policy_groups_undiagnosed=1
+    policy_index_chars=143
+    policy_worktrees_after_dispatch=1
+
+### p1-20261013T122356-pallets-click__1b0e19f-C  verdict=timeout resolved=False started_at_epoch=1791896673 (2026-10-13T21:04:33)
+  scout 记录：label 全量 4 条，run 窗口内 4 条
+    WINDOW ts=2026-10-13T21:07:44+08:00 task_id=ab4fc9da0aafcf506 k=1 group=tests/test_options.py iu=39344 cr=605184 cost=1.2361370000000005 turns=2 elapsed=186.9 scope=scout 会话（独立 query()；含 dr
+    WINDOW ts=2026-10-13T21:10:51+08:00 task_id=ab20b3f397e85c413 k=2 group=tests/test_arguments.py iu=32235 cr=353152 cost=1.0926259999999999 turns=2 elapsed=186.4 scope=scout 会话（独立 query()；含 dr
+    WINDOW ts=2026-10-13T21:15:28+08:00 task_id=aadc4110ba3a72a8d k=3 group=tests/test_info_dict.py iu=54726 cr=1002624 cost=1.883567 turns=5 elapsed=274.7 scope=scout 会话（独立 query()；含 dr
+    WINDOW ts=2026-10-13T21:19:30+08:00 task_id=a12e8f656c339da5a k=3 group=tests/test_info_dict.py iu=40064 cr=700672 cost=1.539281 turns=5 elapsed=242.3 scope=scout 会话（独立 query()；含 dr
+  窗口内汇总: iu=166369 cr=2661632 cost=5.751611
+  parent usage 行：run 窗口内无（超时行）
+
+### p1-20261013T122356-pallets-click__4fd2fea-C  verdict=timeout resolved=False started_at_epoch=1791896992 (2026-10-13T21:09:52)
+  scout 记录：label 全量 3 条，run 窗口内 3 条
+    WINDOW ts=2026-10-13T21:13:53+08:00 task_id=a466707eb90fd4887 k=1 group=tests/test_options.py iu=46005 cr=946304 cost=1.6251269999999998 turns=3 elapsed=237.0 scope=scout 会话（独立 query()；含 dr
+    WINDOW ts=2026-10-13T21:18:39+08:00 task_id=a4938911248d29c2a k=1 group=tests/test_options.py iu=32806 cr=532736 cost=1.616948 turns=5 elapsed=286.4 scope=scout 会话（独立 query()；含 dr
+    WINDOW ts=2026-10-13T21:21:56+08:00 task_id=af58fcf27cc3dd1de k=2 group=tests/test_arguments.py iu=31803 cr=387072 cost=1.179126 turns=2 elapsed=194.9 scope=scout 会话（独立 query()；含 dr
+  窗口内汇总: iu=110614 cr=1866112 cost=4.421201
+  parent usage 行：run 窗口内无（超时行）
+
+### p1-20261013T122356-pallets-click__ac6a2ac-C  verdict=timeout resolved=False started_at_epoch=1791897617 (2026-10-13T21:20:17)
+  scout 记录：label 全量 2 条，run 窗口内 2 条
+    WINDOW ts=2026-10-13T21:24:18+08:00 task_id=a2f28bdb23f90468b k=1 group=tests/test_options.py iu=52995 cr=668928 cost=1.578489 turns=2 elapsed=237.6 scope=scout 会话（独立 query()；含 dr
+    WINDOW ts=2026-10-13T21:32:25+08:00 task_id=a21d747362b9e3940 k=2 group=tests/test_arguments.py iu=44788 cr=1082240 cost=2.79346 turns=2 elapsed=483.5 scope=scout 会话（独立 query()；含 dr
+  窗口内汇总: iu=97783 cr=1751168 cost=4.371949
+  parent usage 行：run 窗口内无（超时行）
+
+====================================================================================================
+# 5 值集合（C 非 timeout 行）
+- scout input_uncached: [('astanin-python-tabulate__5373ebf-C', 21362), ('astanin-python-tabulate__87a9a4e-C', 29324), ('astanin-python-tabulate__9dedd45-C', 18550), ('more-itertools-more-itertools__ccf96ac-C', 23826), ('more-itertools-more-itertools__f8ccab2-C', 23003)]
+    sorted=[18550, 21362, 23003, 23826, 29324]  median=23003  range=(18550, 29324)
+- scout cache_read: [('astanin-python-tabulate__5373ebf-C', 81024), ('astanin-python-tabulate__87a9a4e-C', 302464), ('astanin-python-tabulate__9dedd45-C', 44544), ('more-itertools-more-itertools__ccf96ac-C', 72576), ('more-itertools-more-itertools__f8ccab2-C', 149632)]
+    sorted=[44544, 72576, 81024, 149632, 302464]  median=81024  range=(44544, 302464)
+- scout total_cost_usd: [('astanin-python-tabulate__5373ebf-C', 0.250472), ('astanin-python-tabulate__87a9a4e-C', 0.743152), ('astanin-python-tabulate__9dedd45-C', 0.208872), ('more-itertools-more-itertools__ccf96ac-C', 0.240093), ('more-itertools-more-itertools__f8ccab2-C', 0.414556)]
+    sorted=[0.208872, 0.240093, 0.250472, 0.414556, 0.743152]  median=0.2505  range=(0.208872, 0.743152)
+
+- parent 行 policy_scout_input_uncached: [('astanin-python-tabulate__5373ebf-C', 21362), ('astanin-python-tabulate__87a9a4e-C', 29324), ('astanin-python-tabulate__9dedd45-C', 18550), ('more-itertools-more-itertools__ccf96ac-C', 23826), ('more-itertools-more-itertools__f8ccab2-C', 23003)]
+    sorted=[18550, 21362, 23003, 23826, 29324]  median=23003  range=(18550, 29324)
+- parent 行 policy_scout_cache_read: [('astanin-python-tabulate__5373ebf-C', 81024), ('astanin-python-tabulate__87a9a4e-C', 302464), ('astanin-python-tabulate__9dedd45-C', 44544), ('more-itertools-more-itertools__ccf96ac-C', 72576), ('more-itertools-more-itertools__f8ccab2-C', 149632)]
+    sorted=[44544, 72576, 81024, 149632, 302464]  median=81024  range=(44544, 302464)
+- parent 行 policy_scout_cost_usd: [('astanin-python-tabulate__5373ebf-C', 0.250472), ('astanin-python-tabulate__87a9a4e-C', 0.743152), ('astanin-python-tabulate__9dedd45-C', 0.208872), ('more-itertools-more-itertools__ccf96ac-C', 0.240093), ('more-itertools-more-itertools__f8ccab2-C', 0.414556)]
+    sorted=[0.208872, 0.240093, 0.250472, 0.414556, 0.743152]  median=0.2505  range=(0.208872, 0.743152)

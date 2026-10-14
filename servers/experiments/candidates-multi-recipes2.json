@@ -1,0 +1,26 @@
+[
+  {
+    "name": "recipes.grouper(strict): strict=True -> strict=False",
+    "file": "more_itertools/recipes.py",
+    "old": "            return zip(*iterators, strict=True)",
+    "new": "            return zip(*iterators, strict=False)"
+  },
+  {
+    "name": "recipes.grouper(fill): fillvalue=fillvalue -> fillvalue=None",
+    "file": "more_itertools/recipes.py",
+    "old": "            return zip_longest(*iterators, fillvalue=fillvalue)",
+    "new": "            return zip_longest(*iterators, fillvalue=None)"
+  },
+  {
+    "name": "recipes.sieve: n > 2 -> n >= 2",
+    "file": "more_itertools/recipes.py",
+    "old": "    if n > 2:\n        yield 2",
+    "new": "    if n >= 2:\n        yield 2"
+  },
+  {
+    "name": "recipes.iter_index: 去掉 is 身份判断",
+    "file": "more_itertools/recipes.py",
+    "old": "            if element is value or element == value:",
+    "new": "            if element == value:"
+  }
+]

@@ -1,0 +1,147 @@
+{
+  "before": {
+    "skipped": [
+      "A",
+      "C"
+    ],
+    "pending": [
+      "B"
+    ],
+    "rows": 4,
+    "readback": {
+      "verdict_class": "agent_result",
+      "resolved": true
+    },
+    "old_predicate_source": "if prev and prev.get(\"stage\") == \"judged\":"
+  },
+  "after": {
+    "skipped": [
+      "A",
+      "B",
+      "C"
+    ],
+    "pending": [],
+    "skipped_failed": 1
+  },
+  "immutability": {
+    "before_sha": "4da810797f3338fd3953b87ab8165897d3b55a1e367568e49ca9c98a3d2f47d0",
+    "after_sha": "4da810797f3338fd3953b87ab8165897d3b55a1e367568e49ca9c98a3d2f47d0",
+    "unchanged": true,
+    "rows": 3,
+    "manifest": {
+      "planned_slots": 3,
+      "skipped_completed": 2,
+      "skipped_failed": 1,
+      "runs_done": 3
+    },
+    "started_arms": 38,
+    "files_after": [
+      "manifest.json",
+      "triple_state.jsonl"
+    ]
+  },
+  "budget": {
+    "unique_keys": 1,
+    "counted_spawns": 2,
+    "new_started_arms": 37,
+    "old_formula_would_be": 36,
+    "with_prep_failure": 2,
+    "legacy_row_counted": 1
+  },
+  "f6": {
+    "writers": [
+      "eval/harness/scheduler_p1.py:121  [读/引用] return f\"{iid}/artifacts/policy_evidence_isolated.json\"",
+      "eval/harness/scheduler_p1.py:337  [读/引用] isolated = os.path.join(E.art_dir(run_id, iid), \"policy_evidence_isolated.json\")",
+      "eval/harness/t29_resume_check.py:81  [读/引用] assert artifact == IID + \"/artifacts/policy_evidence_isolated.json\"",
+      "eval/reports/p1_audit_batch.py:12  [读/引用] names=('console_'+r['arm']+'.log','arm_report.jsonl','result.json','judged.json','verdict.json','verdict_run.t",
+      "eval/reports/p1_extract_evidence.py:17  [读/引用] target=art/'policy_evidence_isolated.json'",
+      "eval/reports/p1_recompute.py:18  [读/引用] p=Path(r[\"artifacts\"][0]).parent/\"policy_evidence_isolated.json\"",
+      "eval/reports/p1_review_recompute.py:340  [读/引用] iso = os.path.join(art, \"policy_evidence_isolated.json\")",
+      "eval/reports/p1_review_recompute.py:389  [读/引用] \"policy_evidence_isolated.json\")",
+      "eval/reports/p1_review_t30_resume.py:10  [读/引用] Part D  F6：`policy_evidence_isolated.json` 的**生产者是谁**、现有 state 行是否含它、",
+      "eval/reports/p1_review_t30_resume.py:214  [读/引用] say(\"## D F6：`policy_evidence_isolated.json` 的生产者与现有 state 行\")",
+      "eval/reports/p1_review_t30_resume.py:217  [读/引用] say(f\"- 全仓扫「写 `policy_evidence_isolated.json`」的位置：\")",
+      "eval/reports/p1_review_t30_resume.py:231  [读/引用] iso = os.path.join(art, \"policy_evidence_isolated.json\")",
+      "eval/reports/p1_review_t30_resume.py:237  [读/引用] listed = any(\"policy_evidence_isolated\" in str(a) for a in r[\"artifacts\"])",
+      "eval/reports/p1_review_t30_resume.py:322  [读/引用] if \"policy_evidence_isolated\" not in line:"
+    ],
+    "rows": [
+      {
+        "run_id": "p1-20261013T122356-astanin-python-tabulate__5373ebf-C",
+        "finished_at": "2026-10-13T20:33:57+0800",
+        "iso_mtime": "10-13 21:35:38",
+        "iso_after_run": true,
+        "listed": false
+      },
+      {
+        "run_id": "p1-20261013T122356-astanin-python-tabulate__87a9a4e-C",
+        "finished_at": "2026-10-13T20:36:07+0800",
+        "iso_mtime": "10-13 21:35:38",
+        "iso_after_run": true,
+        "listed": false
+      },
+      {
+        "run_id": "p1-20261013T122356-astanin-python-tabulate__9dedd45-C",
+        "finished_at": "2026-10-13T20:37:42+0800",
+        "iso_mtime": "10-13 21:35:38",
+        "iso_after_run": true,
+        "listed": false
+      },
+      {
+        "run_id": "p1-20261013T122356-more-itertools-more-itertools__1b7f033-C",
+        "finished_at": "2026-10-13T20:52:42+0800",
+        "iso_mtime": "10-13 21:35:38",
+        "iso_after_run": true,
+        "listed": false
+      },
+      {
+        "run_id": "p1-20261013T122356-more-itertools-more-itertools__ccf96ac-C",
+        "finished_at": "2026-10-13T20:55:41+0800",
+        "iso_mtime": "10-13 21:35:38",
+        "iso_after_run": true,
+        "listed": false
+      },
+      {
+        "run_id": "p1-20261013T122356-more-itertools-more-itertools__f8ccab2-C",
+        "finished_at": "2026-10-13T21:09:52+0800",
+        "iso_mtime": "10-13 21:35:38",
+        "iso_after_run": true,
+        "listed": false
+      },
+      {
+        "run_id": "p1-20261013T122356-pallets-click__1b0e19f-C",
+        "finished_at": "2026-10-13T21:19:33+0800",
+        "iso_mtime": "10-13 21:35:38",
+        "iso_after_run": true,
+        "listed": false
+      },
+      {
+        "run_id": "p1-20261013T122356-pallets-click__4fd2fea-C",
+        "finished_at": "2026-10-13T21:24:52+0800",
+        "iso_mtime": "10-13 21:35:38",
+        "iso_after_run": true,
+        "listed": false
+      },
+      {
+        "run_id": "p1-20261013T122356-pallets-click__ac6a2ac-C",
+        "finished_at": "2026-10-13T21:35:17+0800",
+        "iso_mtime": "10-13 21:35:38",
+        "iso_after_run": true,
+        "listed": false
+      }
+    ],
+    "listed_count": 0,
+    "artifact_string": "offline-instance/artifacts/policy_evidence_isolated.json"
+  },
+  "scope": {
+    "state_sha256": "17f3a7119fa01b20b1fa899c1fda2b3ef2af3f737b7444d9a6de334f17da8c78",
+    "state_bytes": 205543,
+    "state_unchanged": true,
+    "unstarted_rows": [],
+    "usage_total": 186,
+    "usage_p1": 56,
+    "scout_total": 55,
+    "scout_p1": 21,
+    "max_p1_usage_ts": "2026-10-13T21:32:25+08:00"
+  }
+}

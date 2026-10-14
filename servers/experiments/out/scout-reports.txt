@@ -1,0 +1,111 @@
+########## agent-subagent-ab-hard-C-1  (status=completed) ##########
+侦察完成。三处缺陷全部定位，32 个子测试失败可完全归因。
+
+## 1. 完整失败测试清单（32 个子测试，3 处缺陷）
+
+**缺陷 A —— `tests/test_more.py::IsliceExtendedTests`（27 个子测试）**
+- `test_all`：25 个 subTest，slice_args 为负 start 组合：
+  `(-4,3,1) (-4,3,2) (-4,3,3) (-4,3,4) (-4,4,1) (-4,5,1) (-4,5,2) (-4,6,1) (-4,6,3) (-3,4,1) (-3,4,2) (-3,4,3) (-3,4,4) (-3,5,1) (-3,6,1) (-3,6,2) (-2,5,1) (-2,5,2) (-2,5,3) (-2,5,4) (-2,6,1) (-1,6,1) (-1,6,2) (-1,6,3) (-1,6,4)`
+- `test_elements_lifecycle`：2 个 subTest —— `[07] slice=(-2,2,1)` 与 `[09] slice=(-4,4,2)`（就是你看到的 `[[True,True,True],[False,False,False]] != [[1,1,1],[0,0,1],[0,0,0]]` 那两条；bool 与 int 相等不是问题，行数少一行才是）
+
+**缺陷 B —— `tests/test_more.py::DiscreteFourierTransformTests`（2 个子测试）**
+- `test_basic`（失败在 `tests/test_more.py:6725`，即 `mi.dft`）
+- `test_roundtrip`（失败在 `tests/test_more.py:6733`，即 `mi.idft`）
+
+**缺陷 C —— `tests/test_recipes.py::SlidingWindowTests::test_islice_version`（3 个子测试）**
+- `expected=[(0,1,2)]`、`expected=[(0,1,2,3)]`、`expected=[(0,1,2,3),(1,2,3,4)]`
+
+合计 27 + 2 + 3 = 32，与题面一致。
+
+## 2. 三处缺陷的根因
+
+### 缺陷 A — `more_itertools/more.py:2737`（函数 `_islice_helper`，step>0 且 start<0 分支）
+- 代码：`len_iter = next(counter)`，其中 `counter = count(1)`、`cache = deque(compress(it, counter), maxlen=-start)`。
+- `compress` 的选择器 `count(1)` 从 1 开始全为真，`deque(..., maxlen)` 会把整个 iterable 消费完，此时 `counter` 已产出 L 个值（1..L），故 `next(counter)` 返回 **L+1**，比真实长度多 1。`len_iter` 应等于 L。
+- 连锁后果：`i = max(len_iter + start, 0)` 偏大 1，`j = min(stop, len_iter)`/`max(len_iter+stop,0)` 也随之偏；`n = j - i` 被算小 1，导致少产出元素甚至直接 `return`。例：`['0'..'5']`、slice `(-4,3,1)` → `i=max(7-4,0)=3`、`j=min(3,7)=3`、`n=0` 返回空，期望 `['2']`（索引 2），正好差 1。`(-4,3,*)` 系列全空、其余系列"少末元素"都由此产生。
+- 佐证：同函数另一分支（负 step，`more.py:2794`）对同款构造写的是 `len_iter = next(counter) - 1`，此处漏了 `- 1`。
+- 最小修改：把 `more.py:2737` 改为 `len_iter = next(counter) - 1`。
+- 注意：报错的入口是 `mi.islice_extended`（`more.py:2705/2717` 调用 `_islice_helper`），坏的是被调用的 `_islice_helper`。
+
+### 缺陷 B — `more_itertools/more.py:5204`（函数 `_complex_sumprod`，被 `dft`/`idft` 调用）
+- 复数积和：实部应为 `Σ(a·c − b·d)`。当前 `r1`（5203）为 `chain(map(real,v1), map(neg,map(imag,v1))) = [a…, −b…]`，而 `r2`（5204）为 `chain(map(imag,v2), map(real,v2)) = [d…, c…]`，两者点积 = `Σ(a·d − b·c)`，既不是实部也不是虚部。虚部路径 `i1/i2`（5205-5206）是对的（`[a…,b…]·[d…,c…] = ad+bc`）。
+- 因此 `dft` 与 `idft` 都错，`test_basic`（先断言 `dft`）与 `test_roundtrip`（`idft`）一起失败。
+- 最小修改：把 `more.py:5204` 改为 `r2 = chain(map(real, v2), map(imag, v2))`，即 `r2=[c…,d…]`，实部即得 `Σ(a·c − b·d)`；不需要动 `i1/i2`。
+- 注意：报错里出现的是 `mi.dft`/`mi.idft`，根因在其下被调用的 `_complex_sumprod`，而非 `dft`/`idft` 本身（二者的 roots-of-unity 与 `/N` 均正确）。
+
+### 缺陷 C — `more_itertools/recipes.py:794`（函数 `_sliding_window_islice`）
+- 代码：`next(islice(iterator, i, i + 1), None)`。`islice(it, i, i+1)` 会跳过 i 个再**消费**第 i 个，使第 i 个 tee 迭代器前进 i+1 个位置（每个都多前进 1）。于是 `zip(*iterators)` 产出的窗口整体右移，且首个窗口丢失。
+- 验证：`[0,1,2]` n=3 → 三个迭代器分别被消费 1/2/3 个 → `zip` 为空，期望 `[(0,1,2)]`；`[0,1,2,3,4]` n=4 → 只剩 `(1,2,3,4)`，丢了 `(0,1,2,3)`。与失败输出完全吻合。deque 分支（`_sliding_window_deque`, n>20）不受影响，故 `test_deque_version` 通过。
+- 同文件 `consume`（`recipes.py:203`）用的正是 `next(islice(iterator, n, n), None)`，佐证应为 `(i, i)`。
+- 最小修改：把 `recipes.py:794` 改为 `next(islice(iterator, i, i), None)`（只前进 i 个，不消费第 i 个）。
+
+## 3. 涉及函数名汇总
+- 缺陷 A：`mi.islice_extended` → 根因 `_islice_helper`（`more.py:2722`，坏行 2737）。
+- 缺陷 B：`mi.dft` / `mi.idft` → 根因 `_complex_sumprod`（`more.py:5196`，坏行 5204）。
+- 缺陷 C：`mi.sliding_window` →（n>2 时）根因 `_sliding_window_islice`（`recipes.py:790`，坏行 794）；`_sliding_window_deque` 正常。
+
+（只读侦察，未修改任何文件。）
+
+########## agent-subagent-ab-hard-C-2  (status=completed) ##########
+NOTE: this agent stopped at its 24-turn limit before finishing. The text below is PARTIAL output; treat it as incomplete. Send the agent a message (SendMessage) to let it continue from where it stopped.
+
+The code changed mid-session (lines 2737 and 5204 were defective in my first read, now corrected). Let me look for any backup/patch artifacts that reveal the original injected forms, and check for other copies.
+
+########## agent-subagent-ab-hard-C-3  (status=completed) ##########
+侦察完成。全部失败可归为 3 个源码缺陷（其余测试全过：test_more 排除这两类后 612 passed，test_recipes 仅 3 个 subtest 失败）。
+
+## 失败 1 —— IsliceExtendedTests（test_all 的 25 个 subtest + test_elements_lifecycle [07][09]）
+
+- 失败点：`tests/test_more.py:3496`（test_all）、`tests/test_more.py:3654`（test_elements_lifecycle）
+- 根因：`more_itertools/more.py:2737`，在 `_islice_helper` 的「step > 0 且 start < 0」分支里
+  `len_iter = next(counter)` 算出的长度多了 1。
+  这里 `counter = count(1)`，`wrapper = compress(it, counter)`；CPython 的 `compress` 每取一个数据项就取一个 selector（取尽时先 `next(data)` 抛 StopIteration，不再取 selector），所以消费 N 个元素后 `counter` 停在 N+1，`next(counter)` 返回 N+1，被当成可迭代对象长度。
+  后果：`i = max(len_iter + start, 0)` 被整体右移 1，而 `j = min(stop, len_iter)` 在 `stop >= 0` 时被真正的 `stop` 钉住，于是 `n = j - i` 少 1，尾部元素被丢掉；极端时 `n <= 0` 直接返回空。这正好解释所有失败用例都满足「start<0 且 stop>=0」。
+  而 `stop is None` 时 `j = len_iter`、`stop < 0` 时 `j = max(len_iter + stop, 0)`，`i`、`j` 同时被 +1 抵消，故那些用例仍然通过。同文件 `more.py:2794`（step<0 分支）用的是同一个模式且带了 `- 1`，反证此处漏掉了 `- 1`。
+  lifecycle 的两个用例是同源：`n` 少 1 使生成器少 yield 一次甚至不 yield，存活状态快照数量与期望不符。
+- 建议最小修改：`more_itertools/more.py:2737` 改为 `len_iter = next(counter) - 1`。
+
+## 失败 2 —— SlidingWindowTests::test_islice_version（3 个 subtest）
+
+- 失败点：`tests/test_recipes.py:906`（`test_islice_version` 内的 assertEqual；subtest 期望 `[(0,1,2)]`、`[(0,1,2,3)]`、`[(0,1,2,3),(1,2,3,4)]`，实际分别 `[]`、`[]`、`[(1,2,3,4)]`）
+- 根因：`more_itertools/recipes.py:794`，在 `_sliding_window_islice` 里
+  `next(islice(iterator, i, i + 1), None)` 把第 i 个 tee 出来的迭代器多推进了 1 位。
+  `islice(it, i, i)` 会消费 i 个元素（不产出），`islice(it, i, i + 1)` 会消费 i 个后再产出下标 i 的元素，`next(...)` 又把它消费掉，实际推进 i+1 位。于是 iter0 从第 1 个元素开始、iter1 从第 2 个开始……`zip` 按最短截断，窗口整体错位甚至为空。
+  只影响 n 在 3..20（走 islice 快路径）的情形；n==1 用 `zip`、n==2 用 `pairwise`、n>20 走 deque 路径，故不受影响。
+- 建议最小修改：`more_itertools/recipes.py:794` 改为 `next(islice(iterator, i, i), None)`（即把 `i + 1` 改回 `i`）。
+
+## 失败 3 —— DiscreteFourierTransformTests（test_basic + test_roundtrip）
+
+- 失败点：`tests/test_more.py:6725`（dft）、`tests/test_more.py:6733`（idft）
+- 根因：`more_itertools/more.py:5204`，`_complex_sumprod` 的实部乘积项
+  `r2 = chain(map(imag, v2), map(real, v2))` 两个 `map` 顺序反了，应为 `chain(map(real, v2), map(imag, v2))`。
+  正确配对：`r1 = [re(a), -im(a)]` 需与 `r2 = [re(b), im(b)]` 点积，才得 `Σ(re(a)re(b) - im(a)im(b))`（复数乘加和的实部）。现在的 `r2 = [im(b), re(b)]` 算出的是 `Σ(re(a)im(b) - im(a)re(b))`，实部错误。`i1/i2`（虚部）是对的，所以虚部正常、实部错位，`dft`/`idft` 都因此失败（两者都调用 `_complex_sumprod`）。
+- 建议最小修改：`more_itertools/more.py:5204` 改为 `r2 = chain(map(real, v2), map(imag, v2))`。
+
+三处均为源码 bug，非测试期望问题；未做任何文件改动。
+
+########## agent-subagent-ab-hard-C-4  (status=completed) ##########
+Investigation complete. All 32 failing subtests trace to exactly 3 defects. Breakdown: 27 from `IsliceExtendedTests` (25 in `test_all`, 2 in `test_elements_lifecycle`), 2 from `DiscreteFourierTransformTests`, 3 from `SlidingWindowTests::test_islice_version` = 32.
+
+---
+
+**Failure group 1 — `tests/test_more.py::IsliceExtendedTests::test_all` (25 subtests) + `::test_elements_lifecycle` [07]/[09] (2 subtests)**
+
+- Root cause: `E:\aicoding\targets\more-itertools-hard\more_itertools\more.py:2737`
+- Code: `len_iter = next(counter)`
+- Why: In the `step > 0`, `start < 0` branch of `_islice_helper`, the iterable length is computed from the loop counter after `compress(it, counter)` has fully drained `it`. `compress` pulls one selector per item, so after N items the counter's next value is N+1 — `len_iter` is off by one (too large). Every failing case has a negative `start`, which routes here. With `len_iter` too large, `i = max(len_iter + start, 0)` and `j = min(stop, len_iter)` are both shifted, yielding empty or one-element-short results. The parallel `step < 0` branch does the same computation correctly at `more.py:2794` as `len_iter = next(counter) - 1`, which confirms the missing `- 1`.
+- Minimal fix: change line 2737 to `len_iter = next(counter) - 1`.
+
+**Failure group 2 — `tests/test_more.py::DiscreteFourierTransformTests::test_basic` and `::test_roundtrip`**
+
+- Root cause: `E:\aicoding\targets\more-itertools-hard\more_itertools\more.py:5204`
+- Code: `r2 = chain(map(imag, v2), map(real, v2))`
+- Why: `_complex_sumprod(v1, v2)` computes the complex dot product. The real part is `sum(a*c - b*d)`, which needs the second factor sequence to be `[real(v2)..., imag(v2)...]` = `[c..., d...]` to pair with `r1 = [a..., -b...]`. The code instead supplies `[imag, real]` = `[d..., c...]`, producing `sum(a*d - b*c)` for the real part. The imaginary part (`i1`/`i2`) is correct, so only the real components are wrong, breaking both `dft` and `idft`.
+- Minimal fix: change line 5204 to `r2 = chain(map(real, v2), map(imag, v2))`.
+
+**Failure group 3 — `tests/test_recipes.py::SlidingWindowTests::test_islice_version` (3 subtests)**
+
+- Root cause: `E:\aicoding\targets\more-itertools-hard\more_itertools\recipes.py:794`
+- Code: `next(islice(iterator, i, i + 1), None)`
+- Why: To align tee-copy `i` of the window, iterator `i` must skip exactly `i` items. `islice(it, i, i+1)` discards `i` and then yields item `i`, and `next(...)` consumes it too, so the iterator advances `i+1` items — one too many ("多消费了一个元素"). For `n=3`, `[0,1,2]`, all three copies overshoot by one, so `zip` is empty (got `[]`, expected `[(0,1,2)]`); for the 5-element case the whole window is shifted by one (got `[(1,2,3,4)]`, expected `[(0,1,2,3),(1,2,3,4)]`).
+- Minimal fix: change line 794 to `next(islice(iterator, i, i), None)` so each copy skips exactly `i` items.

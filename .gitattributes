@@ -1,0 +1,9 @@
+* text=auto eol=lf
+
+# 实验证据文件保留**原始字节**，禁止任何行尾转换。
+# 这些 .raw / .log 是 VERIFY-mcp.md 直接引用的东西 —— 里面那个 CRLF 是 Windows 管道的
+# 真实产物，属于被测现象的一部分。被 git 转成 LF 就等于篡改了证据。
+# （踩过：第一版提交时 direct.stdout.raw 的 index 是 LF、工作区是 CRLF，sha256 对不上。）
+servers/experiments/out/** -text
+*.png binary
+*.jpg binary

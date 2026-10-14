@@ -1,0 +1,170 @@
+{
+  "command": [
+    "D:/Anaconda3/Scripts/conda.exe",
+    "run",
+    "--no-capture-output",
+    "-n",
+    "aicoding",
+    "python",
+    "E:/aicoding/mini-claude-code/servers/local_tools_server.py"
+  ],
+  "responses": {
+    "initialize": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "capabilities": {
+          "experimental": {},
+          "prompts": {
+            "listChanged": false
+          },
+          "resources": {
+            "listChanged": false,
+            "subscribe": false
+          },
+          "tools": {
+            "listChanged": false
+          }
+        },
+        "instructions": "本机通用小工具：文本统计、读取 E:\\<私有目录> 工作区下的文件。",
+        "protocolVersion": "2025-06-18",
+        "serverInfo": {
+          "name": "local-tools",
+          "version": "1.0.0"
+        }
+      }
+    },
+    "tools/list": {
+      "jsonrpc": "2.0",
+      "id": 2,
+      "result": {
+        "tools": [
+          {
+            "description": "统计一段文本的字符数和词数。\n\n    算法与 hello_agent.py 的进程内版本逐字一致，便于两者直接对比输出。\n    ",
+            "inputSchema": {
+              "properties": {
+                "text": {
+                  "title": "Text",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "text"
+              ],
+              "type": "object",
+              "title": "word_countArguments"
+            },
+            "name": "word_count",
+            "outputSchema": {
+              "properties": {
+                "result": {
+                  "title": "Result",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "result"
+              ],
+              "type": "object",
+              "title": "word_countOutput"
+            }
+          },
+          {
+            "description": "读取 E:\\<私有目录> 下的文本文件（相对路径，如 daily/2026-09-15.md）。\n\n    越界访问（.. 逃逸、绝对路径、指向工作区外）一律拒绝并说明原因。\n    这是第二阶段「权限与沙箱」的最小原型：工具自己守住自己的边界。\n    ",
+            "inputSchema": {
+              "properties": {
+                "relpath": {
+                  "title": "Relpath",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "relpath"
+              ],
+              "type": "object",
+              "title": "read_study_fileArguments"
+            },
+            "name": "read_study_file",
+            "outputSchema": {
+              "properties": {
+                "result": {
+                  "title": "Result",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "result"
+              ],
+              "type": "object",
+              "title": "read_study_fileOutput"
+            }
+          }
+        ]
+      }
+    },
+    "tools/call:word_count": {
+      "jsonrpc": "2.0",
+      "id": 3,
+      "result": {
+        "content": [
+          {
+            "text": "「hello world foo」→ 字符数 15，词数 3",
+            "type": "text"
+          }
+        ],
+        "isError": false,
+        "structuredContent": {
+          "result": "「hello world foo」→ 字符数 15，词数 3"
+        }
+      }
+    },
+    "tools/call:read_study_file": {
+      "jsonrpc": "2.0",
+      "id": 4,
+      "result": {
+        "content": [
+          {
+            "text": "<个人求职计划内容，公开版已移除>",
+            "type": "text"
+          }
+        ],
+        "isError": false,
+        "structuredContent": {
+          "result": "<个人求职计划内容，公开版已移除>"
+        }
+      }
+    },
+    "tools/call:escape_attempt": {
+      "jsonrpc": "2.0",
+      "id": 5,
+      "result": {
+        "content": [
+          {
+            "text": "拒绝：../../Windows/win.ini 越出 E:\\<私有目录>（本工具只允许读该目录之内）",
+            "type": "text"
+          }
+        ],
+        "isError": false,
+        "structuredContent": {
+          "result": "拒绝：../../Windows/win.ini 越出 E:\\<私有目录>（本工具只允许读该目录之内）"
+        }
+      }
+    }
+  },
+  "raw_stdout_lines": [
+    "{\"jsonrpc\":\"2.0\",\"id\":1,\"result\":{\"capabilities\":{\"experimental\":{},\"prompts\":{\"listChanged\":false},\"resources\":{\"listChanged\":false,\"subscribe\":false},\"tools\":{\"listChanged\":false}},\"instructions\":\"本机通用小工具：文本统计、读取 E:\\\\学习 工作区下的文件。\",\"protocolVersion\":\"2025-06-18\",\"serverInfo\":{\"name\":\"local-tools\",\"version\":\"1.0.0\"}}}",
+    "{\"jsonrpc\":\"2.0\",\"id\":2,\"result\":{\"tools\":[{\"description\":\"统计一段文本的字符数和词数。\\n\\n    算法与 hello_agent.py 的进程内版本逐字一致，便于两者直接对比输出。\\n    \",\"inputSchema\":{\"properties\":{\"text\":{\"title\":\"Text\",\"type\":\"string\"}},\"required\":[\"text\"],\"type\":\"object\",\"title\":\"word_countArguments\"},\"name\":\"word_count\",\"outputSchema\":{\"properties\":{\"result\":{\"title\":\"Result\",\"type\":\"string\"}},\"required\":[\"result\"],\"type\":\"object\",\"title\":\"word_countOutput\"}},{\"description\":\"读取 E:\\\\学习 下的文本文件（相对路径，如 daily/2026-09-15.md）。\\n\\n    越界访问（.. 逃逸、绝对路径、指向工作区外）一律拒绝并说明原因。\\n    这是第二阶段「权限与沙箱」的最小原型：工具自己守住自己的边界。\\n    \",\"inputSchema\":{\"properties\":{\"relpath\":{\"title\":\"Relpath\",\"type\":\"string\"}},\"required\":[\"relpath\"],\"type\":\"object\",\"title\":\"read_study_fileArguments\"},\"name\":\"read_study_file\",\"outputSchema\":{\"properties\":{\"result\":{\"title\":\"Result\",\"type\":\"string\"}},\"required\":[\"result\"],\"type\":\"object\",\"title\":\"read_study_fileOutput\"}}]}}",
+    "{\"jsonrpc\":\"2.0\",\"id\":3,\"result\":{\"content\":[{\"text\":\"「hello world foo」→ 字符数 15，词数 3\",\"type\":\"text\"}],\"isError\":false,\"structuredContent\":{\"result\":\"「hello world foo」→ 字符数 15，词数 3\"}}}",
+    "{\"jsonrpc\":\"2.0\",\"id\":4,\"result\":{\"content\":[{\"text\":\"<个人求职计划内容，公开版已移除>\",\"type\":\"text\"}],\"isError\":false,\"structuredContent\":{\"result\":\"<个人求职计划内容，公开版已移除>\"}}}",
+    "{\"jsonrpc\":\"2.0\",\"id\":5,\"result\":{\"content\":[{\"text\":\"拒绝：../../Windows/win.ini 越出 E:\\\\学习（本工具只允许读该目录之内）\",\"type\":\"text\"}],\"isError\":false,\"structuredContent\":{\"result\":\"拒绝：../../Windows/win.ini 越出 E:\\\\学习（本工具只允许读该目录之内）\"}}}"
+  ],
+  "notes": [],
+  "tool_names": [
+    "word_count",
+    "read_study_file"
+  ],
+  "word_count_text": "「hello world foo」→ 字符数 15，词数 3",
+  "escape_attempt_text": "拒绝：../../Windows/win.ini 越出 E:\\<私有目录>（本工具只允许读该目录之内）",
+  "exit_code": 0,
+  "non_json_stdout_lines": []
+}

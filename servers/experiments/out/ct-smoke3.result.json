@@ -1,0 +1,94 @@
+{
+  "server": [
+    "D:\\Anaconda3\\envs\\aicoding\\python.exe",
+    "E:\\aicoding\\mini-claude-code\\servers\\code_tools_server.py"
+  ],
+  "exit_code": 0,
+  "checks": [
+    {
+      "name": "initialize",
+      "pass": true,
+      "detail": "握手成功"
+    },
+    {
+      "name": "tools/list 含全部 6 个工具",
+      "pass": true,
+      "detail": "list_files, search_code, read_file, apply_patch, repo_map, run_tests"
+    },
+    {
+      "name": "list_files 列出靶场文件",
+      "pass": true,
+      "detail": "calc.py\nstats.py\ntest_calc.py\ntest_stats.py"
+    },
+    {
+      "name": "search_code 定位到 stats.py",
+      "pass": true,
+      "detail": "stats.py:15: def median(nums: list[float]) -> float:"
+    },
+    {
+      "name": "read_file 带行号输出",
+      "pass": true,
+      "detail": "# calc.py（共 21 行，显示 1-12）\n   1| \"\"\"基础算术工具。\n   2| \n   3| ⚠️ 本模块是「修复靶场」的一部分：**故意留了缺陷**，用于验证 agent 的修复闭环。\n   4|    缺陷由 test_calc.py 暴露。修完两个模块后 `pytest` 应当全绿。\n   5| \"\"\"\n   6| \n   7| \n   8| def safe_divide"
+    },
+    {
+      "name": "越界读被拒绝",
+      "pass": true,
+      "detail": "拒绝：路径越出仓库根：'../../../Windows/win.ini' → E:\\aicoding\\Windows\\win.ini（只允许 E:\\aicoding\\mini-claude-code\\fixtures\\mini_repo 之内）"
+    },
+    {
+      "name": "越界写被拒绝",
+      "pass": true,
+      "detail": "拒绝：路径越出仓库根：'../outside.txt' → E:\\aicoding\\mini-claude-code\\fixtures\\outside.txt（只允许 E:\\aicoding\\mini-claude-code\\fixtures\\mini_repo 之内）"
+    },
+    {
+      "name": "绝对路径被拒绝",
+      "pass": true,
+      "detail": "拒绝：路径越出仓库根：'C:/Windows/win.ini' → C:\\Windows\\win.ini（只允许 E:\\aicoding\\mini-claude-code\\fixtures\\mini_repo 之内）"
+    },
+    {
+      "name": "run_tests 越界 test_path 被拒绝",
+      "pass": true,
+      "detail": "拒绝：路径越出仓库根：'../../x.py' → E:\\aicoding\\mini-claude-code\\x.py（只允许 E:\\aicoding\\mini-claude-code\\fixtures\\mini_repo 之内）"
+    },
+    {
+      "name": "run_tests 非法 keyword 被拒绝",
+      "pass": true,
+      "detail": "拒绝：keyword 含不允许的字符：'; rm -rf /'。只允许字母、数字、下划线、连字符、点与空格。"
+    },
+    {
+      "name": "歧义 old 被拒绝",
+      "pass": true,
+      "detail": "拒绝：old 在 calc.py 中出现 2 次，无法确定改哪一处。请给出更长、能唯一确定的片段。"
+    },
+    {
+      "name": "run_tests 返回退出码",
+      "pass": true,
+      "detail": "退出码 = 1\n────────────────────────────────────────\n.F......F.                                                               [100%]\n================================== FAILURES ===================================\nE   ZeroDivisionError: division by zero\nE:\\aicoding\\mini-claude-code\\fixtures\\mini_repo\\cal"
+    },
+    {
+      "name": "repo_map 摘要含文件与符号数",
+      "pass": true,
+      "detail": "# 4 个 *.py 文件（subdir=.）\n  calc.py            22 行     2 符号\n  stats.py           25 行     2 符号\n  test_calc.py       34 行     5 符号\n  test_stats.py      33 行     5 符号"
+    },
+    {
+      "name": "repo_map(symbols) 含 def",
+      "pass": true,
+      "detail": "# 符号索引：4 个 *.py 文件（subdir=.）\n\ncalc.py  (22 行)\n     8  def safe_divide(a, b) -> float\n    17  def clamp(value, low, high) -> float\n\nstats.py  (25 行)\n     8  def mean(nums) -> float\n    15  def median(nums) -> float\n\ntest_calc.py  (34 行)\n    11  def te"
+    },
+    {
+      "name": "摘要比展开便宜",
+      "pass": true,
+      "detail": "163 vs 653"
+    },
+    {
+      "name": "非法 detail 被拒绝",
+      "pass": true,
+      "detail": "拒绝：detail 只支持 'brief' 或 'full'，收到 'bogus'"
+    },
+    {
+      "name": "brief 不比 full 更长",
+      "pass": true,
+      "detail": "brief=738 full=951"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+subagent-ab-hard-A-1       基线码=1 终局码=0 patch=3 改=['more_itertools/more.py', 'more_itertools/recipes.py'] 测试=[] 越界=[] 轨迹outcome=success 错误=None
+subagent-ab-hard-A-2       基线码=1 终局码=0 patch=3 改=['more_itertools/more.py', 'more_itertools/recipes.py'] 测试=[] 越界=[] 轨迹outcome=success 错误=None
+subagent-ab-hard-A-3       基线码=1 终局码=0 patch=3 改=['more_itertools/more.py', 'more_itertools/recipes.py'] 测试=[] 越界=[] 轨迹outcome=success 错误=None
+subagent-ab-hard-A-4       基线码=1 终局码=0 patch=3 改=['more_itertools/more.py', 'more_itertools/recipes.py'] 测试=[] 越界=[] 轨迹outcome=success 错误=None
+subagent-ab-hard-B-1       基线码=1 终局码=0 patch=3 改=['more_itertools/more.py', 'more_itertools/recipes.py'] 测试=[] 越界=[] 轨迹outcome=success 错误=None
+subagent-ab-hard-B-2       基线码=1 终局码=0 patch=3 改=['more_itertools/more.py', 'more_itertools/recipes.py'] 测试=[] 越界=[] 轨迹outcome=success 错误=None
+subagent-ab-hard-B-3       基线码=1 终局码=0 patch=3 改=['more_itertools/more.py', 'more_itertools/recipes.py'] 测试=[] 越界=[] 轨迹outcome=success 错误=None
+subagent-ab-hard-B-4       基线码=1 终局码=0 patch=3 改=['more_itertools/more.py', 'more_itertools/recipes.py'] 测试=[] 越界=[] 轨迹outcome=success 错误=None
+subagent-ab-hard-C-1       基线码=1 终局码=0 patch=3 改=['more_itertools/more.py', 'more_itertools/recipes.py'] 测试=[] 越界=[] 轨迹outcome=success 错误=None
+subagent-ab-hard-C-2       基线码=1 终局码=0 patch=3 改=['more_itertools/more.py', 'more_itertools/recipes.py'] 测试=[] 越界=[] 轨迹outcome=success 错误=None
+subagent-ab-hard-C-3       基线码=1 终局码=0 patch=3 改=['more_itertools/more.py', 'more_itertools/recipes.py'] 测试=[] 越界=[] 轨迹outcome=success 错误=None
+subagent-ab-hard-C-4       基线码=1 终局码=0 patch=3 改=['more_itertools/more.py', 'more_itertools/recipes.py'] 测试=[] 越界=[] 轨迹outcome=success 错误=None

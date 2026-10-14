@@ -1,0 +1,98 @@
+# t33 独立复验：t32（② 生产路径索引 + ③ 归档回填）
+
+HEAD = f775742f111d357c74b4f50bb8fd36d709257852
+零模型调用：Part 2 用假 Popen 直接调用生产函数，不 spawn 任何 agent。
+
+## Part 1 · ③ 回填完整性（自算）
+
+- 备份文件存在 = True；路径 = E:\aicoding\eval-runs\p1-20261013T122356-t20-batch\triple_state.jsonl.pre-t32
+- 回填前 sha256 = 17f3a7119fa01b20b1fa899c1fda2b3ef2af3f737b7444d9a6de334f17da8c78
+  与我 t15/t30 独立记录的基线一致 = True
+- 回填后 sha256 = bb89825ada4d1eace311376736ab5a2d5cff01a86389bc58cbc623a01d12bbff
+  与 t32 报告声称的 bb89825ada4d1eace311376736ab5a2d5cff01a86389bc58cbc623a01d12bbff 一致 = True
+- 物理行数：前 27 / 后 27
+
+| 行 | 臂 | 非 artifacts 字段逐字相同 | artifacts 变化 | 追加的索引正确 | 整行逐字节相同 |
+|---:|:---:|:---:|:---:|:---:|:---:|
+| 1 | A | True | False | — | True |
+| 2 | B | True | False | — | True |
+| 3 | C | True | True | True | — |
+| 4 | A | True | False | — | True |
+| 5 | A | True | False | — | True |
+| 6 | C | True | True | True | — |
+| 7 | B | True | False | — | True |
+| 8 | B | True | False | — | True |
+| 9 | C | True | True | True | — |
+| 10 | A | True | False | — | True |
+| 11 | B | True | False | — | True |
+| 12 | A | True | False | — | True |
+| 13 | B | True | False | — | True |
+| 14 | C | True | True | True | — |
+| 15 | C | True | True | True | — |
+| 16 | A | True | False | — | True |
+| 17 | B | True | False | — | True |
+| 18 | B | True | False | — | True |
+| 19 | A | True | False | — | True |
+| 20 | A | True | False | — | True |
+| 21 | C | True | True | True | — |
+| 22 | B | True | False | — | True |
+| 23 | C | True | True | True | — |
+| 24 | A | True | False | — | True |
+| 25 | C | True | True | True | — |
+| 26 | B | True | False | — | True |
+| 27 | C | True | True | True | — |
+
+- 非 artifacts 字段**全部**行逐字相同 = True
+- C 行含索引 = 9/9（缺失：无）
+- A/B 行整行逐字节不变 = 18/18
+- 结论字段（resolved/verdict_class/stage/notes/judged/pytest/tokens_*…）零变化 = True
+
+## Part 2 · ② 生效性：直接调用生产函数 `_run_one_arm`（假 Popen）
+
+### 案例 exit1（timed_out=False  verdict=infra_error）
+- 落盘后重读的 state 行含索引 = **True**（索引=astanin-python-tabulate__5373ebf/artifacts/policy_evidence_isolated.json）
+- worker 生成的证据文件存在 = True；dispatch_rows 条数 = 0
+- 证据 payload 键 = ['dispatch_rows', 'label', 'note', 'run_id', 'started_at_epoch']
+- 该行的 artifacts 末尾 = astanin-python-tabulate__5373ebf/artifacts/policy_evidence_isolated.json
+### 案例 timeout（timed_out=True  verdict=timeout）
+- 落盘后重读的 state 行含索引 = **True**（索引=astanin-python-tabulate__5373ebf/artifacts/policy_evidence_isolated.json）
+- worker 生成的证据文件存在 = True；dispatch_rows 条数 = 0
+- 证据 payload 键 = ['dispatch_rows', 'label', 'note', 'run_id', 'started_at_epoch']
+- 该行的 artifacts 末尾 = astanin-python-tabulate__5373ebf/artifacts/policy_evidence_isolated.json
+
+- ⇒ 生产路径（worker 内）**自己生成证据并追加索引**；两个分支（正常退出/超时）都成立 = True
+
+- 过滤有效性（真实 label `p1-astanin-python-tabulate__5373ebf-C` + 真实窗口起点 1791894460）：worker 版 dispatch_rows=2，归档版=2，四元组集合一致 = True
+
+## Part 3 · 两个生产者的 payload schema 对照
+
+- 归档（抽取脚本生成）payload 键 = ['arm_report_rows', 'dispatch_rows', 'label', 'note', 'run_id', 'started_at_epoch', 'verdict_class']
+- 新（worker 生成）payload 键      = ['dispatch_rows', 'label', 'note', 'run_id', 'started_at_epoch']
+- 只有归档版才有的键 = ['arm_report_rows', 'verdict_class']
+- 注：`arm_report_rows` 是我 t15 复算 `index_chars` / `worktrees_after_dispatch` 的来源；worker 版不含它，但同一目录下的 `arm_report.jsonl` 仍在。
+
+## Part 4 · G2 / G3 文本落实
+
+- G2 · `t29-evidence.md` 含「函数返回值正确（未在生产 state 行验证落盘）」= True
+    F6 相关行：['# t29 F5/F6 离线证据', 'F6 run_relative_artifact=offline-instance/artifacts/policy_evidence_isolated.json', '`count_spawned_arms` 按 state 行的 `started_at_epoch` 计实际 spawn，不按 `read_triple_state` 的 `(instance,arm)` 去重；同一键两次实际启动计数为 2。t29 的 F6 断言仅证明**函数返回值正确（未在生产 state 行验证落盘）**。t32 选择方案②：C worker 在返回 state 行前生成 `policy_evidence_isolated.json`，再追加 run-relative 索引；离线桩真实调用 `_run_one_arm` 并把返回 state 行落盘重读，输出 `F6 state_row_index=offline-instance/artifacts/policy_evidence_isolated.json worker_generated=True`。已归档 C 行的索引另于 2026-10-13 23:03:49 +08:00 **回填** 9/9（详见 `eval/reports/p1-t32-backfill.md`），不能声称当时落盘。']
+- G2 · `t29_resume_check.py` 有真实 state 行索引断言（state_row_index）= True
+- G3 · `policy_isolated_artifact()` docstring 写明「除本索引外均为绝对路径 / 以 run_root 为基准」= True
+- ③.④ 「回填」二字：`p1-t32-backfill.md` = True；`p1-batch.md` = True
+- ③.④ 脚本路径与执行时刻：backfill.md 含脚本名 = True；含执行时间 = True
+- `p1-batch.md` 里的「回填」句（共 1 行）：
+    · > t32 证据索引**回填**（2026-10-13 23:03:49 +08:00）：此文件早期关于「未跑批」的历史门槛记录不能替代后续 t20 批次。归档 t20 的 `triple_state.jsonl` 原有
+
+## Part 5 · 越界与零模型调用
+
+- faf7043 改动文件：['eval/harness/scheduler_p1.py', 'eval/harness/t29-evidence.md', 'eval/harness/t29_resume_check.py']
+- f775742 改动文件：['eval/harness/t29-evidence.md', 'eval/harness/t29_resume_check.py', 'eval/reports/p1-batch.md', 'eval/reports/p1-t32-backfill.md', 'eval/reports/p1_backfill_evidence_index.py']
+- 两份预注册被碰 = False
+- `eval/reports/p1-batch.md` 的提交历史：['f775742 P1: backfill archived policy evidence indexes']
+- 我关心的既有他人报告是否被 t32 改动：无
+- eval-runs 下最新 3 个 p1-* 目录：
+    · p1-20261013T122356-pytest-dev-pluggy__dd20a85-B  2026-10-13 20:27:27
+    · p1-20261013T122356-pytest-dev-pluggy__dd20a85-C  2026-10-13 20:27:33
+    · p1-20261013T122356-t20-batch  2026-10-13 23:03:49
+- t32 提交时刻 = 2026-10-13 23:16:09；晚于最新 p1-* 目录 = True
+- usage 总/p1- = 186/56；scout 总/p1- = 55/21（t15/t30 基线 186/56、55/21）
+- p1- 用量最大 ts = 2026-10-13T21:32:25+08:00（t32 提交 23:16:09）⇒ 提交后无新用量 = True

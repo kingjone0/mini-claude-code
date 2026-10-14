@@ -1,0 +1,93 @@
+[cli stderr] [claude-code:unrecognized_model] {"model":"deepseek-flash[1m]","query_source":"sdk"}
+=== 生效的端点配置（密钥已打码）===
+  ANTHROPIC_BASE_URL = https://api.deepseek.com/anthropic
+  ANTHROPIC_AUTH_TOKEN = <35 字符，已隐藏>
+  ANTHROPIC_MODEL = deepseek-flash[1m]
+  ANTHROPIC_DEFAULT_OPUS_MODEL = deepseek-flash[1m]
+  ANTHROPIC_DEFAULT_SONNET_MODEL = deepseek-flash[1m]
+  ANTHROPIC_DEFAULT_HAIKU_MODEL = deepseek-flash
+  API_TIMEOUT_MS = 3000000
+  cli_path = E:\node.js\24.21.0\node_modules\@anthropic-ai\claude-code\bin\claude.exe
+
+=== 本客户端使用的 MCP 配置 ===
+  mcp_servers = {"local-tools": {"type": "stdio", "command": "D:\\Anaconda3\\envs\\aicoding\\python.exe", "args": ["E:\\aicoding\\mini-claude-code\\servers\\experiments\\_stray_in_handler_server.py"]}}
+  等价于命令行: D:\Anaconda3\envs\aicoding\python.exe E:\aicoding\mini-claude-code\servers\experiments\_stray_in_handler_server.py
+
+=== 提问 ===
+请依次调用下面三个工具，每次都要真的调用，然后把每次的原始返回一字不改地列出来：
+1) word_count，参数 text 传 'hello world foo'
+2) read_study_file，参数 relpath 传 '大纲.md'（只要前 3 行）
+3) read_study_file，参数 relpath 传 '../../Windows/win.ini'（这是越界对照，预期被拒绝）
+
+[tool_use]  mcp__local-tools__word_count({"text": "hello world foo"})
+[tool_result] {"result":"「hello world foo」→ 字符数 15，词数 3"}
+[tool_use]  mcp__local-tools__read_study_file({"relpath": "大纲.md"})
+[tool_result] {"result":"<个人求职计划内容，公开版已移除>"}
+[tool_use]  mcp__local-tools__read_study_file({"relpath": "../../Windows/win.ini"})
+[tool_result] {"result":"拒绝：../../Windows/win.ini 越出 E:\\<私有目录>（本工具只允许读该目录之内）"}
+[assistant] 三次调用都真实执行了，下面是每次的原始返回，一字未改：
+
+**1) `word_count` (text = `hello world foo`)**
+
+```
+{"result":"「hello world foo」→ 字符数 15，词数 3"}
+```
+
+**2) `read_study_file` (relpath = `大纲.md`)**
+
+```
+{"result":"<个人求职计划内容，公开版已移除>"}
+```
+
+**3) `read_study_file` (relpath = `../../Windows/win.ini`)**
+
+```
+{"result":"拒绝：../../Windows/win.ini 越出 E:\\<私有目录>（本工具只允许读该目录之内）"}
+```
+
+两点如实说明：
+
+- 第 2 步你要求「只要前 3 行」，但该工具没有行数参数，它把整个文件都返回了——上面就是它的完整原始返回，我没有做任何截断或改写。如果确实只需要前 3 行，那得在工具实现里加限制，或者在客户端侧截断。
+- 第 3 步符合预期：路径越界被工具自身拒绝（它把根目录锁在 `E:\<私有目录>`），返回的是拒绝消息而不是文件内容。
+
+=== 结果 ===
+  subtype        = success
+  is_error       = False
+  num_turns      = 4
+  duration_ms    = 8606
+  session_id     = d2e9c91f-f3f0-4b5c-979a-421c5b0ea1dc
+  total_cost_usd = 0.161974
+  result         = 三次调用都真实执行了，下面是每次的原始返回，一字未改：
+
+**1) `word_count` (text = `hello world foo`)**
+
+```
+{"result":"「hello world foo」→ 字符数 15，词数 3"}
+```
+
+**2) `read_study_file` (relpath = `大纲.md`)**
+
+```
+{"result":"<个人求职计划内容，公开版已移除>"}
+```
+
+**3) `read_study_file` (relpath = `../../Windows/win.ini`)**
+
+```
+{"result":"拒绝：../../Windows/win.ini 越出 E:\\<私有目录>（本工具只允许读该目录之内）"}
+```
+
+两点如实说明：
+
+- 第 2 步你要求「只要前 3 行」，但该工具没有行数参数，它把整个文件都返回了——上面就是它的完整原始返回，我没有做任何截断或改写。如果确实只需要前 3 行，那得在工具实现里加限制，或者在客户端侧截断。
+- 第 3 步符合预期：路径越界被工具自身拒绝（它把根目录锁在 `E:\<私有目录>`），返回的是拒绝消息而不是文件内容。
+  AssistantMessage.model 出现过的值 = ['deepseek-flash']
+
+=== 工具调用清点 ===
+  调用次数 = 3
+    - mcp__local-tools__word_count
+    - mcp__local-tools__read_study_file
+    - mcp__local-tools__read_study_file
+
+=== 判定：两个工具都被真实调用，且运行无错 ===
+=== 越界拦截：命中（返回中含「拒绝」） ===

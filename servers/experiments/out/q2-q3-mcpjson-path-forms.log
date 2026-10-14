@@ -1,0 +1,87 @@
+########## Q2：.mcp.json 里用 ${CLAUDE_PROJECT_DIR:-.} ##########
+cwd(bash) = /e/aicoding/mini-claude-code
+cwd(win)  = E:\aicoding\mini-claude-code
+CLAUDE_PROJECT_DIR 环境变量 = '(未设置)'
+--- .mcp.json 内容 ---
+{
+  "mcpServers": {
+    "projdir": {
+      "type": "stdio",
+      "command": "D:\Anaconda3\envs\aicoding\python.exe",
+      "args": ["${CLAUDE_PROJECT_DIR:-.}/servers/local_tools_server.py"]
+    }
+  }
+}
+--- claude -p ---
+NOT_LOADED
+
+########## Q3：.mcp.json 里用裸相对路径 ##########
+cwd(bash) = /e/aicoding/mini-claude-code
+cwd(win)  = E:\aicoding\mini-claude-code
+--- .mcp.json 内容 ---
+{
+  "mcpServers": {
+    "relpath": {
+      "type": "stdio",
+      "command": "D:\Anaconda3\envs\aicoding\python.exe",
+      "args": ["servers/local_tools_server.py"]
+    }
+  }
+}
+--- claude -p ---
+NOT_LOADED
+
+########## Q3-判别档：.mcp.json 里用「真实存在」的环境变量 ##########
+cwd(bash) = /e/aicoding/mini-claude-code
+cwd(win)  = E:\aicoding\mini-claude-code
+MCP_TEST_PYTHON = D:\Anaconda3\envs\aicoding\python.exe
+MCP_TEST_SERVER = E:\aicoding\mini-claude-code\servers\local_tools_server.py
+这两个变量在本 shell 中确实已设置：2 个
+--- .mcp.json 内容 ---
+{
+  "mcpServers": {
+    "envtest": {
+      "type": "stdio",
+      "command": "${MCP_TEST_PYTHON}",
+      "args": ["${MCP_TEST_SERVER}"]
+    }
+  }
+}
+--- claude -p ---
+FOUND
+
+########## 【更正】Q2/Q3 重跑 ##########
+前一次的 NOT_LOADED 全部无效：.mcp.json 是 heredoc 写的，反斜杠被吃掉，
+command 字段已损坏（不是 args 的问题）。以下全部用 python 写 JSON。
+cwd(bash) = /e/aicoding/mini-claude-code
+args = ['${CLAUDE_PROJECT_DIR:-.}/servers/local_tools_server.py']
+command ����ȷת��: 'D:\\Anaconda3\\envs\\aicoding\\python.exe'
+--- claude -p ---
+FOUND
+
+--- Q3 重跑：裸相对路径 ---
+cwd(bash) = /e/aicoding/mini-claude-code
+cwd(win)  = E:\aicoding\mini-claude-code
+command = 'D:\\Anaconda3\\envs\\aicoding\\python.exe'
+args    = ['servers/local_tools_server.py']
+--- claude -p ---
+FOUND
+
+--- 附加测试：.mcp.json 在项目根，但 cwd = 子目录 servers/ ---
+cwd(bash) = /e/aicoding/mini-claude-code/servers
+cwd(win)  = E:\aicoding\mini-claude-code\servers
+.mcp.json 位置 = E:\aicoding\mini-claude-code\.mcp.json（仍在项目根）
+--- claude mcp list ---
+
+relpath: D:\Anaconda3\envs\aicoding\python.exe servers/local_tools_server.py - ⏸ Pending approval (run `claude` to approve)
+--- claude -p ---
+NOT_LOADED
+  → 判别档：同 cwd（servers/ 子目录），但 args 改用绝对路径
+cwd(bash) = /e/aicoding/mini-claude-code/servers
+FOUND
+
+--- 决定性问题：cwd = 子目录 servers/，args 用 ${CLAUDE_PROJECT_DIR:-.} ---
+  若 FOUND   → CLAUDE_PROJECT_DIR 被设为项目根，此写法比裸相对路径更稳健
+  若 NOT_LOADED → 变量未设，`:-.` 回退到 cwd，与裸相对路径等价
+cwd(bash) = /e/aicoding/mini-claude-code/servers
+NOT_LOADED

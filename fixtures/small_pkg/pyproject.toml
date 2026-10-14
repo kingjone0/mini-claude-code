@@ -1,0 +1,7 @@
+[tool.pytest.ini_options]
+# 让 tests/ 里的 `from inventory import ...` 能找到包。
+# 没有这一行，pytest 默认只把**测试文件所在目录**插进 sys.path，
+# 于是 `inventory` 不在路径上，一上来就 ImportError。
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-q"

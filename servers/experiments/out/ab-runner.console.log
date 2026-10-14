@@ -1,0 +1,176 @@
+==============================================================================
+A/B 实验运行清单（t2）—— 只记录原始事实，不含分析结论
+==============================================================================
+生成时间      : 2026-10-08T19:09:42
+仓库根        : E:\aicoding\mini-claude-code
+解释器        : D:\Anaconda3\envs\aicoding\python.exe
+靶场          : E:\aicoding\targets\more-itertools
+靶场 HEAD(开跑前) : d21dd31c3f1bde3a9a5de9e044bff7b2045af465
+靶场 git status(开跑前): ''  -> 干净
+唯一变量      : AGENT_REPO_MAP_DEFAULT（臂 A=symbols / 臂 B=summary）
+机制          : 12 次统一只用环境变量，不使用 --repo-map-default
+每臂次数      : 6，共 12 次
+
+命令原文模板（每次按此执行，逐次实参见下表）:
+  $env:AGENT_REPO_MAP_DEFAULT='<本臂取值>'
+  & D:\Anaconda3\envs\aicoding\python.exe coding_agent.py --fixture more-itertools --label ab-<臂>-<n>
+  $env:AGENT_REPO_MAP_DEFAULT=''
+注意：--repo-map-default 一次都没用；每次运行前显式赋本臂取值，不依赖继承或默认值。
+
+------------------------------------------------------------------------------
+ #  标签       计划臂     起(iso)               止(iso)                  耗时s 产物arm     arm来源                      success  rmc   退出
+------------------------------------------------------------------------------
+ 1  ab-A-1   A       2026-10-08T19:09:42  2026-10-08T19:11:25   103.6 symbols   env:AGENT_REPO_MAP_DEFAULT True       0    0
+ 2  ab-A-2   A       2026-10-08T19:11:25  2026-10-08T19:13:03    97.8 symbols   env:AGENT_REPO_MAP_DEFAULT True       0    0
+ 3  ab-A-3   A       2026-10-08T19:13:03  2026-10-08T19:14:43    99.2 symbols   env:AGENT_REPO_MAP_DEFAULT True       0    0
+ 4  ab-A-4   A       2026-10-08T19:14:43  2026-10-08T19:16:20    97.0 symbols   env:AGENT_REPO_MAP_DEFAULT True       0    0
+ 5  ab-A-5   A       2026-10-08T19:16:20  2026-10-08T19:17:54    93.9 symbols   env:AGENT_REPO_MAP_DEFAULT True       0    0
+ 6  ab-A-6   A       2026-10-08T19:17:54  2026-10-08T19:19:29    95.7 symbols   env:AGENT_REPO_MAP_DEFAULT True       1    0
+ 7  ab-B-1   B       2026-10-08T19:19:30  2026-10-08T19:21:07    97.5 summary   env:AGENT_REPO_MAP_DEFAULT True       0    0
+ 8  ab-B-2   B       2026-10-08T19:21:07  2026-10-08T19:22:44    96.8 summary   env:AGENT_REPO_MAP_DEFAULT True       1    0
+ 9  ab-B-3   B       2026-10-08T19:22:44  2026-10-08T19:24:22    97.7 summary   env:AGENT_REPO_MAP_DEFAULT True       0    0
+10  ab-B-4   B       2026-10-08T19:24:22  2026-10-08T19:25:58    96.1 summary   env:AGENT_REPO_MAP_DEFAULT True       0    0
+11  ab-B-5   B       2026-10-08T19:25:58  2026-10-08T19:27:34    96.0 summary   env:AGENT_REPO_MAP_DEFAULT True       0    0
+12  ab-B-6   B       2026-10-08T19:27:34  2026-10-08T19:29:10    96.0 summary   env:AGENT_REPO_MAP_DEFAULT True       0    0
+
+------------------------------------------------------------------------------
+逐次核对（靶场状态 / 生效取值证据）
+------------------------------------------------------------------------------
+[ 1] ab-A-1
+     实际命令: $env:AGENT_REPO_MAP_DEFAULT='symbols'; & D:\Anaconda3\envs\aicoding\python.exe coding_agent.py --fixture more-itertools --label ab-A-1; $env:AGENT_REPO_MAP_DEFAULT=''
+     起止: 2026-10-08T19:09:42 → 2026-10-08T19:11:25  (103.6s)  进程退出码=0
+     靶场 HEAD 前/后: d21dd31c3f1bde3a9a5de9e044bff7b2045af465 / d21dd31c3f1bde3a9a5de9e044bff7b2045af465
+     靶场 status 前: ''  后: ''
+     产物: agent-ab-A-1.json  存在=True  metrics可解析=True
+     实际生效取值: 'symbols'  (来源字段: 'env:AGENT_REPO_MAP_DEFAULT')
+     子进程证据: 2026-10-08 19:10:10 INFO pid=26704 repo_map 默认详细度：AGENT_REPO_MAP_DEFAULT='symbols' -> 生效 'symbols'
+     独立判定: metrics.success=True  repo_map_count=0
+
+[ 2] ab-A-2
+     实际命令: $env:AGENT_REPO_MAP_DEFAULT='symbols'; & D:\Anaconda3\envs\aicoding\python.exe coding_agent.py --fixture more-itertools --label ab-A-2; $env:AGENT_REPO_MAP_DEFAULT=''
+     起止: 2026-10-08T19:11:25 → 2026-10-08T19:13:03  (97.8s)  进程退出码=0
+     靶场 HEAD 前/后: d21dd31c3f1bde3a9a5de9e044bff7b2045af465 / d21dd31c3f1bde3a9a5de9e044bff7b2045af465
+     靶场 status 前: ''  后: ''
+     产物: agent-ab-A-2.json  存在=True  metrics可解析=True
+     实际生效取值: 'symbols'  (来源字段: 'env:AGENT_REPO_MAP_DEFAULT')
+     子进程证据: 2026-10-08 19:11:48 INFO pid=65988 repo_map 默认详细度：AGENT_REPO_MAP_DEFAULT='symbols' -> 生效 'symbols'
+     独立判定: metrics.success=True  repo_map_count=0
+
+[ 3] ab-A-3
+     实际命令: $env:AGENT_REPO_MAP_DEFAULT='symbols'; & D:\Anaconda3\envs\aicoding\python.exe coding_agent.py --fixture more-itertools --label ab-A-3; $env:AGENT_REPO_MAP_DEFAULT=''
+     起止: 2026-10-08T19:13:03 → 2026-10-08T19:14:43  (99.2s)  进程退出码=0
+     靶场 HEAD 前/后: d21dd31c3f1bde3a9a5de9e044bff7b2045af465 / d21dd31c3f1bde3a9a5de9e044bff7b2045af465
+     靶场 status 前: ''  后: ''
+     产物: agent-ab-A-3.json  存在=True  metrics可解析=True
+     实际生效取值: 'symbols'  (来源字段: 'env:AGENT_REPO_MAP_DEFAULT')
+     子进程证据: 2026-10-08 19:13:26 INFO pid=61992 repo_map 默认详细度：AGENT_REPO_MAP_DEFAULT='symbols' -> 生效 'symbols'
+     独立判定: metrics.success=True  repo_map_count=0
+
+[ 4] ab-A-4
+     实际命令: $env:AGENT_REPO_MAP_DEFAULT='symbols'; & D:\Anaconda3\envs\aicoding\python.exe coding_agent.py --fixture more-itertools --label ab-A-4; $env:AGENT_REPO_MAP_DEFAULT=''
+     起止: 2026-10-08T19:14:43 → 2026-10-08T19:16:20  (97.0s)  进程退出码=0
+     靶场 HEAD 前/后: d21dd31c3f1bde3a9a5de9e044bff7b2045af465 / d21dd31c3f1bde3a9a5de9e044bff7b2045af465
+     靶场 status 前: ''  后: ''
+     产物: agent-ab-A-4.json  存在=True  metrics可解析=True
+     实际生效取值: 'symbols'  (来源字段: 'env:AGENT_REPO_MAP_DEFAULT')
+     子进程证据: 2026-10-08 19:15:05 INFO pid=19320 repo_map 默认详细度：AGENT_REPO_MAP_DEFAULT='symbols' -> 生效 'symbols'
+     独立判定: metrics.success=True  repo_map_count=0
+
+[ 5] ab-A-5
+     实际命令: $env:AGENT_REPO_MAP_DEFAULT='symbols'; & D:\Anaconda3\envs\aicoding\python.exe coding_agent.py --fixture more-itertools --label ab-A-5; $env:AGENT_REPO_MAP_DEFAULT=''
+     起止: 2026-10-08T19:16:20 → 2026-10-08T19:17:54  (93.9s)  进程退出码=0
+     靶场 HEAD 前/后: d21dd31c3f1bde3a9a5de9e044bff7b2045af465 / d21dd31c3f1bde3a9a5de9e044bff7b2045af465
+     靶场 status 前: ''  后: ''
+     产物: agent-ab-A-5.json  存在=True  metrics可解析=True
+     实际生效取值: 'symbols'  (来源字段: 'env:AGENT_REPO_MAP_DEFAULT')
+     子进程证据: 2026-10-08 19:16:42 INFO pid=63548 repo_map 默认详细度：AGENT_REPO_MAP_DEFAULT='symbols' -> 生效 'symbols'
+     独立判定: metrics.success=True  repo_map_count=0
+
+[ 6] ab-A-6
+     实际命令: $env:AGENT_REPO_MAP_DEFAULT='symbols'; & D:\Anaconda3\envs\aicoding\python.exe coding_agent.py --fixture more-itertools --label ab-A-6; $env:AGENT_REPO_MAP_DEFAULT=''
+     起止: 2026-10-08T19:17:54 → 2026-10-08T19:19:29  (95.7s)  进程退出码=0
+     靶场 HEAD 前/后: d21dd31c3f1bde3a9a5de9e044bff7b2045af465 / d21dd31c3f1bde3a9a5de9e044bff7b2045af465
+     靶场 status 前: ''  后: ''
+     产物: agent-ab-A-6.json  存在=True  metrics可解析=True
+     实际生效取值: 'symbols'  (来源字段: 'env:AGENT_REPO_MAP_DEFAULT')
+     子进程证据: 2026-10-08 19:18:16 INFO pid=43496 repo_map 默认详细度：AGENT_REPO_MAP_DEFAULT='symbols' -> 生效 'symbols'
+     独立判定: metrics.success=True  repo_map_count=1
+
+[ 7] ab-B-1
+     实际命令: $env:AGENT_REPO_MAP_DEFAULT='summary'; & D:\Anaconda3\envs\aicoding\python.exe coding_agent.py --fixture more-itertools --label ab-B-1; $env:AGENT_REPO_MAP_DEFAULT=''
+     起止: 2026-10-08T19:19:30 → 2026-10-08T19:21:07  (97.5s)  进程退出码=0
+     靶场 HEAD 前/后: d21dd31c3f1bde3a9a5de9e044bff7b2045af465 / d21dd31c3f1bde3a9a5de9e044bff7b2045af465
+     靶场 status 前: ''  后: ''
+     产物: agent-ab-B-1.json  存在=True  metrics可解析=True
+     实际生效取值: 'summary'  (来源字段: 'env:AGENT_REPO_MAP_DEFAULT')
+     子进程证据: 2026-10-08 19:19:53 INFO pid=56840 repo_map 默认详细度：AGENT_REPO_MAP_DEFAULT='summary' -> 生效 'summary'
+     独立判定: metrics.success=True  repo_map_count=0
+
+[ 8] ab-B-2
+     实际命令: $env:AGENT_REPO_MAP_DEFAULT='summary'; & D:\Anaconda3\envs\aicoding\python.exe coding_agent.py --fixture more-itertools --label ab-B-2; $env:AGENT_REPO_MAP_DEFAULT=''
+     起止: 2026-10-08T19:21:07 → 2026-10-08T19:22:44  (96.8s)  进程退出码=0
+     靶场 HEAD 前/后: d21dd31c3f1bde3a9a5de9e044bff7b2045af465 / d21dd31c3f1bde3a9a5de9e044bff7b2045af465
+     靶场 status 前: ''  后: ''
+     产物: agent-ab-B-2.json  存在=True  metrics可解析=True
+     实际生效取值: 'summary'  (来源字段: 'env:AGENT_REPO_MAP_DEFAULT')
+     子进程证据: 2026-10-08 19:21:30 INFO pid=69072 repo_map 默认详细度：AGENT_REPO_MAP_DEFAULT='summary' -> 生效 'summary'
+     独立判定: metrics.success=True  repo_map_count=1
+
+[ 9] ab-B-3
+     实际命令: $env:AGENT_REPO_MAP_DEFAULT='summary'; & D:\Anaconda3\envs\aicoding\python.exe coding_agent.py --fixture more-itertools --label ab-B-3; $env:AGENT_REPO_MAP_DEFAULT=''
+     起止: 2026-10-08T19:22:44 → 2026-10-08T19:24:22  (97.7s)  进程退出码=0
+     靶场 HEAD 前/后: d21dd31c3f1bde3a9a5de9e044bff7b2045af465 / d21dd31c3f1bde3a9a5de9e044bff7b2045af465
+     靶场 status 前: ''  后: ''
+     产物: agent-ab-B-3.json  存在=True  metrics可解析=True
+     实际生效取值: 'summary'  (来源字段: 'env:AGENT_REPO_MAP_DEFAULT')
+     子进程证据: 2026-10-08 19:23:07 INFO pid=49208 repo_map 默认详细度：AGENT_REPO_MAP_DEFAULT='summary' -> 生效 'summary'
+     独立判定: metrics.success=True  repo_map_count=0
+
+[10] ab-B-4
+     实际命令: $env:AGENT_REPO_MAP_DEFAULT='summary'; & D:\Anaconda3\envs\aicoding\python.exe coding_agent.py --fixture more-itertools --label ab-B-4; $env:AGENT_REPO_MAP_DEFAULT=''
+     起止: 2026-10-08T19:24:22 → 2026-10-08T19:25:58  (96.1s)  进程退出码=0
+     靶场 HEAD 前/后: d21dd31c3f1bde3a9a5de9e044bff7b2045af465 / d21dd31c3f1bde3a9a5de9e044bff7b2045af465
+     靶场 status 前: ''  后: ''
+     产物: agent-ab-B-4.json  存在=True  metrics可解析=True
+     实际生效取值: 'summary'  (来源字段: 'env:AGENT_REPO_MAP_DEFAULT')
+     子进程证据: 2026-10-08 19:24:45 INFO pid=45828 repo_map 默认详细度：AGENT_REPO_MAP_DEFAULT='summary' -> 生效 'summary'
+     独立判定: metrics.success=True  repo_map_count=0
+
+[11] ab-B-5
+     实际命令: $env:AGENT_REPO_MAP_DEFAULT='summary'; & D:\Anaconda3\envs\aicoding\python.exe coding_agent.py --fixture more-itertools --label ab-B-5; $env:AGENT_REPO_MAP_DEFAULT=''
+     起止: 2026-10-08T19:25:58 → 2026-10-08T19:27:34  (96.0s)  进程退出码=0
+     靶场 HEAD 前/后: d21dd31c3f1bde3a9a5de9e044bff7b2045af465 / d21dd31c3f1bde3a9a5de9e044bff7b2045af465
+     靶场 status 前: ''  后: ''
+     产物: agent-ab-B-5.json  存在=True  metrics可解析=True
+     实际生效取值: 'summary'  (来源字段: 'env:AGENT_REPO_MAP_DEFAULT')
+     子进程证据: 2026-10-08 19:26:21 INFO pid=68772 repo_map 默认详细度：AGENT_REPO_MAP_DEFAULT='summary' -> 生效 'summary'
+     独立判定: metrics.success=True  repo_map_count=0
+
+[12] ab-B-6
+     实际命令: $env:AGENT_REPO_MAP_DEFAULT='summary'; & D:\Anaconda3\envs\aicoding\python.exe coding_agent.py --fixture more-itertools --label ab-B-6; $env:AGENT_REPO_MAP_DEFAULT=''
+     起止: 2026-10-08T19:27:34 → 2026-10-08T19:29:10  (96.0s)  进程退出码=0
+     靶场 HEAD 前/后: d21dd31c3f1bde3a9a5de9e044bff7b2045af465 / d21dd31c3f1bde3a9a5de9e044bff7b2045af465
+     靶场 status 前: ''  后: ''
+     产物: agent-ab-B-6.json  存在=True  metrics可解析=True
+     实际生效取值: 'summary'  (来源字段: 'env:AGENT_REPO_MAP_DEFAULT')
+     子进程证据: 2026-10-08 19:27:57 INFO pid=7680 repo_map 默认详细度：AGENT_REPO_MAP_DEFAULT='summary' -> 生效 'summary'
+     独立判定: metrics.success=True  repo_map_count=0
+
+------------------------------------------------------------------------------
+收尾状态
+------------------------------------------------------------------------------
+靶场 HEAD(全部跑完) : d21dd31c3f1bde3a9a5de9e044bff7b2045af465
+HEAD 是否与开跑前一致: 是
+靶场 git status(全部跑完后): ''  -> 干净
+已完成运行次数      : 12 / 12
+
+------------------------------------------------------------------------------
+偏差记录（与计划不符之处，如实列，不掩盖）
+------------------------------------------------------------------------------
+  (无)
+
+说明：本次实验未使用 --repo-map-default；12 次全部走环境变量，机制单一。
+本清单只含原始事实；『是否被采用』的判定与结论由 analyst 负责。
+
+[OK] 清单已写: E:\aicoding\mini-claude-code\servers\experiments\out\ab-manifest.txt
+[OK] 逐次记录: E:\aicoding\mini-claude-code\servers\experiments\out\ab-runs.jsonl

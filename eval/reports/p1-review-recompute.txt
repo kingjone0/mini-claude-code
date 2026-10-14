@@ -1,0 +1,200 @@
+# t15 独立重算与审计（reviewer 自写脚本，不复用 p1_recompute.py）
+
+批次：E:\aicoding\eval-runs\p1-20261013T122356-t20-batch
+triple_state.jsonl：27 行  bytes=205543  sha256=17f3a7119fa01b20b1fa899c1fda2b3ef2af3f737b7444d9a6de334f17da8c78
+
+## 1 逐臂主口径（分母 = agent_result + empty_patch + patch_conflict）
+
+| arm | rows | agent_result | timeout | infra | 分母 | resolved | rate |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| A | 9 | 9 | 0 | 0 | 9 | 6 | 0.6667 |
+| B | 9 | 9 | 0 | 0 | 9 | 8 | 0.8889 |
+| C | 9 | 5 | 4 | 0 | 5 | 3 | 0.6 |
+
+逐实例配对（verdict_class/resolved）：
+| instance | A | B | C |
+|---|---|---|---|
+| astanin-python-tabulate__5373ebf | agent_result/T | agent_result/T | agent_result/T |
+| astanin-python-tabulate__87a9a4e | agent_result/T | agent_result/T | agent_result/F |
+| astanin-python-tabulate__9dedd45 | agent_result/T | agent_result/T | agent_result/T |
+| more-itertools-more-itertools__1b7f033 | agent_result/F | agent_result/T | timeout/F |
+| more-itertools-more-itertools__ccf96ac | agent_result/F | agent_result/F | agent_result/F |
+| more-itertools-more-itertools__f8ccab2 | agent_result/F | agent_result/T | agent_result/T |
+| pallets-click__1b0e19f | agent_result/T | agent_result/T | timeout/F |
+| pallets-click__4fd2fea | agent_result/T | agent_result/T | timeout/F |
+| pallets-click__ac6a2ac | agent_result/T | agent_result/T | timeout/F |
+
+## 2 用量池与 label 复用风险
+
+usage.jsonl 总 186 行 / p1- 56 行；label 出现 >1 次的 3 个：{"p1-astanin-python-tabulate__5373ebf-A": 13, "p1-astanin-python-tabulate__5373ebf-B": 12, "p1-astanin-python-tabulate__5373ebf-C": 11}
+policy_scout_usage.jsonl 总 55 行 / p1- 21 行；label 出现 >1 次的 4 个：{"p1-astanin-python-tabulate__5373ebf-C": 7, "p1-pallets-click__1b0e19f-C": 4, "p1-pallets-click__4fd2fea-C": 3, "p1-pallets-click__ac6a2ac-C": 2}
+⇒ 同一 label 被历次接线探针与正式批次共用，**任何 label-only 匹配都会串入探针行**；必须再按 run 窗口（ts >= started_at_epoch）过滤。
+
+## 3 parent 层指标：三种匹配口径对照
+
+| mode | arm | n | input_uncached 中位(极差) | cache_read 中位(极差) | cost 中位 | turns 中位 |
+|---|---|---:|---|---|---|---|
+| window | A | 9 | 36681 [13877, 50097] | 1848704 [110464, 2915200] | 1.9843 | 68 |
+| window | B | 9 | 38283 [23515, 113906] | 2138752 [218368, 9045504] | 2.2537 | 70 |
+| window | C | 5 | 25005 [8581, 113077] | 899072 [34944, 12958848] | 1.3437 | 49 |
+| label_last | A | 9 | 36681 [13877, 50097] | 1848704 [110464, 2915200] | 1.9843 | 68 |
+| label_last | B | 9 | 38283 [23515, 113906] | 2138752 [218368, 9045504] | 2.2537 | 70 |
+| label_last | C | 5 | 25005 [8581, 113077] | 899072 [34944, 12958848] | 1.3437 | 49 |
+| label_first | A | 9 | 36558 [13877, 50097] | 1539456 [110464, 2915200] | 1.9843 | 68 |
+| label_first | B | 9 | 37077 [23515, 113906] | 1927424 [218368, 9045504] | 2.2212 | 70 |
+| label_first | C | 5 | 25005 [8581, 113077] | 899072 [34944, 12958848] | 1.3437 | 49 |
+
+window 口径逐行 parent usage：
+| run | verdict | input_uncached | cache_read | cost | turns | wall_s |
+|---|---|---:|---:|---:|---:|---:|
+| p1-20261013T122356-astanin-python-tabulate__5373ebf-A | agent_result | 36681 | 1848704 | 2.0945820000000004 | 64 | 247.81 |
+| p1-20261013T122356-astanin-python-tabulate__5373ebf-B | agent_result | 42842 | 2138752 | 2.4767360000000003 | 54 | 304.64 |
+| p1-20261013T122356-astanin-python-tabulate__5373ebf-C | agent_result | 59696 | 3290880 | 3.32302 | 72 | 375.73 |
+| p1-20261013T122356-astanin-python-tabulate__87a9a4e-A | agent_result | 34849 | 1091328 | 1.2959839999999994 | 54 | 151.8 |
+| p1-20261013T122356-astanin-python-tabulate__9dedd45-A | agent_result | 13877 | 110464 | 0.268692 | 17 | 42.49 |
+| p1-20261013T122356-astanin-python-tabulate__87a9a4e-C | agent_result | 8581 | 34944 | 0.12565199999999999 | 10 | 127.95 |
+| p1-20261013T122356-astanin-python-tabulate__9dedd45-B | agent_result | 32331 | 684032 | 0.8032209999999999 | 37 | 90.76 |
+| p1-20261013T122356-astanin-python-tabulate__87a9a4e-B | agent_result | 60874 | 1886720 | 2.2191549999999993 | 52 | 254.11 |
+| p1-20261013T122356-astanin-python-tabulate__9dedd45-C | agent_result | 16085 | 188288 | 0.32334399999999996 | 21 | 93.43 |
+| p1-20261013T122356-more-itertools-more-itertools__1b7f0 | agent_result | 37623 | 2432768 | 2.7735989999999986 | 82 | 473.87 |
+| p1-20261013T122356-more-itertools-more-itertools__1b7f0 | agent_result | 35128 | 3805568 | 3.7453990000000004 | 99 | 521.11 |
+| p1-20261013T122356-more-itertools-more-itertools__ccf96 | agent_result | 35485 | 1347328 | 1.7900639999999999 | 59 | 306.36 |
+| p1-20261013T122356-more-itertools-more-itertools__ccf96 | agent_result | 30493 | 1927424 | 2.2211770000000004 | 70 | 372.27 |
+| p1-20261013T122356-more-itertools-more-itertools__1b7f0 | timeout | (无) | (无) | (无) | (无) | 900.02 |
+| p1-20261013T122356-more-itertools-more-itertools__ccf96 | agent_result | 25005 | 899072 | 1.343736 | 49 | 357.33 |
+| p1-20261013T122356-more-itertools-more-itertools__f8cca | agent_result | 45831 | 2807552 | 3.8529560000000003 | 68 | 622.2 |
+| p1-20261013T122356-more-itertools-more-itertools__f8cca | agent_result | 113906 | 9045504 | 7.322707 | 136 | 641.52 |
+| p1-20261013T122356-pallets-click__1b0e19f-B | agent_result | 23515 | 218368 | 0.48713399999999996 | 26 | 67.14 |
+| p1-20261013T122356-pallets-click__1b0e19f-A | agent_result | 37365 | 1910656 | 1.9842780000000004 | 98 | 221.4 |
+| p1-20261013T122356-pallets-click__4fd2fea-A | agent_result | 35774 | 1539456 | 1.744798 | 77 | 207.71 |
+| p1-20261013T122356-more-itertools-more-itertools__f8cca | agent_result | 113077 | 12958848 | 9.487459 | 155 | 849.83 |
+| p1-20261013T122356-pallets-click__4fd2fea-B | agent_result | 38283 | 2186880 | 2.2536799999999997 | 92 | 246.18 |
+| p1-20261013T122356-pallets-click__1b0e19f-C | timeout | (无) | (无) | (无) | (无) | 900.03 |
+| p1-20261013T122356-pallets-click__ac6a2ac-A | agent_result | 50097 | 2915200 | 3.3171600000000003 | 107 | 393.92 |
+| p1-20261013T122356-pallets-click__4fd2fea-C | timeout | (无) | (无) | (无) | (无) | 900.02 |
+| p1-20261013T122356-pallets-click__ac6a2ac-B | agent_result | 49176 | 3432576 | 4.272117999999999 | 79 | 559.6 |
+| p1-20261013T122356-pallets-click__ac6a2ac-C | timeout | (无) | (无) | (无) | (无) | 900.02 |
+
+wall_s（row=全部行 / valid=仅计入分母的行）：
+| arm | 全部行 中位(极差) | valid 中位(极差) | valid n |
+|---|---|---|---:|
+| A | 247.81 [42.49, 622.2] | 247.81 [42.49, 622.2] | 9 |
+| B | 304.64 [67.14, 641.52] | 304.64 [67.14, 641.52] | 9 |
+| C | 849.83 [93.43, 900.03] | 357.33 [93.43, 849.83] | 5 |
+
+## 3b 端到端（parent + scout）
+
+| arm | n | e2e input_uncached 中位(极差) | e2e cost 中位(极差) |
+|---|---:|---|---|
+| A | 9 | 36681 [13877, 50097] | 1.9843 [0.268692, 3.852956] |
+| B | 9 | 38283 [23515, 113906] | 2.2537 [0.487134, 7.322707] |
+| C | 5 | 48831 [34635, 136080] | 1.5838 [0.532216, 9.902015] |
+
+## 4 C 臂 scout 侧：label 全量 vs run 窗口（单列）
+
+| C run | verdict | 口径 | scout 条数 | sum input_uncached | sum cache_read | sum cost |
+|---|---|---|---:|---:|---:|---:|
+| p1-20261013T122356-astanin-python-tabulate__5373ebf-C | agent_result | label_all | 7 | 182668 | 953088 | 2.775259 |
+| p1-20261013T122356-astanin-python-tabulate__5373ebf-C | agent_result | window | 1 | 21362 | 81024 | 0.250472 |
+| p1-20261013T122356-astanin-python-tabulate__87a9a4e-C | agent_result | label_all | 1 | 29324 | 302464 | 0.743152 |
+| p1-20261013T122356-astanin-python-tabulate__87a9a4e-C | agent_result | window | 1 | 29324 | 302464 | 0.743152 |
+| p1-20261013T122356-astanin-python-tabulate__9dedd45-C | agent_result | label_all | 1 | 18550 | 44544 | 0.208872 |
+| p1-20261013T122356-astanin-python-tabulate__9dedd45-C | agent_result | window | 1 | 18550 | 44544 | 0.208872 |
+| p1-20261013T122356-more-itertools-more-itertools__1b7f0 | timeout | label_all | 1 | 19612 | 131200 | 0.303835 |
+| p1-20261013T122356-more-itertools-more-itertools__1b7f0 | timeout | window | 1 | 19612 | 131200 | 0.303835 |
+| p1-20261013T122356-more-itertools-more-itertools__ccf96 | agent_result | label_all | 1 | 23826 | 72576 | 0.240093 |
+| p1-20261013T122356-more-itertools-more-itertools__ccf96 | agent_result | window | 1 | 23826 | 72576 | 0.240093 |
+| p1-20261013T122356-more-itertools-more-itertools__f8cca | agent_result | label_all | 1 | 23003 | 149632 | 0.414556 |
+| p1-20261013T122356-more-itertools-more-itertools__f8cca | agent_result | window | 1 | 23003 | 149632 | 0.414556 |
+| p1-20261013T122356-pallets-click__1b0e19f-C | timeout | label_all | 4 | 166369 | 2661632 | 5.751611 |
+| p1-20261013T122356-pallets-click__1b0e19f-C | timeout | window | 4 | 166369 | 2661632 | 5.751611 |
+| p1-20261013T122356-pallets-click__4fd2fea-C | timeout | label_all | 3 | 110614 | 1866112 | 4.421201 |
+| p1-20261013T122356-pallets-click__4fd2fea-C | timeout | window | 3 | 110614 | 1866112 | 4.421201 |
+| p1-20261013T122356-pallets-click__ac6a2ac-C | timeout | label_all | 2 | 97783 | 1751168 | 4.371949 |
+| p1-20261013T122356-pallets-click__ac6a2ac-C | timeout | window | 2 | 97783 | 1751168 | 4.371949 |
+
+- C 非 timeout 行（window） scout 中位：input_uncached=23003 极差=[18550, 29324]；cache_read=81024 极差=[44544, 302464]；cost=0.2505 极差=[0.208872, 0.743152]
+- C 非 timeout 行（label_all） scout 中位：input_uncached=23826 极差=[18550, 182668]；cache_read=149632 极差=[44544, 953088]；cost=0.4146 极差=[0.208872, 2.775259]
+
+被审报告声明的 C scout：中位 input_uncached=23003 极差=(18550, 29324)；cache_read=149632 极差=(44544, 302464)；cost=0.415 极差=(0.209, 0.743)（n=5（C 非 timeout 行））
+
+## 5 C 臂 per-run 证据可复算性（只读该 run 的 artifacts 目录）
+
+| C run | verdict | K_expected | 证据 | terminal 组数 | 组名 | k | index_chars | worktrees |
+|---|---|---:|---|---:|---|---:|---:|---:|
+| p1-20261013T122356-astanin-python-tabulate__5373ebf-C | agent_result | 1 | 有 | 1 | test/test_output.py | [1] | 141 | 1 |
+| p1-20261013T122356-astanin-python-tabulate__87a9a4e-C | agent_result | 1 | 有 | 1 | test/test_regression.py | [1] | 407 | 1 |
+| p1-20261013T122356-astanin-python-tabulate__9dedd45-C | agent_result | 1 | 有 | 1 | test/test_output.py | [1] | 141 | 1 |
+| p1-20261013T122356-more-itertools-more-itertools__1b7f0 | timeout | 1 | 有 | 1 | tests/test_more.py | [1] | 140 | 1 |
+| p1-20261013T122356-more-itertools-more-itertools__ccf96 | agent_result | 1 | 有 | 1 | tests/test_recipes.py | [1] | 143 | 1 |
+| p1-20261013T122356-more-itertools-more-itertools__f8cca | agent_result | 1 | 有 | 1 | tests/test_recipes.py | [1] | 143 | 1 |
+| p1-20261013T122356-pallets-click__1b0e19f-C | timeout | 1 | 有 | 3 | tests/test_arguments.py,tests/test_info_dict.py,tests/test_options.py | [1, 2, 3] | None | None |
+| p1-20261013T122356-pallets-click__4fd2fea-C | timeout | 1 | 有 | 2 | tests/test_arguments.py,tests/test_options.py | [1, 2] | None | None |
+| p1-20261013T122356-pallets-click__ac6a2ac-C | timeout | 1 | 有 | 2 | tests/test_arguments.py,tests/test_options.py | [1, 2] | None | None |
+
+## 6 抽取保真性（isolated vs 共享 policy_dispatch.jsonl）
+
+- p1-20261013T122356-astanin-python-tabulate__5373ebf-C: isolated 2 行 ⊆ 共享同 label 14 行 = True
+- p1-20261013T122356-astanin-python-tabulate__87a9a4e-C: isolated 2 行 ⊆ 共享同 label 2 行 = True
+- p1-20261013T122356-astanin-python-tabulate__9dedd45-C: isolated 2 行 ⊆ 共享同 label 2 行 = True
+- p1-20261013T122356-more-itertools-more-itertools__1b7f0: isolated 2 行 ⊆ 共享同 label 2 行 = True
+- p1-20261013T122356-more-itertools-more-itertools__ccf96: isolated 2 行 ⊆ 共享同 label 2 行 = True
+- p1-20261013T122356-more-itertools-more-itertools__f8cca: isolated 2 行 ⊆ 共享同 label 2 行 = True
+- p1-20261013T122356-pallets-click__1b0e19f-C: isolated 8 行 ⊆ 共享同 label 8 行 = True
+- p1-20261013T122356-pallets-click__4fd2fea-C: isolated 6 行 ⊆ 共享同 label 6 行 = True
+- p1-20261013T122356-pallets-click__ac6a2ac-C: isolated 5 行 ⊆ 共享同 label 5 行 = True
+
+## 7 超时与分类顺序
+
+- more-itertools-more-itertools__1b7f033/C wall_s=900.02 timed_out=True exit_code=1 judge_exit_code=None stage=failed_infra notes=['agent 阶段超时（>900s）=> timeout']
+- pallets-click__1b0e19f/C wall_s=900.03 timed_out=True exit_code=1 judge_exit_code=None stage=failed_infra notes=['agent 阶段超时（>900s）=> timeout']
+- pallets-click__4fd2fea/C wall_s=900.02 timed_out=True exit_code=1 judge_exit_code=None stage=failed_infra notes=['agent 阶段超时（>900s）=> timeout']
+- pallets-click__ac6a2ac/C wall_s=900.02 timed_out=True exit_code=1 judge_exit_code=None stage=failed_infra notes=['agent 阶段超时（>900s）=> timeout']
+
+## 8 declared vs recomputed（≥8 个关键数字）
+
+| # | 数字 | p1-analysis.md | 本次重算（window 口径） | 一致 |
+|---:|---|---|---|---|
+| 1 | A resolved/分母 | 6/9 | 6/9 | YES |
+| 2 | B resolved/分母 | 8/9 | 8/9 | YES |
+| 3 | C resolved/分母 | 3/5 | 3/5 | YES |
+| 4 | A parent input_uncached 中位 | 36681 | 36681 | YES |
+| 5 | B parent input_uncached 中位 | 38283 | 38283 | YES |
+| 6 | C parent input_uncached 中位 | 25005 | 25005 | YES |
+| 7 | A/B/C parent input_uncached 极差 | [13877, 50097] | [13877, 50097] | YES |
+| 8 | B parent input_uncached 极差 | [23515, 113906] | [23515, 113906] | YES |
+| 9 | C parent input_uncached 极差 | [8581, 113077] | [8581, 113077] | YES |
+| 10 | A parent cache_read 中位 | 1848704 | 1848704 | YES |
+| 11 | B parent cache_read 中位 | 2138752 | 2138752 | YES |
+| 12 | C parent cache_read 中位 | 899072 | 899072 | YES |
+| 13 | A parent cache_read 极差 | [110464, 2915200] | [110464, 2915200] | YES |
+| 14 | B parent cache_read 极差 | [218368, 9045504] | [218368, 9045504] | YES |
+| 15 | C parent cache_read 极差 | [34944, 12958848] | [34944, 12958848] | YES |
+| 16 | A parent cost 中位 | 1.984 | 1.9843 | YES |
+| 17 | B parent cost 中位 | 2.254 | 2.2537 | YES |
+| 18 | C parent cost 中位 | 1.344 | 1.3437 | YES |
+| 19 | A turns 中位 | 68 | 68 | YES |
+| 20 | B turns 中位 | 70 | 70 | YES |
+| 21 | C turns 中位 | 49 | 49 | YES |
+| 22 | A turns 极差 | [17, 107] | [17, 107] | YES |
+| 23 | A wall 中位（valid） | 247.81 | 247.81 | YES |
+| 24 | B wall 中位（valid） | 304.64 | 304.64 | YES |
+| 25 | C wall 中位（valid） | 357.33 | 357.33 | YES |
+| 26 | A wall 极差（valid） | [42.49, 622.2] | [42.49, 622.2] | YES |
+| 27 | B wall 极差（valid） | [67.14, 641.52] | [67.14, 641.52] | YES |
+| 28 | C wall 极差（valid） | [93.43, 849.83] | [93.43, 849.83] | YES |
+| 29 | C scout input_uncached 中位 | 23003 | 23003 | YES |
+| 30 | C scout input_uncached 极差 | [18550, 29324] | [18550, 29324] | YES |
+| 31 | C scout cache_read 中位 | 149632 | 81024 | NO |
+| 32 | C scout cache_read 极差 | [44544, 302464] | [44544, 302464] | YES |
+| 33 | C scout cost 中位 | 0.415 | 0.2505 | NO |
+| 34 | C scout cost 极差 | [0.209, 0.743] | [0.208872, 0.743152] | YES |
+| 35 | C e2e input_uncached 中位 | 48831 | 48831 | YES |
+| 36 | C e2e input_uncached 极差 | [34635, 136080] | [34635, 136080] | YES |
+| 37 | C e2e cost 中位 | 1.584 | 1.5838 | YES |
+| 38 | C e2e cost 极差 | [0.532, 9.902] | [0.532216, 9.902015] | YES |
+| 39 | A e2e input_uncached 中位 | 36681 | 36681 | YES |
+| 40 | A e2e cost 中位 | 1.984 | 1.9843 | YES |
+| 41 | timeout 行数 | 4 | 4 | YES |
+
+不一致项：2 / 41 ⇒ [{"no": 31, "name": "C scout cache_read 中位", "declared": 149632, "recomputed": 81024, "match": false}, {"no": 33, "name": "C scout cost 中位", "declared": 0.415, "recomputed": 0.2505, "match": false}]

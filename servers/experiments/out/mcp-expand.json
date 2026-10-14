@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "expanded": {
+      "command": "${MCP_TEST_PYTHON}",
+      "args": ["${MCP_TEST_SERVER}"]
+    }
+  }
+}

@@ -1,0 +1,78 @@
+# t30 独立复验：t29（resume 终态语义 + state.artifacts 索引）
+
+HEAD = c0262c43f968389127812460328ceed5f936798c
+零模型调用：本脚本不加载实例、不建 venv、不 spawn coding_agent。
+
+## A 同一状态的「修前 vs 修后」对照
+
+初始 state：3 行（A judged/agent_result、B failed_infra/timeout、C judged/agent_result）  sha256=4da810797f3338fd3953b87ab8165897d3b55a1e367568e49ca9c98a3d2f47d0
+
+### A-1 修前逻辑（复刻 `4f15fa2` 的跳过条件）
+- 修前源码片段：`if prev and prev.get("stage") == "judged":`
+- 修前（4f15fa2）该行 = if prev and prev.get("stage") == "judged":；HEAD 里同一行命中数 = 0（应为 0）
+- 修前分类：skipped=['A', 'C']  pending=['B']  ⇒ timeout 槽被当作待跑
+- 修前 resume 的效果（复刻）：行数 3 → 4；读回 B = agent_result/True  ⇒ **终态被改写（timeout/False → agent_result/True）**
+
+### A-2 修后逻辑（`plan_resume`）
+- 修后分类：skipped=['A', 'B', 'C']  pending=[]  skipped_failed=1  ⇒ timeout 槽被当**终态**
+
+## C 终态不可改写：真实 `run_p1_batch(resume=True)` 桩
+
+- pending 为空 ⇒ 未加载实例、未建 venv、未 spawn
+- manifest：planned_slots=3  skipped_completed=2  skipped_failed=1  runs_done=3
+- manifest budget.started_arms=38（= REV2_INITIAL_STARTED 35 + count_spawned_arms 3）
+- state 行数：3（应为 3，**未追加第二行**）
+- 修前 sha256=4da810797f3338fd3953b87ab8165897d3b55a1e367568e49ca9c98a3d2f47d0
+- 修后 sha256=4da810797f3338fd3953b87ab8165897d3b55a1e367568e49ca9c98a3d2f47d0  ⇒ **逐字不变 = True**
+- 临时 run_root 里新增的文件只有 manifest.json：['manifest.json', 'triple_state.jsonl']
+
+## B 预算：实际 spawn 计数 vs 旧公式（key 去重）
+
+- 同一 (实例, 臂) 两次实际启动 ⇒ state 2 行
+- `read_triple_state` 键数（旧公式输入）= 1
+- `count_spawned_arms`（新公式输入）= 2
+- 新 `_budget_snapshot().started_arms` = 37；旧公式会给出 36（少记 1）
+- 追加 1 行「准备失败」（spawned=False、无 started_at_epoch）后 `count_spawned_arms` = 2（应为 2，准备失败不计）
+- 遗留行（无 `spawned` 但有 `started_at_epoch`）计入 = 1（应为 1，向后兼容）
+
+## D F6：`policy_evidence_isolated.json` 的生产者与现有 state 行
+
+- 全仓扫「写 `policy_evidence_isolated.json`」的位置：
+    · eval/harness/scheduler_p1.py:121  [读/引用] return f"{iid}/artifacts/policy_evidence_isolated.json"
+    · eval/harness/scheduler_p1.py:337  [读/引用] isolated = os.path.join(E.art_dir(run_id, iid), "policy_evidence_isolated.json")
+    · eval/harness/t29_resume_check.py:81  [读/引用] assert artifact == IID + "/artifacts/policy_evidence_isolated.json"
+    · eval/reports/p1_audit_batch.py:12  [读/引用] names=('console_'+r['arm']+'.log','arm_report.jsonl','result.json','judged.json','verdict.json','verdict_run.t
+    · eval/reports/p1_extract_evidence.py:17  [读/引用] target=art/'policy_evidence_isolated.json'
+    · eval/reports/p1_recompute.py:18  [读/引用] p=Path(r["artifacts"][0]).parent/"policy_evidence_isolated.json"
+    · eval/reports/p1_review_recompute.py:340  [读/引用] iso = os.path.join(art, "policy_evidence_isolated.json")
+    · eval/reports/p1_review_recompute.py:389  [读/引用] "policy_evidence_isolated.json")
+    · eval/reports/p1_review_t30_resume.py:10  [读/引用] Part D  F6：`policy_evidence_isolated.json` 的**生产者是谁**、现有 state 行是否含它、
+    · eval/reports/p1_review_t30_resume.py:214  [读/引用] say("## D F6：`policy_evidence_isolated.json` 的生产者与现有 state 行")
+    · eval/reports/p1_review_t30_resume.py:217  [读/引用] say(f"- 全仓扫「写 `policy_evidence_isolated.json`」的位置：")
+    · eval/reports/p1_review_t30_resume.py:231  [读/引用] iso = os.path.join(art, "policy_evidence_isolated.json")
+    · eval/reports/p1_review_t30_resume.py:237  [读/引用] listed = any("policy_evidence_isolated" in str(a) for a in r["artifacts"])
+    · eval/reports/p1_review_t30_resume.py:322  [读/引用] if "policy_evidence_isolated" not in line:
+- `policy_isolated_artifact()` 返回值 = `offline-instance/artifacts/policy_evidence_isolated.json`（run 相对路径，字符串正确）
+
+| C run | run 结束时刻 | isolated 文件 mtime | 文件 mtime > 结束 | state.artifacts 含索引 |
+|---|---|---|---|---|
+| p1-20261013T122356-astanin-python-tabulate__5373ebf- | 2026-10-13 20:33:57 | 10-13 21:35:38 | True | False |
+| p1-20261013T122356-astanin-python-tabulate__87a9a4e- | 2026-10-13 20:36:07 | 10-13 21:35:38 | True | False |
+| p1-20261013T122356-astanin-python-tabulate__9dedd45- | 2026-10-13 20:37:42 | 10-13 21:35:38 | True | False |
+| p1-20261013T122356-more-itertools-more-itertools__1b | 2026-10-13 20:52:42 | 10-13 21:35:38 | True | False |
+| p1-20261013T122356-more-itertools-more-itertools__cc | 2026-10-13 20:55:41 | 10-13 21:35:38 | True | False |
+| p1-20261013T122356-more-itertools-more-itertools__f8 | 2026-10-13 21:09:52 | 10-13 21:35:38 | True | False |
+| p1-20261013T122356-pallets-click__1b0e19f-C | 2026-10-13 21:19:33 | 10-13 21:35:38 | True | False |
+| p1-20261013T122356-pallets-click__4fd2fea-C | 2026-10-13 21:24:52 | 10-13 21:35:38 | True | False |
+| p1-20261013T122356-pallets-click__ac6a2ac-C | 2026-10-13 21:35:17 | 10-13 21:35:38 | True | False |
+
+- ⇒ 9/9 的 isolated 文件都由**跑完之后**的抽取脚本产生，worker 运行期间该文件**不存在** ⇒ `scheduler_p1.py:337` 的 `os.path.isfile(isolated)` 在生产路径上恒为 False，索引不会被追加。
+- 现有 state 行含索引的比例：0/9
+
+## E 越界与零模型调用
+
+- 批次 triple_state.jsonl：bytes=205543（t15 基线 205543）  sha256=17f3a7119fa01b20b1fa899c1fda2b3ef2af3f737b7444d9a6de334f17da8c78（t15 基线 17f3a7119fa01b20b1fa899c1fda2b3ef2af3f737b7444d9a6de334f17da8c78）⇒ 未改 = True
+- 9 个未启动槽（20d8143/cbf58d5/dd20a85）在 state 里的行：无
+- usage.jsonl 总/p1- = 186/56（t15 基线 186/56）
+- policy_scout_usage.jsonl 总/p1- = 55/21（t15 基线 55/21）
+- p1- 用量最大 ts = 2026-10-13T21:32:25+08:00（t29 提交于 2026-10-13 22:42:53）⇒ 提交后无新用量

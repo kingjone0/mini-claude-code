@@ -1,0 +1,9 @@
+[run ] subagent-ab-hard-A-1  --fixture more-itertools-hard --label subagent-ab-hard-A-1
+[done] subagent-ab-hard-A-1  exit=0
+[run ] subagent-ab-hard-B-1  --fixture more-itertools-hard --label subagent-ab-hard-B-1 --subagent
+[done] subagent-ab-hard-B-1  exit=0
+[run ] subagent-ab-hard-C-1  --fixture more-itertools-hard --label subagent-ab-hard-C-1 --subagent --subagent-force
+[done] subagent-ab-hard-C-1  exit=0
+[run ] subagent-ab-hard-A-2  --fixture more-itertools-hard --label subagent-ab-hard-A-2
+[done] subagent-ab-hard-A-2  exit=0
+[run ] subagent-ab-hard-B-2  --fixture more-itertools-hard --label subagent-ab-hard-B-2 --subagent

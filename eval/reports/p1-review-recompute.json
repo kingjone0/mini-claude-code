@@ -1,0 +1,1304 @@
+{
+  "batch": "E:\\aicoding\\eval-runs\\p1-20261013T122356-t20-batch",
+  "state_sha256": "17f3a7119fa01b20b1fa899c1fda2b3ef2af3f737b7444d9a6de334f17da8c78",
+  "rows": 27,
+  "main": {
+    "A": {
+      "rows": 9,
+      "counts": {
+        "agent_result": 9
+      },
+      "denominator": 9,
+      "resolved": 6,
+      "rate": 0.6667
+    },
+    "B": {
+      "rows": 9,
+      "counts": {
+        "agent_result": 9
+      },
+      "denominator": 9,
+      "resolved": 8,
+      "rate": 0.8889
+    },
+    "C": {
+      "rows": 9,
+      "counts": {
+        "agent_result": 5,
+        "timeout": 4
+      },
+      "denominator": 5,
+      "resolved": 3,
+      "rate": 0.6
+    }
+  },
+  "parent_window": {
+    "A": {
+      "n": 9,
+      "iu": 36681,
+      "iu_r": [
+        13877,
+        50097
+      ],
+      "cr": 1848704,
+      "cr_r": [
+        110464,
+        2915200
+      ],
+      "co": 1.9843,
+      "co_r": [
+        0.268692,
+        3.8529560000000003
+      ],
+      "tu": 68,
+      "tu_r": [
+        17,
+        107
+      ]
+    },
+    "B": {
+      "n": 9,
+      "iu": 38283,
+      "iu_r": [
+        23515,
+        113906
+      ],
+      "cr": 2138752,
+      "cr_r": [
+        218368,
+        9045504
+      ],
+      "co": 2.2537,
+      "co_r": [
+        0.48713399999999996,
+        7.322707
+      ],
+      "tu": 70,
+      "tu_r": [
+        26,
+        136
+      ]
+    },
+    "C": {
+      "n": 5,
+      "iu": 25005,
+      "iu_r": [
+        8581,
+        113077
+      ],
+      "cr": 899072,
+      "cr_r": [
+        34944,
+        12958848
+      ],
+      "co": 1.3437,
+      "co_r": [
+        0.12565199999999999,
+        9.487459
+      ],
+      "tu": 49,
+      "tu_r": [
+        10,
+        155
+      ]
+    }
+  },
+  "parent_modes": {
+    "window": {
+      "A": {
+        "n": 9,
+        "iu": 36681,
+        "iu_r": [
+          13877,
+          50097
+        ],
+        "cr": 1848704,
+        "cr_r": [
+          110464,
+          2915200
+        ],
+        "co": 1.9843,
+        "co_r": [
+          0.268692,
+          3.8529560000000003
+        ],
+        "tu": 68,
+        "tu_r": [
+          17,
+          107
+        ]
+      },
+      "B": {
+        "n": 9,
+        "iu": 38283,
+        "iu_r": [
+          23515,
+          113906
+        ],
+        "cr": 2138752,
+        "cr_r": [
+          218368,
+          9045504
+        ],
+        "co": 2.2537,
+        "co_r": [
+          0.48713399999999996,
+          7.322707
+        ],
+        "tu": 70,
+        "tu_r": [
+          26,
+          136
+        ]
+      },
+      "C": {
+        "n": 5,
+        "iu": 25005,
+        "iu_r": [
+          8581,
+          113077
+        ],
+        "cr": 899072,
+        "cr_r": [
+          34944,
+          12958848
+        ],
+        "co": 1.3437,
+        "co_r": [
+          0.12565199999999999,
+          9.487459
+        ],
+        "tu": 49,
+        "tu_r": [
+          10,
+          155
+        ]
+      }
+    },
+    "label_last": {
+      "A": {
+        "n": 9,
+        "iu": 36681,
+        "iu_r": [
+          13877,
+          50097
+        ],
+        "cr": 1848704,
+        "cr_r": [
+          110464,
+          2915200
+        ],
+        "co": 1.9843,
+        "co_r": [
+          0.268692,
+          3.8529560000000003
+        ],
+        "tu": 68,
+        "tu_r": [
+          17,
+          107
+        ]
+      },
+      "B": {
+        "n": 9,
+        "iu": 38283,
+        "iu_r": [
+          23515,
+          113906
+        ],
+        "cr": 2138752,
+        "cr_r": [
+          218368,
+          9045504
+        ],
+        "co": 2.2537,
+        "co_r": [
+          0.48713399999999996,
+          7.322707
+        ],
+        "tu": 70,
+        "tu_r": [
+          26,
+          136
+        ]
+      },
+      "C": {
+        "n": 5,
+        "iu": 25005,
+        "iu_r": [
+          8581,
+          113077
+        ],
+        "cr": 899072,
+        "cr_r": [
+          34944,
+          12958848
+        ],
+        "co": 1.3437,
+        "co_r": [
+          0.12565199999999999,
+          9.487459
+        ],
+        "tu": 49,
+        "tu_r": [
+          10,
+          155
+        ]
+      }
+    },
+    "label_first": {
+      "A": {
+        "n": 9,
+        "iu": 36558,
+        "iu_r": [
+          13877,
+          50097
+        ],
+        "cr": 1539456,
+        "cr_r": [
+          110464,
+          2915200
+        ],
+        "co": 1.9843,
+        "co_r": [
+          0.268692,
+          3.8529560000000003
+        ],
+        "tu": 68,
+        "tu_r": [
+          17,
+          107
+        ]
+      },
+      "B": {
+        "n": 9,
+        "iu": 37077,
+        "iu_r": [
+          23515,
+          113906
+        ],
+        "cr": 1927424,
+        "cr_r": [
+          218368,
+          9045504
+        ],
+        "co": 2.2212,
+        "co_r": [
+          0.48713399999999996,
+          7.322707
+        ],
+        "tu": 70,
+        "tu_r": [
+          26,
+          136
+        ]
+      },
+      "C": {
+        "n": 5,
+        "iu": 25005,
+        "iu_r": [
+          8581,
+          113077
+        ],
+        "cr": 899072,
+        "cr_r": [
+          34944,
+          12958848
+        ],
+        "co": 1.3437,
+        "co_r": [
+          0.12565199999999999,
+          9.487459
+        ],
+        "tu": 49,
+        "tu_r": [
+          10,
+          155
+        ]
+      }
+    }
+  },
+  "wall": {
+    "A": {
+      "med_all": 247.81,
+      "range_all": [
+        42.49,
+        622.2
+      ],
+      "med": 247.81,
+      "range": [
+        42.49,
+        622.2
+      ],
+      "n_valid": 9
+    },
+    "B": {
+      "med_all": 304.64,
+      "range_all": [
+        67.14,
+        641.52
+      ],
+      "med": 304.64,
+      "range": [
+        67.14,
+        641.52
+      ],
+      "n_valid": 9
+    },
+    "C": {
+      "med_all": 849.83,
+      "range_all": [
+        93.43,
+        900.03
+      ],
+      "med": 357.33,
+      "range": [
+        93.43,
+        849.83
+      ],
+      "n_valid": 5
+    }
+  },
+  "scout": {
+    "p1-20261013T122356-astanin-python-tabulate__5373ebf-C": {
+      "verdict_class": "agent_result",
+      "label_all": {
+        "n": 7,
+        "iu": 182668,
+        "cr": 953088,
+        "cost": 2.775259
+      },
+      "window": {
+        "n": 1,
+        "iu": 21362,
+        "cr": 81024,
+        "cost": 0.250472
+      }
+    },
+    "p1-20261013T122356-astanin-python-tabulate__87a9a4e-C": {
+      "verdict_class": "agent_result",
+      "label_all": {
+        "n": 1,
+        "iu": 29324,
+        "cr": 302464,
+        "cost": 0.743152
+      },
+      "window": {
+        "n": 1,
+        "iu": 29324,
+        "cr": 302464,
+        "cost": 0.743152
+      }
+    },
+    "p1-20261013T122356-astanin-python-tabulate__9dedd45-C": {
+      "verdict_class": "agent_result",
+      "label_all": {
+        "n": 1,
+        "iu": 18550,
+        "cr": 44544,
+        "cost": 0.208872
+      },
+      "window": {
+        "n": 1,
+        "iu": 18550,
+        "cr": 44544,
+        "cost": 0.208872
+      }
+    },
+    "p1-20261013T122356-more-itertools-more-itertools__1b7f033-C": {
+      "verdict_class": "timeout",
+      "label_all": {
+        "n": 1,
+        "iu": 19612,
+        "cr": 131200,
+        "cost": 0.303835
+      },
+      "window": {
+        "n": 1,
+        "iu": 19612,
+        "cr": 131200,
+        "cost": 0.303835
+      }
+    },
+    "p1-20261013T122356-more-itertools-more-itertools__ccf96ac-C": {
+      "verdict_class": "agent_result",
+      "label_all": {
+        "n": 1,
+        "iu": 23826,
+        "cr": 72576,
+        "cost": 0.240093
+      },
+      "window": {
+        "n": 1,
+        "iu": 23826,
+        "cr": 72576,
+        "cost": 0.240093
+      }
+    },
+    "p1-20261013T122356-more-itertools-more-itertools__f8ccab2-C": {
+      "verdict_class": "agent_result",
+      "label_all": {
+        "n": 1,
+        "iu": 23003,
+        "cr": 149632,
+        "cost": 0.414556
+      },
+      "window": {
+        "n": 1,
+        "iu": 23003,
+        "cr": 149632,
+        "cost": 0.414556
+      }
+    },
+    "p1-20261013T122356-pallets-click__1b0e19f-C": {
+      "verdict_class": "timeout",
+      "label_all": {
+        "n": 4,
+        "iu": 166369,
+        "cr": 2661632,
+        "cost": 5.751611
+      },
+      "window": {
+        "n": 4,
+        "iu": 166369,
+        "cr": 2661632,
+        "cost": 5.751611
+      }
+    },
+    "p1-20261013T122356-pallets-click__4fd2fea-C": {
+      "verdict_class": "timeout",
+      "label_all": {
+        "n": 3,
+        "iu": 110614,
+        "cr": 1866112,
+        "cost": 4.421201
+      },
+      "window": {
+        "n": 3,
+        "iu": 110614,
+        "cr": 1866112,
+        "cost": 4.421201
+      }
+    },
+    "p1-20261013T122356-pallets-click__ac6a2ac-C": {
+      "verdict_class": "timeout",
+      "label_all": {
+        "n": 2,
+        "iu": 97783,
+        "cr": 1751168,
+        "cost": 4.371949
+      },
+      "window": {
+        "n": 2,
+        "iu": 97783,
+        "cr": 1751168,
+        "cost": 4.371949
+      }
+    }
+  },
+  "c_evidence": [
+    {
+      "run_id": "p1-20261013T122356-astanin-python-tabulate__5373ebf-C",
+      "iso_path": "E:\\aicoding\\eval-runs\\p1-20261013T122356-astanin-python-tabulate__5373ebf-C\\astanin-python-tabulate__5373ebf\\artifacts\\policy_evidence_isolated.json",
+      "iso_exists": true,
+      "k_expected": 1,
+      "artifacts_dir": "E:\\aicoding\\eval-runs\\p1-20261013T122356-astanin-python-tabulate__5373ebf-C\\astanin-python-tabulate__5373ebf\\artifacts",
+      "iso_bytes": 14820,
+      "iso_sha256": "c67ba962060431ce5c408bbe38ef37284d7e841ea4d5ffdc603cda8be92e8d1d",
+      "terminal_rows": 1,
+      "groups": [
+        "test/test_output.py"
+      ],
+      "group_count": 1,
+      "k_values": [
+        1
+      ],
+      "index_chars": 141,
+      "index_chars_paths": [
+        "$.arm_report_rows[0].policy.index_chars"
+      ],
+      "worktrees_after_dispatch": 1,
+      "worktrees_paths": [
+        "$.arm_report_rows[0].policy.worktrees_after_dispatch"
+      ],
+      "dispatch_rows": 2,
+      "arm_report_rows": 1,
+      "gate": {
+        "group_count==K_expected": true,
+        "index_chars<=2000": true,
+        "worktrees==1": true
+      }
+    },
+    {
+      "run_id": "p1-20261013T122356-astanin-python-tabulate__87a9a4e-C",
+      "iso_path": "E:\\aicoding\\eval-runs\\p1-20261013T122356-astanin-python-tabulate__87a9a4e-C\\astanin-python-tabulate__87a9a4e\\artifacts\\policy_evidence_isolated.json",
+      "iso_exists": true,
+      "k_expected": 1,
+      "artifacts_dir": "E:\\aicoding\\eval-runs\\p1-20261013T122356-astanin-python-tabulate__87a9a4e-C\\astanin-python-tabulate__87a9a4e\\artifacts",
+      "iso_bytes": 14971,
+      "iso_sha256": "fbfdd98eb06636bed6c1e52bf6c1d22c5bf8d5175ab20e8171ed0f2c861c6407",
+      "terminal_rows": 1,
+      "groups": [
+        "test/test_regression.py"
+      ],
+      "group_count": 1,
+      "k_values": [
+        1
+      ],
+      "index_chars": 407,
+      "index_chars_paths": [
+        "$.arm_report_rows[0].policy.index_chars"
+      ],
+      "worktrees_after_dispatch": 1,
+      "worktrees_paths": [
+        "$.arm_report_rows[0].policy.worktrees_after_dispatch"
+      ],
+      "dispatch_rows": 2,
+      "arm_report_rows": 1,
+      "gate": {
+        "group_count==K_expected": true,
+        "index_chars<=2000": true,
+        "worktrees==1": true
+      }
+    },
+    {
+      "run_id": "p1-20261013T122356-astanin-python-tabulate__9dedd45-C",
+      "iso_path": "E:\\aicoding\\eval-runs\\p1-20261013T122356-astanin-python-tabulate__9dedd45-C\\astanin-python-tabulate__9dedd45\\artifacts\\policy_evidence_isolated.json",
+      "iso_exists": true,
+      "k_expected": 1,
+      "artifacts_dir": "E:\\aicoding\\eval-runs\\p1-20261013T122356-astanin-python-tabulate__9dedd45-C\\astanin-python-tabulate__9dedd45\\artifacts",
+      "iso_bytes": 14811,
+      "iso_sha256": "8d36c738ec84662b86fc3aa03b3dc611a2c7ec85d205167b700a60f56017e0da",
+      "terminal_rows": 1,
+      "groups": [
+        "test/test_output.py"
+      ],
+      "group_count": 1,
+      "k_values": [
+        1
+      ],
+      "index_chars": 141,
+      "index_chars_paths": [
+        "$.arm_report_rows[0].policy.index_chars"
+      ],
+      "worktrees_after_dispatch": 1,
+      "worktrees_paths": [
+        "$.arm_report_rows[0].policy.worktrees_after_dispatch"
+      ],
+      "dispatch_rows": 2,
+      "arm_report_rows": 1,
+      "gate": {
+        "group_count==K_expected": true,
+        "index_chars<=2000": true,
+        "worktrees==1": true
+      }
+    },
+    {
+      "run_id": "p1-20261013T122356-more-itertools-more-itertools__1b7f033-C",
+      "iso_path": "E:\\aicoding\\eval-runs\\p1-20261013T122356-more-itertools-more-itertools__1b7f033-C\\more-itertools-more-itertools__1b7f033\\artifacts\\policy_evidence_isolated.json",
+      "iso_exists": true,
+      "k_expected": 1,
+      "artifacts_dir": "E:\\aicoding\\eval-runs\\p1-20261013T122356-more-itertools-more-itertools__1b7f033-C\\more-itertools-more-itertools__1b7f033\\artifacts",
+      "iso_bytes": 15000,
+      "iso_sha256": "e9056735a0c4fee0e76cc434203d8a97554b5a2fc02e7ef8ab5060a41d43744d",
+      "terminal_rows": 1,
+      "groups": [
+        "tests/test_more.py"
+      ],
+      "group_count": 1,
+      "k_values": [
+        1
+      ],
+      "index_chars": 140,
+      "index_chars_paths": [
+        "$.arm_report_rows[0].policy.index_chars"
+      ],
+      "worktrees_after_dispatch": 1,
+      "worktrees_paths": [
+        "$.arm_report_rows[0].policy.worktrees_after_dispatch"
+      ],
+      "dispatch_rows": 2,
+      "arm_report_rows": 1,
+      "gate": {
+        "group_count==K_expected": true,
+        "index_chars<=2000": true,
+        "worktrees==1": true
+      }
+    },
+    {
+      "run_id": "p1-20261013T122356-more-itertools-more-itertools__ccf96ac-C",
+      "iso_path": "E:\\aicoding\\eval-runs\\p1-20261013T122356-more-itertools-more-itertools__ccf96ac-C\\more-itertools-more-itertools__ccf96ac\\artifacts\\policy_evidence_isolated.json",
+      "iso_exists": true,
+      "k_expected": 1,
+      "artifacts_dir": "E:\\aicoding\\eval-runs\\p1-20261013T122356-more-itertools-more-itertools__ccf96ac-C\\more-itertools-more-itertools__ccf96ac\\artifacts",
+      "iso_bytes": 15001,
+      "iso_sha256": "eac60fea1164a8262c377d94b9e84149b45397515c94fbdb6f244f76a252370f",
+      "terminal_rows": 1,
+      "groups": [
+        "tests/test_recipes.py"
+      ],
+      "group_count": 1,
+      "k_values": [
+        1
+      ],
+      "index_chars": 143,
+      "index_chars_paths": [
+        "$.arm_report_rows[0].policy.index_chars"
+      ],
+      "worktrees_after_dispatch": 1,
+      "worktrees_paths": [
+        "$.arm_report_rows[0].policy.worktrees_after_dispatch"
+      ],
+      "dispatch_rows": 2,
+      "arm_report_rows": 1,
+      "gate": {
+        "group_count==K_expected": true,
+        "index_chars<=2000": true,
+        "worktrees==1": true
+      }
+    },
+    {
+      "run_id": "p1-20261013T122356-more-itertools-more-itertools__f8ccab2-C",
+      "iso_path": "E:\\aicoding\\eval-runs\\p1-20261013T122356-more-itertools-more-itertools__f8ccab2-C\\more-itertools-more-itertools__f8ccab2\\artifacts\\policy_evidence_isolated.json",
+      "iso_exists": true,
+      "k_expected": 1,
+      "artifacts_dir": "E:\\aicoding\\eval-runs\\p1-20261013T122356-more-itertools-more-itertools__f8ccab2-C\\more-itertools-more-itertools__f8ccab2\\artifacts",
+      "iso_bytes": 14976,
+      "iso_sha256": "d89a941f1bfcc1bf30c4660cf413c667731c2fe267c059012bf6caa788576c7f",
+      "terminal_rows": 1,
+      "groups": [
+        "tests/test_recipes.py"
+      ],
+      "group_count": 1,
+      "k_values": [
+        1
+      ],
+      "index_chars": 143,
+      "index_chars_paths": [
+        "$.arm_report_rows[0].policy.index_chars"
+      ],
+      "worktrees_after_dispatch": 1,
+      "worktrees_paths": [
+        "$.arm_report_rows[0].policy.worktrees_after_dispatch"
+      ],
+      "dispatch_rows": 2,
+      "arm_report_rows": 1,
+      "gate": {
+        "group_count==K_expected": true,
+        "index_chars<=2000": true,
+        "worktrees==1": true
+      }
+    },
+    {
+      "run_id": "p1-20261013T122356-pallets-click__1b0e19f-C",
+      "iso_path": "E:\\aicoding\\eval-runs\\p1-20261013T122356-pallets-click__1b0e19f-C\\pallets-click__1b0e19f\\artifacts\\policy_evidence_isolated.json",
+      "iso_exists": true,
+      "k_expected": 1,
+      "artifacts_dir": "E:\\aicoding\\eval-runs\\p1-20261013T122356-pallets-click__1b0e19f-C\\pallets-click__1b0e19f\\artifacts",
+      "iso_bytes": 37762,
+      "iso_sha256": "94f8823eeb4a3c18f17b280642813a8e667e41aadfac6637f908d37baa4723b3",
+      "terminal_rows": 3,
+      "groups": [
+        "tests/test_arguments.py",
+        "tests/test_info_dict.py",
+        "tests/test_options.py"
+      ],
+      "group_count": 3,
+      "k_values": [
+        1,
+        2,
+        3
+      ],
+      "index_chars": null,
+      "index_chars_paths": [],
+      "worktrees_after_dispatch": null,
+      "worktrees_paths": [],
+      "dispatch_rows": 8,
+      "arm_report_rows": 0,
+      "gate": {
+        "group_count==K_expected": false,
+        "index_chars<=2000": false,
+        "worktrees==1": false
+      }
+    },
+    {
+      "run_id": "p1-20261013T122356-pallets-click__4fd2fea-C",
+      "iso_path": "E:\\aicoding\\eval-runs\\p1-20261013T122356-pallets-click__4fd2fea-C\\pallets-click__4fd2fea\\artifacts\\policy_evidence_isolated.json",
+      "iso_exists": true,
+      "k_expected": 1,
+      "artifacts_dir": "E:\\aicoding\\eval-runs\\p1-20261013T122356-pallets-click__4fd2fea-C\\pallets-click__4fd2fea\\artifacts",
+      "iso_bytes": 27488,
+      "iso_sha256": "a26b71ddb7a6b925d8fe64776503d9dee0b6281ffc988237be93fb567475fb18",
+      "terminal_rows": 2,
+      "groups": [
+        "tests/test_arguments.py",
+        "tests/test_options.py"
+      ],
+      "group_count": 2,
+      "k_values": [
+        1,
+        2
+      ],
+      "index_chars": null,
+      "index_chars_paths": [],
+      "worktrees_after_dispatch": null,
+      "worktrees_paths": [],
+      "dispatch_rows": 6,
+      "arm_report_rows": 0,
+      "gate": {
+        "group_count==K_expected": false,
+        "index_chars<=2000": false,
+        "worktrees==1": false
+      }
+    },
+    {
+      "run_id": "p1-20261013T122356-pallets-click__ac6a2ac-C",
+      "iso_path": "E:\\aicoding\\eval-runs\\p1-20261013T122356-pallets-click__ac6a2ac-C\\pallets-click__ac6a2ac\\artifacts\\policy_evidence_isolated.json",
+      "iso_exists": true,
+      "k_expected": 1,
+      "artifacts_dir": "E:\\aicoding\\eval-runs\\p1-20261013T122356-pallets-click__ac6a2ac-C\\pallets-click__ac6a2ac\\artifacts",
+      "iso_bytes": 21631,
+      "iso_sha256": "08e550222cd1c6a19370ad8d521d7119fe4e3994962082951a55f17d41fa9143",
+      "terminal_rows": 2,
+      "groups": [
+        "tests/test_arguments.py",
+        "tests/test_options.py"
+      ],
+      "group_count": 2,
+      "k_values": [
+        1,
+        2
+      ],
+      "index_chars": null,
+      "index_chars_paths": [],
+      "worktrees_after_dispatch": null,
+      "worktrees_paths": [],
+      "dispatch_rows": 5,
+      "arm_report_rows": 0,
+      "gate": {
+        "group_count==K_expected": false,
+        "index_chars<=2000": false,
+        "worktrees==1": false
+      }
+    }
+  ],
+  "fidelity": [
+    {
+      "run_id": "p1-20261013T122356-astanin-python-tabulate__5373ebf-C",
+      "iso_rows": 2,
+      "shared_label_rows": 14,
+      "iso_is_subset_of_shared": true
+    },
+    {
+      "run_id": "p1-20261013T122356-astanin-python-tabulate__87a9a4e-C",
+      "iso_rows": 2,
+      "shared_label_rows": 2,
+      "iso_is_subset_of_shared": true
+    },
+    {
+      "run_id": "p1-20261013T122356-astanin-python-tabulate__9dedd45-C",
+      "iso_rows": 2,
+      "shared_label_rows": 2,
+      "iso_is_subset_of_shared": true
+    },
+    {
+      "run_id": "p1-20261013T122356-more-itertools-more-itertools__1b7f033-C",
+      "iso_rows": 2,
+      "shared_label_rows": 2,
+      "iso_is_subset_of_shared": true
+    },
+    {
+      "run_id": "p1-20261013T122356-more-itertools-more-itertools__ccf96ac-C",
+      "iso_rows": 2,
+      "shared_label_rows": 2,
+      "iso_is_subset_of_shared": true
+    },
+    {
+      "run_id": "p1-20261013T122356-more-itertools-more-itertools__f8ccab2-C",
+      "iso_rows": 2,
+      "shared_label_rows": 2,
+      "iso_is_subset_of_shared": true
+    },
+    {
+      "run_id": "p1-20261013T122356-pallets-click__1b0e19f-C",
+      "iso_rows": 8,
+      "shared_label_rows": 8,
+      "iso_is_subset_of_shared": true
+    },
+    {
+      "run_id": "p1-20261013T122356-pallets-click__4fd2fea-C",
+      "iso_rows": 6,
+      "shared_label_rows": 6,
+      "iso_is_subset_of_shared": true
+    },
+    {
+      "run_id": "p1-20261013T122356-pallets-click__ac6a2ac-C",
+      "iso_rows": 5,
+      "shared_label_rows": 5,
+      "iso_is_subset_of_shared": true
+    }
+  ],
+  "declared": {
+    "A.rate": "6/9",
+    "B.rate": "8/9",
+    "C.rate": "3/5",
+    "A.parent.input_uncached.med": 36681,
+    "A.parent.input_uncached.range": [
+      13877,
+      50097
+    ],
+    "B.parent.input_uncached.med": 38283,
+    "B.parent.input_uncached.range": [
+      23515,
+      113906
+    ],
+    "C.parent.input_uncached.med": 25005,
+    "C.parent.input_uncached.range": [
+      8581,
+      113077
+    ],
+    "A.parent.cache_read.med": 1848704,
+    "A.parent.cache_read.range": [
+      110464,
+      2915200
+    ],
+    "B.parent.cache_read.med": 2138752,
+    "B.parent.cache_read.range": [
+      218368,
+      9045504
+    ],
+    "C.parent.cache_read.med": 899072,
+    "C.parent.cache_read.range": [
+      34944,
+      12958848
+    ],
+    "A.parent.cost.med": 1.984,
+    "B.parent.cost.med": 2.254,
+    "C.parent.cost.med": 1.344,
+    "A.turns.med": 68,
+    "A.turns.range": [
+      17,
+      107
+    ],
+    "B.turns.med": 70,
+    "B.turns.range": [
+      26,
+      136
+    ],
+    "C.turns.med": 49,
+    "C.turns.range": [
+      10,
+      155
+    ],
+    "A.wall.med": 247.81,
+    "A.wall.range": [
+      42.49,
+      622.2
+    ],
+    "B.wall.med": 304.64,
+    "B.wall.range": [
+      67.14,
+      641.52
+    ],
+    "C.wall.med": 357.33,
+    "C.wall.range": [
+      93.43,
+      849.83
+    ],
+    "C.scout.input_uncached.med": 23003,
+    "C.scout.input_uncached.range": [
+      18550,
+      29324
+    ],
+    "C.scout.cache_read.med": 149632,
+    "C.scout.cache_read.range": [
+      44544,
+      302464
+    ],
+    "C.scout.cost.med": 0.415,
+    "C.scout.cost.range": [
+      0.209,
+      0.743
+    ],
+    "C.scout.sample": "n=5（C 非 timeout 行）"
+  },
+  "checks": [
+    {
+      "no": 1,
+      "name": "A resolved/分母",
+      "declared": "6/9",
+      "recomputed": "6/9",
+      "match": true
+    },
+    {
+      "no": 2,
+      "name": "B resolved/分母",
+      "declared": "8/9",
+      "recomputed": "8/9",
+      "match": true
+    },
+    {
+      "no": 3,
+      "name": "C resolved/分母",
+      "declared": "3/5",
+      "recomputed": "3/5",
+      "match": true
+    },
+    {
+      "no": 4,
+      "name": "A parent input_uncached 中位",
+      "declared": 36681,
+      "recomputed": 36681,
+      "match": true
+    },
+    {
+      "no": 5,
+      "name": "B parent input_uncached 中位",
+      "declared": 38283,
+      "recomputed": 38283,
+      "match": true
+    },
+    {
+      "no": 6,
+      "name": "C parent input_uncached 中位",
+      "declared": 25005,
+      "recomputed": 25005,
+      "match": true
+    },
+    {
+      "no": 7,
+      "name": "A/B/C parent input_uncached 极差",
+      "declared": [
+        13877,
+        50097
+      ],
+      "recomputed": [
+        13877,
+        50097
+      ],
+      "match": true
+    },
+    {
+      "no": 8,
+      "name": "B parent input_uncached 极差",
+      "declared": [
+        23515,
+        113906
+      ],
+      "recomputed": [
+        23515,
+        113906
+      ],
+      "match": true
+    },
+    {
+      "no": 9,
+      "name": "C parent input_uncached 极差",
+      "declared": [
+        8581,
+        113077
+      ],
+      "recomputed": [
+        8581,
+        113077
+      ],
+      "match": true
+    },
+    {
+      "no": 10,
+      "name": "A parent cache_read 中位",
+      "declared": 1848704,
+      "recomputed": 1848704,
+      "match": true
+    },
+    {
+      "no": 11,
+      "name": "B parent cache_read 中位",
+      "declared": 2138752,
+      "recomputed": 2138752,
+      "match": true
+    },
+    {
+      "no": 12,
+      "name": "C parent cache_read 中位",
+      "declared": 899072,
+      "recomputed": 899072,
+      "match": true
+    },
+    {
+      "no": 13,
+      "name": "A parent cache_read 极差",
+      "declared": [
+        110464,
+        2915200
+      ],
+      "recomputed": [
+        110464,
+        2915200
+      ],
+      "match": true
+    },
+    {
+      "no": 14,
+      "name": "B parent cache_read 极差",
+      "declared": [
+        218368,
+        9045504
+      ],
+      "recomputed": [
+        218368,
+        9045504
+      ],
+      "match": true
+    },
+    {
+      "no": 15,
+      "name": "C parent cache_read 极差",
+      "declared": [
+        34944,
+        12958848
+      ],
+      "recomputed": [
+        34944,
+        12958848
+      ],
+      "match": true
+    },
+    {
+      "no": 16,
+      "name": "A parent cost 中位",
+      "declared": 1.984,
+      "recomputed": 1.9843,
+      "match": true
+    },
+    {
+      "no": 17,
+      "name": "B parent cost 中位",
+      "declared": 2.254,
+      "recomputed": 2.2537,
+      "match": true
+    },
+    {
+      "no": 18,
+      "name": "C parent cost 中位",
+      "declared": 1.344,
+      "recomputed": 1.3437,
+      "match": true
+    },
+    {
+      "no": 19,
+      "name": "A turns 中位",
+      "declared": 68,
+      "recomputed": 68,
+      "match": true
+    },
+    {
+      "no": 20,
+      "name": "B turns 中位",
+      "declared": 70,
+      "recomputed": 70,
+      "match": true
+    },
+    {
+      "no": 21,
+      "name": "C turns 中位",
+      "declared": 49,
+      "recomputed": 49,
+      "match": true
+    },
+    {
+      "no": 22,
+      "name": "A turns 极差",
+      "declared": [
+        17,
+        107
+      ],
+      "recomputed": [
+        17,
+        107
+      ],
+      "match": true
+    },
+    {
+      "no": 23,
+      "name": "A wall 中位（valid）",
+      "declared": 247.81,
+      "recomputed": 247.81,
+      "match": true
+    },
+    {
+      "no": 24,
+      "name": "B wall 中位（valid）",
+      "declared": 304.64,
+      "recomputed": 304.64,
+      "match": true
+    },
+    {
+      "no": 25,
+      "name": "C wall 中位（valid）",
+      "declared": 357.33,
+      "recomputed": 357.33,
+      "match": true
+    },
+    {
+      "no": 26,
+      "name": "A wall 极差（valid）",
+      "declared": [
+        42.49,
+        622.2
+      ],
+      "recomputed": [
+        42.49,
+        622.2
+      ],
+      "match": true
+    },
+    {
+      "no": 27,
+      "name": "B wall 极差（valid）",
+      "declared": [
+        67.14,
+        641.52
+      ],
+      "recomputed": [
+        67.14,
+        641.52
+      ],
+      "match": true
+    },
+    {
+      "no": 28,
+      "name": "C wall 极差（valid）",
+      "declared": [
+        93.43,
+        849.83
+      ],
+      "recomputed": [
+        93.43,
+        849.83
+      ],
+      "match": true
+    },
+    {
+      "no": 29,
+      "name": "C scout input_uncached 中位",
+      "declared": 23003,
+      "recomputed": 23003,
+      "match": true
+    },
+    {
+      "no": 30,
+      "name": "C scout input_uncached 极差",
+      "declared": [
+        18550,
+        29324
+      ],
+      "recomputed": [
+        18550,
+        29324
+      ],
+      "match": true
+    },
+    {
+      "no": 31,
+      "name": "C scout cache_read 中位",
+      "declared": 149632,
+      "recomputed": 81024,
+      "match": false
+    },
+    {
+      "no": 32,
+      "name": "C scout cache_read 极差",
+      "declared": [
+        44544,
+        302464
+      ],
+      "recomputed": [
+        44544,
+        302464
+      ],
+      "match": true
+    },
+    {
+      "no": 33,
+      "name": "C scout cost 中位",
+      "declared": 0.415,
+      "recomputed": 0.2505,
+      "match": false
+    },
+    {
+      "no": 34,
+      "name": "C scout cost 极差",
+      "declared": [
+        0.209,
+        0.743
+      ],
+      "recomputed": [
+        0.208872,
+        0.743152
+      ],
+      "match": true
+    },
+    {
+      "no": 35,
+      "name": "C e2e input_uncached 中位",
+      "declared": 48831,
+      "recomputed": 48831,
+      "match": true
+    },
+    {
+      "no": 36,
+      "name": "C e2e input_uncached 极差",
+      "declared": [
+        34635,
+        136080
+      ],
+      "recomputed": [
+        34635,
+        136080
+      ],
+      "match": true
+    },
+    {
+      "no": 37,
+      "name": "C e2e cost 中位",
+      "declared": 1.584,
+      "recomputed": 1.5838,
+      "match": true
+    },
+    {
+      "no": 38,
+      "name": "C e2e cost 极差",
+      "declared": [
+        0.532,
+        9.902
+      ],
+      "recomputed": [
+        0.532216,
+        9.902015
+      ],
+      "match": true
+    },
+    {
+      "no": 39,
+      "name": "A e2e input_uncached 中位",
+      "declared": 36681,
+      "recomputed": 36681,
+      "match": true
+    },
+    {
+      "no": 40,
+      "name": "A e2e cost 中位",
+      "declared": 1.984,
+      "recomputed": 1.9843,
+      "match": true
+    },
+    {
+      "no": 41,
+      "name": "timeout 行数",
+      "declared": 4,
+      "recomputed": 4,
+      "match": true
+    }
+  ]
+}

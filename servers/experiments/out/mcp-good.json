@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "good": {
+      "command": "D:\\Anaconda3\\envs\\aicoding\\python.exe",
+      "args": ["E:\\aicoding\\mini-claude-code\\servers\\local_tools_server.py"]
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "projdir": {
+      "type": "stdio",
+      "command": "D:\\Anaconda3\\envs\\aicoding\\python.exe",
+      "args": ["${CLAUDE_PROJECT_DIR:-.}/servers/local_tools_server.py"]
+    },
+    "abs": {
+      "type": "stdio",
+      "command": "D:\\Anaconda3\\envs\\aicoding\\python.exe",
+      "args": ["E:\\aicoding\\mini-claude-code\\servers\\local_tools_server.py"]
+    }
+  }
+}

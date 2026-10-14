@@ -1,0 +1,44 @@
+[
+  {
+    "name": "chunked strict: != 改成 >",
+    "file": "more_itertools/more.py",
+    "old": "                if len(chunk) != n:\n                    raise ValueError('iterable is not divisible by n.')",
+    "new": "                if len(chunk) > n:\n                    raise ValueError('iterable is not divisible by n.')"
+  },
+  {
+    "name": "chunked: n<0 改成 n<1（多拒了 0）",
+    "file": "more_itertools/more.py",
+    "old": "    if n is not None and n < 0:\n        raise ValueError('n must be at least 0')",
+    "new": "    if n is not None and n < 1:\n        raise ValueError('n must be at least 0')"
+  },
+  {
+    "name": "windowed: n<=0 改成 n<0（少拒了 0）",
+    "file": "more_itertools/more.py",
+    "old": "    if n <= 0:\n        raise ValueError('n must be > 0')",
+    "new": "    if n < 0:\n        raise ValueError('n must be > 0')"
+  },
+  {
+    "name": "windowed: step<1 改成 step<0（少拒了 0）",
+    "file": "more_itertools/more.py",
+    "old": "    if step < 1:\n        raise ValueError('step must be >= 1')",
+    "new": "    if step < 0:\n        raise ValueError('step must be >= 1')"
+  },
+  {
+    "name": "windowed: 尾部 padding 的 step-1 改成 step",
+    "file": "more_itertools/more.py",
+    "old": "    padding = (fillvalue,) * (n - 1 if step >= n else step - 1)",
+    "new": "    padding = (fillvalue,) * (n - 1 if step >= n else step)"
+  },
+  {
+    "name": "windowed: 首窗不满的判定 < n 改成 <= n",
+    "file": "more_itertools/more.py",
+    "old": "    if len(window) < n:\n        yield tuple(window) + ((fillvalue,) * (n - len(window)))",
+    "new": "    if len(window) <= n:\n        yield tuple(window) + ((fillvalue,) * (n - len(window)))"
+  },
+  {
+    "name": "windowed: 首窗不满时补的填充数 n-len 改成 n-len+1",
+    "file": "more_itertools/more.py",
+    "old": "    if len(window) < n:\n        yield tuple(window) + ((fillvalue,) * (n - len(window)))\n        return",
+    "new": "    if len(window) < n:\n        yield tuple(window) + ((fillvalue,) * (n - len(window) + 1))\n        return"
+  }
+]

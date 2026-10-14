@@ -1,0 +1,12 @@
+subagent-ab-hard-A-1       头="# 2026-10-10T15:28:21  label=subagent-ab-hard-A-" 基线失败=32 基线通过=766 终局失败=0 终局通过=768
+subagent-ab-hard-A-2       头="# 2026-10-10T15:39:39  label=subagent-ab-hard-A-" 基线失败=32 基线通过=766 终局失败=0 终局通过=768
+subagent-ab-hard-A-3       头="# 2026-10-10T15:56:22  label=subagent-ab-hard-A-" 基线失败=32 基线通过=766 终局失败=0 终局通过=768
+subagent-ab-hard-A-4       头="# 2026-10-10T16:07:46  label=subagent-ab-hard-A-" 基线失败=32 基线通过=766 终局失败=0 终局通过=768
+subagent-ab-hard-B-1       头="# 2026-10-10T15:31:33  label=subagent-ab-hard-B-" 基线失败=32 基线通过=766 终局失败=0 终局通过=768
+subagent-ab-hard-B-2       头="# 2026-10-10T15:49:00  label=subagent-ab-hard-B-" 基线失败=32 基线通过=766 终局失败=0 终局通过=768
+subagent-ab-hard-B-3       头="# 2026-10-10T15:59:19  label=subagent-ab-hard-B-" 基线失败=32 基线通过=766 终局失败=0 终局通过=768
+subagent-ab-hard-B-4       头="# 2026-10-10T16:10:38  label=subagent-ab-hard-B-" 基线失败=32 基线通过=766 终局失败=0 终局通过=768
+subagent-ab-hard-C-1       头="# 2026-10-10T15:45:50  label=subagent-ab-hard-C-" 基线失败=32 基线通过=766 终局失败=0 终局通过=768
+subagent-ab-hard-C-2       头="# 2026-10-10T15:53:53  label=subagent-ab-hard-C-" 基线失败=32 基线通过=766 终局失败=0 终局通过=768
+subagent-ab-hard-C-3       头="# 2026-10-10T16:04:04  label=subagent-ab-hard-C-" 基线失败=32 基线通过=766 终局失败=0 终局通过=768
+subagent-ab-hard-C-4       头="# 2026-10-10T16:14:42  label=subagent-ab-hard-C-" 基线失败=32 基线通过=766 终局失败=0 终局通过=768

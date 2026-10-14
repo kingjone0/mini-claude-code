@@ -1,0 +1,30 @@
+[
+  {
+    "case": "C0 父进程未设 + 未显式传",
+    "parent_env": null,
+    "passed_in_mcp_env": null,
+    "error": null,
+    "child_seen": null
+  },
+  {
+    "case": "C1 父进程设了 + 未显式传",
+    "parent_env": "symbols",
+    "passed_in_mcp_env": null,
+    "error": null,
+    "child_seen": "symbols"
+  },
+  {
+    "case": "C2 父进程设了 + 显式传",
+    "parent_env": "symbols",
+    "passed_in_mcp_env": "symbols",
+    "error": null,
+    "child_seen": "symbols"
+  },
+  {
+    "case": "C3 父进程未设 + 显式传",
+    "parent_env": null,
+    "passed_in_mcp_env": "summary",
+    "error": null,
+    "child_seen": "summary"
+  }
+]

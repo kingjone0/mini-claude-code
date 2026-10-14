@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "novar": {
+      "type": "stdio",
+      "command": "D:\\Anaconda3\\envs\\aicoding\\python.exe",
+      "args": [
+        "${CLAUDE_PROJECT_DIR}/servers/local_tools_server.py"
+      ]
+    }
+  }
+}

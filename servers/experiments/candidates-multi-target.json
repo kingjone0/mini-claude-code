@@ -1,0 +1,26 @@
+[
+  {
+    "name": "recipes.tail(有 len): size - n -> size - n + 1",
+    "file": "more_itertools/recipes.py",
+    "old": "        return islice(iterable, max(0, size - n), None)",
+    "new": "        return islice(iterable, max(0, size - n + 1), None)"
+  },
+  {
+    "name": "recipes.tail(无 len): maxlen=n -> maxlen=n + 1",
+    "file": "more_itertools/recipes.py",
+    "old": "        return iter(deque(iterable, maxlen=n))",
+    "new": "        return iter(deque(iterable, maxlen=n + 1))"
+  },
+  {
+    "name": "recipes.nth: n -> n + 1",
+    "file": "more_itertools/recipes.py",
+    "old": "    return next(islice(iterable, n, None), default)",
+    "new": "    return next(islice(iterable, n + 1, None), default)"
+  },
+  {
+    "name": "recipes.consume: islice(n, n) -> islice(n, n + 1)",
+    "file": "more_itertools/recipes.py",
+    "old": "        next(islice(iterator, n, n), None)",
+    "new": "        next(islice(iterator, n, n + 1), None)"
+  }
+]
